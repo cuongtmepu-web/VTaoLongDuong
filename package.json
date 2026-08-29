@@ -36,6 +36,8 @@
   },
   "devDependencies": {
     "@tsconfig/node24": "^24.0.4",
+    "@types/bootstrap": "^5.2.11",
+    "@types/lodash": "^4.17.25",
     "@types/node": "^24.13.3",
     "@vitejs/plugin-vue": "^6.0.8",
     "@vue/eslint-config-typescript": "^14.9.0",

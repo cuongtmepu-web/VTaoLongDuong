@@ -5,6 +5,8 @@ export interface Appointment {
   userId: number
   userName: string
   doctorId: number
+  phone: string
+  email: string
   doctorName: string
   appointmentDate: string
   appointmentTime: string

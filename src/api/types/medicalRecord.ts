@@ -15,12 +15,14 @@ export interface MedicalRecord {
   userName: string
   doctorId: number
   doctorName: string
+  appointmentId?: number
   recordDate: string
   diagnosis?: string
   symptoms?: string
   traditionalDiagnosis?: string
   treatmentPlan?: string
   prescriptionJson?: string
+  notes?: string
   followUpDate?: string
   prescriptions?: Prescription[]
 }

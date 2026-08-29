@@ -28,6 +28,9 @@ export interface BlogPost {
   createdAt: string
   commentCount: number
   comments?: BlogComment[]
+  metaTitle?: string
+  metaDescription?: string
+  metaKeywords?: string
 }
 
 export interface BlogComment {
