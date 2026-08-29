@@ -112,57 +112,84 @@ onMounted(() => {
 
 <style scoped>
 .doctors-section {
-  background: #f8f9fa;
+  padding: 5rem 0;
+  background: var(--surface);
 }
 
-.section-title {
-  font-size: 2.5rem;
-  font-weight: bold;
+.doctors-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 2rem;
 }
 
 .doctor-card {
-  background: white;
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s;
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: 2rem 1.5rem;
+  text-align: center;
+  border: 1px solid var(--surface-border);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.35s var(--ease);
 }
-
 .doctor-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--secondary-light);
 }
-
-.doctor-image {
-  position: relative;
-  width: 150px;
-  height: 150px;
-  margin: 0 auto 15px;
+.doctor-card .avatar {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 1rem;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid var(--primary-light);
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.3s var(--ease);
 }
-
-.doctor-image img {
+.doctor-card:hover .avatar {
+  border-color: var(--primary);
+}
+.doctor-card .avatar img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border: 4px solid #fff;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
-
-.status-badge {
-  position: absolute;
-  bottom: 5px;
-  right: 5px;
-  padding: 3px 10px;
-  border-radius: 20px;
+.doctor-card h5 {
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+}
+.doctor-card .specialty {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+.doctor-card .badge-status {
+  display: inline-block;
+  padding: 0.2rem 0.7rem;
+  border-radius: 999px;
   font-size: 0.7rem;
-  font-weight: bold;
-  color: white;
+  font-weight: 600;
+  margin-top: 0.3rem;
+}
+.badge-status.available {
+  background: var(--primary-light);
+  color: var(--primary-dark);
+}
+.badge-status.offline {
+  background: var(--secondary-light);
+  color: var(--secondary-dark);
 }
 
-.status-badge.available {
-  background: #28a745;
+@media (max-width: 992px) {
+  .doctors-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
-
-.status-badge.offline {
-  background: #dc3545;
+@media (max-width: 576px) {
+  .doctors-grid {
+    grid-template-columns: 1fr;
+  }
 }
 </style>

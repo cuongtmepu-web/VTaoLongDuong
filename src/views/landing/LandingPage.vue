@@ -2,12 +2,15 @@
   <DefaultLayout>
     <div class="landing-page">
       <HeroSection />
-      <AboutSection />
-      <ServicesSection />
-      <DoctorsSection />
-      <TestimonialsSection />
-      <BlogSection />
-      <ContactSection />
+
+      <div class="content-band">
+        <AboutSection />
+        <ServicesSection />
+        <DoctorsSection />
+        <TestimonialsSection />
+        <BlogSection />
+        <ContactSection />
+      </div>
     </div>
   </DefaultLayout>
 </template>
@@ -34,5 +37,13 @@ onMounted(() => {
 <style scoped>
 .landing-page {
   overflow-x: hidden;
+}
+.content-band {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+.content-band > * {
+  width: 100%;
 }
 </style>

@@ -177,61 +177,51 @@ onMounted(async () => {
 
 <style scoped>
 .blog-list-page {
-  background: #f8f9fa;
+  padding: 5rem 0 3rem;
+  background: var(--bg);
   min-height: 100vh;
 }
 
-.blog-card {
-  background: white;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s;
-  height: 100%;
+.blog-list-page .filters {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 2rem;
+}
+.blog-list-page .filters .form-control {
+  min-width: 200px;
 }
 
-.blog-card:hover {
-  transform: translateY(-5px);
+.blog-list-page .pagination {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 2.5rem;
 }
-
-.blog-image {
-  position: relative;
-  height: 200px;
-  overflow: hidden;
+.blog-list-page .pagination .page-item {
+  list-style: none;
 }
-
-.blog-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.blog-list-page .pagination .page-link {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-sm);
+  color: var(--text-soft);
+  font-weight: 500;
+  transition: all 0.25s var(--ease);
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
 }
-
-.category-badge {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  background: #ffc107;
-  color: #333;
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 0.75rem;
-  font-weight: bold;
+.blog-list-page .pagination .page-link:hover {
+  background: var(--primary-light);
+  color: var(--primary);
 }
-
-.blog-content {
-  padding: 20px;
-}
-
-.blog-content h5 {
-  margin-bottom: 10px;
-  font-weight: 600;
-}
-
-.blog-content p {
-  margin-bottom: 15px;
-}
-
-.blog-meta {
-  font-size: 0.85rem;
+.blog-list-page .pagination .active .page-link {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
 }
 </style>

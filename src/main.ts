@@ -5,6 +5,7 @@ import App from './App.vue'
 import router from './router'
 import VueToast from '@erag/vue-toastification'
 import '@/styles/main.css'
+import 'bootstrap-icons/font/bootstrap-icons.css'
 
 const app = createApp(App)
 

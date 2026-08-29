@@ -183,38 +183,64 @@ onMounted(() => {
 
 <style scoped>
 .doctor-detail-page {
-  background: #f8f9fa;
+  padding: 6rem 0 3rem;
+  background: var(--bg);
   min-height: 100vh;
 }
 
-.doctor-profile-card {
-  background: white;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+.doctor-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2.5rem;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 2rem;
 }
 
-.schedule-grid {
-  display: grid;
-  gap: 10px;
+.doctor-profile-card {
+  background: var(--surface);
+  padding: 2rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--surface-border);
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+}
+.doctor-profile-card img {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--primary-light);
+  margin-bottom: 1rem;
+}
+.doctor-profile-card h3 {
+  font-weight: 700;
+}
+.doctor-profile-card .specialty {
+  color: var(--text-muted);
+}
+
+.doctor-info-card {
+  background: var(--surface);
+  padding: 2rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--surface-border);
+  box-shadow: var(--shadow-sm);
 }
 
 .schedule-item {
   display: flex;
   justify-content: space-between;
-  padding: 10px;
-  background: #f8f9fa;
-  border-radius: 8px;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--surface-border);
+}
+.schedule-item:last-child {
+  border-bottom: none;
 }
 
-.schedule-item .day {
-  font-weight: 600;
-}
-
-.review-item {
-  padding: 15px;
-  background: #f8f9fa;
-  border-radius: 8px;
-  margin-bottom: 10px;
+@media (max-width: 768px) {
+  .doctor-detail-grid {
+    grid-template-columns: 1fr;
+  }
 }
 </style>

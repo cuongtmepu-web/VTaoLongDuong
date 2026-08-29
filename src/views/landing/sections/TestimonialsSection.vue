@@ -15,18 +15,13 @@
 
       <div v-else class="row g-4">
         <div class="col-md-4" v-for="(testimonial, index) in displayedTestimonials" :key="index">
-          <div class="testimonial-card">
-            <div class="testimonial-rating">
+          <article class="testimonial-card">
+            <div class="testimonial-rating" aria-label="Đánh giá">
               <i
                 v-for="star in 5"
                 :key="star"
-                :class="
-                  star <= testimonial.rating
-                    ? 'bi bi-star-fill text-warning'
-                    : 'bi bi-star text-muted'
-                "
-              >
-              </i>
+                :class="star <= testimonial.rating ? 'bi bi-star-fill active' : 'bi bi-star'"
+              ></i>
             </div>
             <p class="testimonial-content">{{ testimonial.content }}</p>
             <div class="testimonial-author">
@@ -34,17 +29,16 @@
                 <img
                   :src="testimonial.avatar || '/images/default-avatar.jpg'"
                   :alt="testimonial.name"
-                  class="rounded-circle"
-                  width="50"
-                  height="50"
+                  width="48"
+                  height="48"
                 />
               </div>
               <div class="author-info">
-                <h6 class="mb-0">{{ testimonial.name }}</h6>
-                <small class="text-muted">{{ testimonial.role || 'Khách hàng' }}</small>
+                <h6>{{ testimonial.name }}</h6>
+                <small>{{ testimonial.role || 'Khách hàng' }}</small>
               </div>
             </div>
-          </div>
+          </article>
         </div>
       </div>
 
@@ -125,9 +119,7 @@ const testimonials = computed<Testimonial[]>(() => {
 })
 
 const displayedTestimonials = computed(() => {
-  if (showAll.value) {
-    return testimonials.value
-  }
+  if (showAll.value) return testimonials.value
   return testimonials.value.slice(0, 3)
 })
 
@@ -138,62 +130,71 @@ onMounted(() => {
 
 <style scoped>
 .testimonials-section {
-  background: #f8f9fa;
+  padding: 5rem 0;
+  background: var(--bg);
 }
 
-.section-title {
-  font-size: 2.5rem;
-  font-weight: bold;
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 2rem;
 }
 
 .testimonial-card {
-  background: white;
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.06);
-  height: 100%;
-  transition: transform 0.3s;
+  background: var(--surface);
+  padding: 1.8rem 1.6rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--surface-border);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.35s var(--ease);
 }
-
 .testimonial-card:hover {
-  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--secondary-light);
 }
-
-.testimonial-rating {
-  margin-bottom: 15px;
+.testimonial-card .stars {
+  color: var(--secondary);
+  font-size: 1rem;
+  margin-bottom: 0.8rem;
 }
-
-.testimonial-rating i {
-  font-size: 1.1rem;
-  margin-right: 2px;
-}
-
-.testimonial-content {
-  color: #555;
+.testimonial-card .content {
+  color: var(--text-soft);
+  line-height: 1.7;
   font-size: 0.95rem;
-  line-height: 1.6;
-  margin-bottom: 20px;
-  min-height: 80px;
+  margin-bottom: 1.2rem;
 }
-
-.testimonial-author {
+.testimonial-card .author {
   display: flex;
   align-items: center;
-  gap: 15px;
-  border-top: 1px solid #eee;
-  padding-top: 15px;
+  gap: 0.8rem;
+  border-top: 1px solid var(--surface-border);
+  padding-top: 1rem;
 }
-
-.author-avatar img {
+.testimonial-card .author img {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
   object-fit: cover;
-  border: 2px solid #f8f9fa;
 }
-
-.author-info h6 {
+.testimonial-card .author .name {
   font-weight: 600;
 }
+.testimonial-card .author .role {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
 
-.author-info small {
-  font-size: 0.8rem;
+@media (max-width: 992px) {
+  .testimonials-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 576px) {
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
 }
 </style>

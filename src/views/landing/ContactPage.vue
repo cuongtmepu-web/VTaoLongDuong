@@ -146,68 +146,8 @@ const handleSubmit = async () => {
 
 <style scoped>
 .contact-page {
-  background: #f8f9fa;
+  padding: 6rem 0 3rem;
+  background: var(--bg);
   min-height: 100vh;
-}
-
-.contact-info-card {
-  background: white;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
-}
-
-.contact-item {
-  display: flex;
-  gap: 15px;
-  margin-bottom: 20px;
-}
-
-.contact-item i {
-  font-size: 1.5rem;
-  color: #2c3e50;
-  width: 40px;
-  height: 40px;
-  background: #f8f9fa;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.contact-item h6 {
-  margin: 0;
-  font-weight: 600;
-}
-
-.contact-item p {
-  margin: 0;
-  color: #6c757d;
-  font-size: 0.9rem;
-}
-
-.social-links {
-  display: flex;
-  gap: 10px;
-}
-
-.social-link {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: #f8f9fa;
-  color: #2c3e50;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s;
-  text-decoration: none;
-}
-
-.social-link:hover {
-  background: #2c3e50;
-  color: white;
-  transform: translateY(-3px);
 }
 </style>

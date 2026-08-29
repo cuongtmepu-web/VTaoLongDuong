@@ -104,53 +104,8 @@ onMounted(() => {
 
 <style scoped>
 .doctors-page {
-  background: #f8f9fa;
+  padding: 6rem 0 3rem;
+  background: var(--bg);
   min-height: 100vh;
-}
-
-.doctor-card {
-  background: white;
-  border-radius: 12px;
-  padding: 25px;
-  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s;
-}
-
-.doctor-card:hover {
-  transform: translateY(-5px);
-}
-
-.doctor-image {
-  position: relative;
-  width: 150px;
-  height: 150px;
-  margin: 0 auto 15px;
-}
-
-.doctor-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border: 4px solid #fff;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.status-badge {
-  position: absolute;
-  bottom: 5px;
-  right: 5px;
-  padding: 3px 10px;
-  border-radius: 20px;
-  font-size: 0.7rem;
-  font-weight: bold;
-  color: white;
-}
-
-.status-badge.available {
-  background: #28a745;
-}
-
-.status-badge.offline {
-  background: #dc3545;
 }
 </style>

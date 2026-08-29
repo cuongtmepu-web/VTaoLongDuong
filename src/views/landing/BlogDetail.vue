@@ -178,56 +178,66 @@ onMounted(() => {
 
 <style scoped>
 .blog-detail-page {
-  background: #f8f9fa;
+  padding: 6rem 0 3rem;
+  background: var(--bg);
   min-height: 100vh;
 }
 
 .blog-detail {
-  background: white;
-  padding: 40px;
-  border-radius: 12px;
-  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 0 2rem;
 }
 
-.post-header {
-  margin-bottom: 30px;
+.blog-detail .post-header {
+  margin-bottom: 2rem;
 }
-
-.post-meta {
+.blog-detail .post-header h1 {
+  font-size: 2.8rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+.blog-detail .post-meta {
+  display: flex;
+  gap: 1.5rem;
+  color: var(--text-muted);
   font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+.blog-detail .post-content {
+  font-size: 1.05rem;
+  line-height: 1.9;
+  color: var(--text-soft);
+}
+.blog-detail .post-content img {
+  border-radius: var(--radius-md);
+  margin: 1.5rem 0;
+  box-shadow: var(--shadow-sm);
 }
 
-.post-content {
-  font-size: 1.1rem;
-  line-height: 1.8;
+.comment-section {
+  margin-top: 3rem;
+  border-top: 1px solid var(--surface-border);
+  padding-top: 2rem;
 }
-
-.post-content img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 8px;
-  margin: 20px 0;
-}
-
 .comment-item {
-  padding: 15px;
-  background: #f8f9fa;
-  border-radius: 8px;
-  margin-bottom: 10px;
+  background: var(--surface);
+  padding: 1rem 1.2rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--surface-border);
+  margin-bottom: 0.8rem;
 }
-
-.comment-author {
-  margin-bottom: 5px;
+.comment-item .author {
+  font-weight: 600;
 }
-
-.comment-content {
-  margin: 0;
-  color: #555;
+.comment-item .date {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  margin-left: 0.8rem;
 }
-
-.replies {
-  margin-top: 10px;
-  padding-left: 20px;
-  border-left: 3px solid #dee2e6;
+.comment-item .content {
+  color: var(--text-soft);
+  margin-top: 0.2rem;
 }
 </style>

@@ -32,22 +32,27 @@ const goBack = () => {
 
 <style scoped>
 .not-found-page {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background:
+    radial-gradient(circle at top, rgba(20, 184, 166, 0.16), transparent 30%),
+    linear-gradient(135deg, #0f172a 0%, #0f766e 100%);
 }
 
 .error-code {
   font-size: 8rem;
-  font-weight: bold;
-  color: rgba(255, 255, 255, 0.2);
-  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.22);
+  text-shadow: 0 16px 36px rgba(15, 23, 42, 0.22);
 }
 
 .not-found-page h1 {
   color: white;
+  font-weight: 800;
 }
 
 .not-found-page .text-muted {
-  color: rgba(255, 255, 255, 0.7) !important;
+  color: rgba(255, 255, 255, 0.76) !important;
 }
 </style>

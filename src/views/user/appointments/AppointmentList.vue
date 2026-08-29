@@ -214,24 +214,41 @@ onMounted(() => {
 
 <style scoped>
 .appointment-list {
-  padding: 20px;
+  padding: 1.5rem;
 }
 
 .appointment-card {
-  transition: all 0.2s;
+  border-radius: 18px;
+  transition: all 0.25s ease;
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 1), rgba(240, 253, 250, 0.7));
 }
 
 .appointment-card:hover {
-  transform: translateX(5px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-3px);
+  box-shadow: 0 16px 28px rgba(15, 23, 42, 0.06);
 }
 
 .appointment-details p {
-  color: #6c757d;
-  font-size: 0.9rem;
+  color: #64748b;
+  font-size: 0.92rem;
+}
+
+.nav-tabs {
+  border-bottom: 1px solid rgba(148, 163, 184, 0.22);
 }
 
 .nav-tabs .nav-link {
   cursor: pointer;
+  border: none;
+  border-radius: 12px 12px 0 0;
+  color: #475569;
+  font-weight: 600;
+}
+
+.nav-tabs .nav-link.active {
+  background: linear-gradient(135deg, rgba(20, 184, 166, 0.12), rgba(244, 183, 64, 0.1));
+  color: #0f766e;
+  border-bottom: 2px solid #0f766e;
 }
 </style>

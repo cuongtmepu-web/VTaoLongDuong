@@ -240,21 +240,28 @@ onMounted(() => {
 
 <style scoped>
 .appointment-detail {
-  padding: 20px;
+  padding: 1.5rem;
 }
 
 .info-item {
-  margin-bottom: 15px;
+  margin-bottom: 1rem;
+  padding: 0.9rem 1rem;
+  background: linear-gradient(180deg, rgba(248, 250, 252, 0.8), rgba(240, 253, 250, 0.7));
+  border: 1px solid rgba(148, 163, 184, 0.12);
+  border-radius: 14px;
 }
 
 .info-item label {
   display: block;
-  font-size: 0.85rem;
-  margin-bottom: 2px;
+  font-size: 0.82rem;
+  margin-bottom: 0.35rem;
+  color: #64748b;
+  letter-spacing: 0.02em;
 }
 
 .info-item p {
   margin: 0;
   font-size: 1rem;
+  color: #0f172a;
 }
 </style>
