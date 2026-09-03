@@ -1,9 +1,26 @@
 <template>
-  <section class="doctors-section py-5 bg-light">
+  <section class="doctors-section py-5">
+    <div class="mist-layer"></div>
     <div class="container">
-      <h2 class="text-center section-title mb-5">
-        {{ sectionData.title || 'Đội ngũ bác sĩ' }}
-      </h2>
+      <div class="doctors-header">
+        <span class="eyebrow-tag">Đội ngũ</span>
+        <h2 class="text-center section-title">
+          {{ sectionData.title || 'Đội ngũ bác sĩ' }}
+        </h2>
+        <div class="section-divider">
+          <span class="line"></span>
+          <svg class="taiji-icon" viewBox="0 0 100 100" aria-hidden="true">
+            <circle cx="50" cy="50" r="47" fill="none" stroke="currentColor" stroke-width="3" />
+            <path
+              d="M50,3 A23.5,23.5 0 0,1 50,50 A23.5,23.5 0 0,0 50,97 A47,47 0 0,1 50,3 Z"
+              fill="currentColor"
+            />
+            <circle cx="50" cy="26.5" r="7" fill="var(--surface)" />
+            <circle cx="50" cy="73.5" r="7" fill="currentColor" />
+          </svg>
+          <span class="line right"></span>
+        </div>
+      </div>
 
       <div v-if="loading" class="text-center py-5">
         <div class="spinner-border text-primary"></div>
@@ -112,84 +129,99 @@ onMounted(() => {
 
 <style scoped>
 .doctors-section {
-  padding: 5rem 0;
-  background: var(--surface);
+  position: relative;
+  padding: 5.5rem 0;
+  background: linear-gradient(180deg, var(--surface) 0%, var(--soft-peach) 100%);
+  border: none;
+  overflow: hidden;
 }
 
-.doctors-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 2rem;
+.doctors-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.eyebrow-tag {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.doctors-header .section-title {
+  display: inline-block;
+}
+.doctors-header .section-title::after {
+  display: none;
+}
+.doctors-header .section-divider {
+  margin-top: 1rem;
 }
 
 .doctor-card {
   background: var(--surface);
-  border-radius: var(--radius-lg);
-  padding: 2rem 1.5rem;
+  border-radius: 22px;
+  padding: 2.1rem 1.5rem 1.8rem;
   text-align: center;
   border: 1px solid var(--surface-border);
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 12px 24px rgba(28, 38, 32, 0.04);
   transition: all 0.35s var(--ease);
+  height: 100%;
 }
 .doctor-card:hover {
   transform: translateY(-8px);
-  box-shadow: var(--shadow-md);
-  border-color: var(--secondary-light);
+  box-shadow: 0 18px 32px rgba(28, 38, 32, 0.1);
+  border-color: var(--gold-light);
 }
-.doctor-card .avatar {
+.doctor-image {
+  position: relative;
   width: 120px;
   height: 120px;
-  margin: 0 auto 1rem;
-  border-radius: 50%;
-  overflow: hidden;
-  border: 4px solid var(--primary-light);
-  box-shadow: var(--shadow-sm);
-  transition: border-color 0.3s var(--ease);
+  margin: 0 auto 1.1rem;
 }
-.doctor-card:hover .avatar {
-  border-color: var(--primary);
-}
-.doctor-card .avatar img {
+.doctor-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid var(--gold-light);
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.3s var(--ease);
 }
-.doctor-card h5 {
-  font-weight: 700;
-  margin-bottom: 0.2rem;
+.doctor-card:hover .doctor-image img {
+  border-color: var(--primary);
 }
-.doctor-card .specialty {
-  color: var(--text-muted);
-  font-size: 0.9rem;
-}
-.doctor-card .badge-status {
-  display: inline-block;
-  padding: 0.2rem 0.7rem;
+.status-badge {
+  position: absolute;
+  bottom: 2px;
+  right: 4px;
+  padding: 0.18rem 0.6rem;
   border-radius: 999px;
-  font-size: 0.7rem;
-  font-weight: 600;
-  margin-top: 0.3rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  border: 2px solid var(--surface);
 }
-.badge-status.available {
+.status-badge.available {
   background: var(--primary-light);
   color: var(--primary-dark);
 }
-.badge-status.offline {
+.status-badge.offline {
   background: var(--secondary-light);
   color: var(--secondary-dark);
 }
-
-@media (max-width: 992px) {
-  .doctors-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+.doctor-info h5 {
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+  color: var(--text);
 }
+.doctor-info .text-primary {
+  color: var(--primary) !important;
+}
+
 @media (max-width: 576px) {
-  .doctors-grid {
-    grid-template-columns: 1fr;
+  .doctors-section {
+    padding: 4rem 0;
   }
 }
 </style>

@@ -1,8 +1,25 @@
 <template>
   <DefaultLayout>
     <div class="blog-list-page py-5">
+      <div class="mist-layer"></div>
       <div class="container">
-        <h2 class="text-center mb-4">Bài thuốc & Kiến thức sức khỏe</h2>
+        <div class="page-header">
+          <span class="eyebrow-tag">Thư viện</span>
+          <h2 class="text-center mb-0">Bài thuốc & Kiến thức sức khỏe</h2>
+          <div class="section-divider">
+            <span class="line"></span>
+            <svg class="taiji-icon" viewBox="0 0 100 100" aria-hidden="true">
+              <circle cx="50" cy="50" r="47" fill="none" stroke="currentColor" stroke-width="3" />
+              <path
+                d="M50,3 A23.5,23.5 0 0,1 50,50 A23.5,23.5 0 0,0 50,97 A47,47 0 0,1 50,3 Z"
+                fill="currentColor"
+              />
+              <circle cx="50" cy="26.5" r="7" fill="var(--surface)" />
+              <circle cx="50" cy="73.5" r="7" fill="currentColor" />
+            </svg>
+            <span class="line right"></span>
+          </div>
+        </div>
 
         <!-- Search & Filter -->
         <div class="row g-3 mb-4">
@@ -177,9 +194,87 @@ onMounted(async () => {
 
 <style scoped>
 .blog-list-page {
-  padding: 5rem 0 3rem;
-  background: var(--bg);
+  position: relative;
+  padding: 7rem 0 4rem;
+  background: linear-gradient(180deg, var(--soft-sand) 0%, var(--bg) 100%);
   min-height: 100vh;
+  overflow: hidden;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 2.6rem;
+}
+.eyebrow-tag {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.page-header h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(2.2rem, 3.4vw, 3rem);
+  color: var(--text);
+  font-weight: 600;
+}
+.page-header .section-divider {
+  margin-top: 1rem;
+}
+
+.blog-card {
+  background: var(--surface);
+  border-radius: 22px;
+  overflow: hidden;
+  border: 1px solid var(--surface-border);
+  box-shadow: 0 12px 24px rgba(28, 38, 32, 0.04);
+  transition: all 0.35s var(--ease);
+  height: 100%;
+}
+.blog-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 32px rgba(28, 38, 32, 0.1);
+  border-color: var(--gold-light);
+}
+.blog-image {
+  position: relative;
+  height: 190px;
+  overflow: hidden;
+}
+.blog-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s var(--ease);
+}
+.blog-card:hover .blog-image img {
+  transform: scale(1.06);
+}
+.category-badge {
+  position: absolute;
+  top: 0.8rem;
+  left: 0.8rem;
+  padding: 0.28rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(28, 38, 32, 0.75);
+  color: var(--gold-light);
+  font-size: 0.68rem;
+  font-weight: 600;
+}
+.blog-content {
+  padding: 1.3rem 1.2rem 1.4rem;
+}
+.blog-content h5 {
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.4rem;
+}
+.blog-meta {
+  border-top: 1px solid var(--surface-border);
+  padding-top: 0.8rem;
+  margin-top: 0.6rem;
 }
 
 .blog-list-page .filters {

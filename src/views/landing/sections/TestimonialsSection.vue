@@ -1,9 +1,26 @@
 <template>
   <section class="testimonials-section py-5">
+    <div class="mist-layer"></div>
     <div class="container">
-      <h2 class="text-center section-title mb-5">
-        {{ sectionData.title || 'Cảm nhận của khách hàng' }}
-      </h2>
+      <div class="testimonials-header">
+        <span class="eyebrow-tag">Cảm nhận</span>
+        <h2 class="text-center section-title">
+          {{ sectionData.title || 'Cảm nhận của khách hàng' }}
+        </h2>
+        <div class="section-divider">
+          <span class="line"></span>
+          <svg class="taiji-icon" viewBox="0 0 100 100" aria-hidden="true">
+            <circle cx="50" cy="50" r="47" fill="none" stroke="currentColor" stroke-width="3" />
+            <path
+              d="M50,3 A23.5,23.5 0 0,1 50,50 A23.5,23.5 0 0,0 50,97 A47,47 0 0,1 50,3 Z"
+              fill="currentColor"
+            />
+            <circle cx="50" cy="26.5" r="7" fill="var(--surface)" />
+            <circle cx="50" cy="73.5" r="7" fill="currentColor" />
+          </svg>
+          <span class="line right"></span>
+        </div>
+      </div>
 
       <div v-if="loading" class="text-center py-5">
         <div class="spinner-border text-primary"></div>
@@ -130,71 +147,107 @@ onMounted(() => {
 
 <style scoped>
 .testimonials-section {
-  padding: 5rem 0;
-  background: var(--bg);
+  position: relative;
+  padding: 5.5rem 0;
+  background: linear-gradient(180deg, var(--soft-mint) 0%, var(--surface) 100%);
+  border: none;
+  overflow: hidden;
 }
 
-.testimonials-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 2rem;
+.testimonials-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.eyebrow-tag {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.testimonials-header .section-title {
+  display: inline-block;
+}
+.testimonials-header .section-title::after {
+  display: none;
+}
+.testimonials-header .section-divider {
+  margin-top: 1rem;
 }
 
 .testimonial-card {
+  position: relative;
   background: var(--surface);
-  padding: 1.8rem 1.6rem;
-  border-radius: var(--radius-lg);
+  padding: 2.2rem 1.7rem 1.8rem;
+  border-radius: 22px;
   border: 1px solid var(--surface-border);
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 12px 24px rgba(28, 38, 32, 0.04);
   transition: all 0.35s var(--ease);
+  height: 100%;
 }
 .testimonial-card:hover {
-  box-shadow: var(--shadow-md);
-  border-color: var(--secondary-light);
+  transform: translateY(-6px);
+  box-shadow: 0 18px 32px rgba(28, 38, 32, 0.1);
+  border-color: var(--gold-light);
 }
-.testimonial-card .stars {
-  color: var(--secondary);
-  font-size: 1rem;
-  margin-bottom: 0.8rem;
+.testimonial-card::before {
+  content: '\201C';
+  position: absolute;
+  top: 0.6rem;
+  right: 1.2rem;
+  font-family: var(--font-heading);
+  font-size: 3.4rem;
+  line-height: 1;
+  color: var(--gold-light);
+  opacity: 0.7;
 }
-.testimonial-card .content {
-  color: var(--text-soft);
-  line-height: 1.7;
+.testimonial-rating {
+  color: var(--gold);
   font-size: 0.95rem;
-  margin-bottom: 1.2rem;
+  margin-bottom: 0.9rem;
 }
-.testimonial-card .author {
+.testimonial-rating i {
+  color: var(--surface-border);
+}
+.testimonial-rating i.active {
+  color: var(--gold);
+}
+.testimonial-content {
+  color: var(--text-soft);
+  line-height: 1.75;
+  font-size: 0.95rem;
+  margin-bottom: 1.3rem;
+  font-style: italic;
+}
+.testimonial-author {
   display: flex;
   align-items: center;
   gap: 0.8rem;
   border-top: 1px solid var(--surface-border);
   padding-top: 1rem;
 }
-.testimonial-card .author img {
+.author-avatar img {
   width: 44px;
   height: 44px;
   border-radius: 50%;
   object-fit: cover;
+  border: 2px solid var(--gold-light);
 }
-.testimonial-card .author .name {
+.author-info h6 {
   font-weight: 600;
+  margin: 0;
+  color: var(--text);
 }
-.testimonial-card .author .role {
+.author-info small {
   font-size: 0.85rem;
   color: var(--text-muted);
 }
 
-@media (max-width: 992px) {
-  .testimonials-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
 @media (max-width: 576px) {
-  .testimonials-grid {
-    grid-template-columns: 1fr;
+  .testimonials-section {
+    padding: 4rem 0;
   }
 }
 </style>

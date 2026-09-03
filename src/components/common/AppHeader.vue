@@ -3,7 +3,15 @@
     <div class="container header-inner">
       <router-link to="/" class="brand" aria-label="Trang chủ Tảo Long Đường">
         <span class="brand-mark">
-          <i class="bi bi-flower2"></i>
+          <svg viewBox="0 0 100 100" class="brand-taiji" aria-hidden="true">
+            <circle cx="50" cy="50" r="47" fill="none" stroke="currentColor" stroke-width="3" />
+            <path
+              d="M50,3 A23.5,23.5 0 0,1 50,50 A23.5,23.5 0 0,0 50,97 A47,47 0 0,1 50,3 Z"
+              fill="currentColor"
+            />
+            <circle cx="50" cy="26.5" r="7" fill="var(--surface)" />
+            <circle cx="50" cy="73.5" r="7" fill="currentColor" />
+          </svg>
         </span>
         <span class="brand-text">Tảo Long Đường</span>
       </router-link>
@@ -51,15 +59,15 @@ const authStore = useAuthStore()
   right: 0;
   z-index: 1050;
   padding: 0.8rem 0;
-  background: rgba(255, 255, 255, 0.72);
+  background: rgba(250, 246, 236, 0.78);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(233, 238, 244, 0.5);
+  border-bottom: 1px solid var(--gold-light);
   transition: all 0.3s var(--ease);
 }
 .app-header.scrolled {
-  background: rgba(255, 255, 255, 0.92);
-  box-shadow: 0 4px 20px rgba(11, 26, 42, 0.06);
+  background: rgba(250, 246, 236, 0.95);
+  box-shadow: 0 4px 20px rgba(28, 38, 32, 0.07);
 }
 
 .header-inner {
@@ -87,11 +95,22 @@ const authStore = useAuthStore()
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: var(--radius-sm);
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  color: #fff;
-  font-size: 1.1rem;
-  box-shadow: 0 8px 16px var(--primary-glow);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--primary-dark);
+  box-shadow:
+    0 0 0 1px var(--gold-light),
+    0 8px 16px var(--primary-glow);
+}
+.brand-taiji {
+  width: 24px;
+  height: 24px;
+  animation: taijiSpin 22s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .brand-taiji {
+    animation: none;
+  }
 }
 .brand-text {
   font-weight: 700;

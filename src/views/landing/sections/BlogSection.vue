@@ -1,10 +1,25 @@
 <template>
   <section class="blog-section py-5">
+    <div class="mist-layer"></div>
     <div class="container">
       <div class="section-header">
+        <span class="eyebrow-tag">Tri thức Đông y</span>
         <h2 class="section-title mb-0">
           {{ sectionData.title || 'Bài viết mới nhất' }}
         </h2>
+        <div class="section-divider">
+          <span class="line"></span>
+          <svg class="taiji-icon" viewBox="0 0 100 100" aria-hidden="true">
+            <circle cx="50" cy="50" r="47" fill="none" stroke="currentColor" stroke-width="3" />
+            <path
+              d="M50,3 A23.5,23.5 0 0,1 50,50 A23.5,23.5 0 0,0 50,97 A47,47 0 0,1 50,3 Z"
+              fill="currentColor"
+            />
+            <circle cx="50" cy="26.5" r="7" fill="var(--surface)" />
+            <circle cx="50" cy="73.5" r="7" fill="currentColor" />
+          </svg>
+          <span class="line right"></span>
+        </div>
       </div>
 
       <div v-if="loading" class="text-center py-5">
@@ -103,75 +118,107 @@ onMounted(() => {
 
 <style scoped>
 .blog-section {
-  padding: 5rem 0;
-  background: var(--surface);
+  position: relative;
+  padding: 5.5rem 0;
+  background: linear-gradient(180deg, var(--surface) 0%, var(--soft-sand) 100%);
+  border: none;
+  overflow: hidden;
 }
 
-.blog-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 2rem;
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.eyebrow-tag {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.section-header .section-title {
+  display: inline-block;
+}
+.section-header .section-title::after {
+  display: none;
+}
+.section-header .section-divider {
+  margin-top: 1rem;
 }
 
 .blog-card {
   background: var(--surface);
-  border-radius: var(--radius-lg);
+  border-radius: 22px;
   overflow: hidden;
   border: 1px solid var(--surface-border);
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 12px 24px rgba(28, 38, 32, 0.04);
   transition: all 0.35s var(--ease);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 .blog-card:hover {
   transform: translateY(-6px);
-  box-shadow: var(--shadow-md);
-  border-color: var(--primary-light);
+  box-shadow: 0 18px 32px rgba(28, 38, 32, 0.1);
+  border-color: var(--gold-light);
 }
-.blog-card .thumb {
+.blog-image {
+  position: relative;
   height: 200px;
   overflow: hidden;
 }
-.blog-card .thumb img {
+.blog-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.4s var(--ease);
 }
-.blog-card:hover .thumb img {
-  transform: scale(1.05);
+.blog-card:hover .blog-image img {
+  transform: scale(1.06);
 }
-.blog-card .body {
-  padding: 1.4rem 1.2rem;
+.category-badge {
+  position: absolute;
+  top: 0.9rem;
+  left: 0.9rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  background: rgba(28, 38, 32, 0.75);
+  backdrop-filter: blur(4px);
+  color: var(--gold-light);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
 }
-.blog-card .body h5 {
+.blog-content {
+  padding: 1.5rem 1.3rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.blog-copy h5 {
   font-weight: 700;
   margin-bottom: 0.5rem;
+  color: var(--text);
 }
-.blog-card .body p {
+.blog-copy p {
   color: var(--text-soft);
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   line-height: 1.6;
   margin-bottom: 1rem;
 }
-.blog-card .meta {
-  display: flex;
-  justify-content: space-between;
+.blog-meta {
   font-size: 0.8rem;
   color: var(--text-muted);
   border-top: 1px solid var(--surface-border);
   padding-top: 0.8rem;
+  margin-top: auto;
 }
 
-@media (max-width: 992px) {
-  .blog-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
 @media (max-width: 576px) {
-  .blog-grid {
-    grid-template-columns: 1fr;
+  .blog-section {
+    padding: 4rem 0;
   }
 }
 </style>

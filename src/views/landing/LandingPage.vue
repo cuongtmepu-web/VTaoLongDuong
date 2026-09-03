@@ -37,13 +37,22 @@ onMounted(() => {
 <style scoped>
 .landing-page {
   overflow-x: hidden;
+  background: var(--bg);
 }
 .content-band {
-  max-width: 1280px;
+  width: 80%;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0;
 }
+
 .content-band > * {
   width: 100%;
+  margin: 0;
+}
+
+@media (max-width: 576px), (max-width: 786px), (max-width: 1024px) {
+  .content-band {
+    width: calc(100% - 10px);
+  }
 }
 </style>

@@ -1,11 +1,28 @@
 <template>
   <DefaultLayout>
     <div class="doctors-page py-5">
+      <div class="mist-layer"></div>
       <div class="container">
-        <h2 class="text-center mb-4">Đội ngũ bác sĩ</h2>
-        <p class="text-center text-muted mb-5">Đội ngũ bác sĩ giàu kinh nghiệm, tận tâm với nghề</p>
+        <div class="page-header">
+          <span class="eyebrow-tag">Đội ngũ</span>
+          <h2 class="text-center mb-2">Đội ngũ bác sĩ</h2>
+          <p class="text-center page-sub mb-3">Đội ngũ bác sĩ giàu kinh nghiệm, tận tâm với nghề</p>
+          <div class="section-divider">
+            <span class="line"></span>
+            <svg class="taiji-icon" viewBox="0 0 100 100" aria-hidden="true">
+              <circle cx="50" cy="50" r="47" fill="none" stroke="currentColor" stroke-width="3" />
+              <path
+                d="M50,3 A23.5,23.5 0 0,1 50,50 A23.5,23.5 0 0,0 50,97 A47,47 0 0,1 50,3 Z"
+                fill="currentColor"
+              />
+              <circle cx="50" cy="26.5" r="7" fill="var(--surface)" />
+              <circle cx="50" cy="73.5" r="7" fill="currentColor" />
+            </svg>
+            <span class="line right"></span>
+          </div>
+        </div>
 
-        <div v-if="loading" class="text-center py-5">
+        <div v-if="loading" class="text-center py-5 doctors-page-loading">
           <div class="spinner-border text-primary"></div>
         </div>
 
@@ -104,8 +121,98 @@ onMounted(() => {
 
 <style scoped>
 .doctors-page {
-  padding: 6rem 0 3rem;
-  background: var(--bg);
+  position: relative;
+  padding: 7rem 0 4rem;
+  background: linear-gradient(180deg, var(--soft-peach) 0%, var(--bg) 100%);
   min-height: 100vh;
+  overflow: hidden;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 2.6rem;
+}
+.eyebrow-tag {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.page-header h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(2.2rem, 3.4vw, 3rem);
+  color: var(--text);
+  font-weight: 600;
+}
+.page-sub {
+  color: var(--text-soft);
+  font-size: 1rem;
+}
+.page-header .section-divider {
+  margin-top: 0.6rem;
+}
+
+.doctor-card {
+  background: var(--surface);
+  border-radius: 22px;
+  padding: 2.1rem 1.5rem 1.8rem;
+  text-align: center;
+  border: 1px solid var(--surface-border);
+  box-shadow: 0 12px 24px rgba(28, 38, 32, 0.04);
+  transition: all 0.35s var(--ease);
+  height: 100%;
+}
+.doctor-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 18px 32px rgba(28, 38, 32, 0.1);
+  border-color: var(--gold-light);
+}
+.doctor-image {
+  position: relative;
+  width: 130px;
+  height: 130px;
+  margin: 0 auto 1.1rem;
+}
+.doctor-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid var(--gold-light);
+}
+.doctor-card:hover .doctor-image img {
+  border-color: var(--primary);
+}
+.status-badge {
+  position: absolute;
+  bottom: 4px;
+  right: 6px;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  border: 2px solid var(--surface);
+}
+.status-badge.available {
+  background: var(--primary-light);
+  color: var(--primary-dark);
+}
+.status-badge.offline {
+  background: var(--secondary-light);
+  color: var(--secondary-dark);
+}
+.doctor-info h4 {
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.2rem;
+}
+.doctor-info .text-primary {
+  color: var(--primary) !important;
+}
+.doctor-info .text-success {
+  color: var(--gold) !important;
 }
 </style>
