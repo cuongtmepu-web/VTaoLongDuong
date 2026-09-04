@@ -68,19 +68,44 @@
                 <div class="row">
                   <div class="col-md-6 mb-3">
                     <label class="form-label">Mật khẩu <span style="color: red">*</span></label>
-                    <input type="password" class="form-control" v-model="form.password" required />
+                    <div class="password-wrapper">
+                      <input
+                        :type="showPassword ? 'text' : 'password'"
+                        class="form-control password-input"
+                        v-model="form.password"
+                        required
+                        placeholder="Nhập mật khẩu"
+                      />
+                      <button
+                        class="password-toggle-btn"
+                        type="button"
+                        @click="showPassword = !showPassword"
+                      >
+                        <i :class="showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
+                      </button>
+                    </div>
                   </div>
 
                   <div class="col-md-6 mb-3">
                     <label class="form-label"
                       >Xác nhận mật khẩu <span style="color: red">*</span></label
                     >
-                    <input
-                      type="password"
-                      class="form-control"
-                      v-model="form.confirmPassword"
-                      required
-                    />
+                    <div class="password-wrapper">
+                      <input
+                        :type="showConfirmPassword ? 'text' : 'password'"
+                        class="form-control password-input"
+                        v-model="form.confirmPassword"
+                        required
+                        placeholder="Xác nhận mật khẩu"
+                      />
+                      <button
+                        class="password-toggle-btn"
+                        type="button"
+                        @click="showConfirmPassword = !showConfirmPassword"
+                      >
+                        <i :class="showConfirmPassword ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
+                      </button>
+                    </div>
                   </div>
                 </div>
 
@@ -139,6 +164,8 @@ import { useToast } from '@erag/vue-toastification'
 const authStore = useAuthStore()
 const toast = useToast()
 const loading = ref(false)
+const showPassword = ref(false)
+const showConfirmPassword = ref(false)
 
 const form = reactive<{
   username: string
@@ -251,6 +278,54 @@ const handleRegister = async () => {
   color: var(--text-muted);
   font-size: 0.92rem;
   font-style: italic;
+}
+
+/* Password wrapper styles - đưa icon vào bên trong input */
+.password-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.password-input {
+  padding-right: 45px; /* Tạo khoảng trống cho icon */
+}
+
+.password-toggle-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: #6c757d;
+  cursor: pointer;
+  padding: 0;
+  font-size: 1.2rem;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+}
+
+.password-toggle-btn:hover {
+  color: var(--primary-dark, #b8860b);
+}
+
+.password-toggle-btn:focus {
+  outline: none;
+}
+
+/* Đảm bảo input không bị che khuất khi focus */
+.password-input:focus {
+  padding-right: 45px;
+}
+
+/* Tùy chỉnh cho dark theme nếu có */
+.password-toggle-btn i {
+  font-size: 1.2rem;
+  line-height: 1;
 }
 
 @media (max-width: 576px), (max-width: 786px), (max-width: 1024px) {

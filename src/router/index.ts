@@ -312,9 +312,9 @@ router.beforeEach((to, from, next) => {
     if (to.meta.role) {
       if (to.meta.role !== userRole) {
         // Redirect to appropriate dashboard
-        if (userRole === 'Admin') {
+        if (userRole === '1') {
           next('/admin/dashboard')
-        } else if (userRole === 'User') {
+        } else if (userRole === '3') {
           next('/user/dashboard')
         } else {
           next('/login')
@@ -330,7 +330,7 @@ router.beforeEach((to, from, next) => {
   // Check if route is for guests only (login/register)
   if (to.meta.guestOnly && token) {
     // Redirect authenticated users away from login/register
-    if (userRole === 'Admin') {
+    if (userRole === '1') {
       next('/admin/dashboard')
     } else {
       next('/user/dashboard')

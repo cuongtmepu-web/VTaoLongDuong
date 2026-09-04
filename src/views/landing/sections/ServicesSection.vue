@@ -54,7 +54,7 @@ const defaultServices = [
   {
     title: 'Châm cứu',
     description: 'Phương pháp châm cứu cổ truyền giúp giảm đau và phục hồi sức khỏe',
-    icon: 'bi bi-syringe',
+    icon: 'bi bi-crosshair',
   },
   {
     title: 'Bài thuốc gia truyền',
@@ -74,7 +74,7 @@ const defaultServices = [
   {
     title: 'Tư vấn dinh dưỡng',
     description: 'Hướng dẫn chế độ ăn uống theo y học cổ truyền',
-    icon: 'bi bi-apple',
+    icon: 'bi bi-calendar2-heart',
   },
 ]
 

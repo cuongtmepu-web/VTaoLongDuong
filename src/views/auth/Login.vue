@@ -110,8 +110,10 @@ const handleLogin = async () => {
   const success = await authStore.login(form.username, form.password)
   loading.value = false
 
+  debugger
   if (success) {
     // Redirect based on role will be handled in the store
+    router.push('dashboard')
   }
 }
 </script>
