@@ -417,20 +417,307 @@ textarea.form-control {
 }
 
 /* Toast */
-.Vue-Toastification__toast {
-  font-family: 'Inter', sans-serif;
+.erag-toast-container.erag-top-center {
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.erag-toast {
+  width: min(360px, calc(100vw - 2rem));
+  min-height: 58px;
+  border: 1px solid rgba(233, 216, 179, 0.45);
   border-radius: var(--radius-md);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-lg);
+  font-family: var(--font-body);
 }
-.Vue-Toastification__toast--success {
+
+.erag-toast.erag-success {
+  --toast-bg: var(--primary);
+}
+
+.erag-toast.erag-error,
+.erag-toast.erag-warning {
+  --toast-bg: var(--secondary);
+}
+
+.erag-toast.erag-info {
+  --toast-bg: var(--primary-dark);
+}
+
+.erag-toast-icon {
+  flex: 0 0 20px;
+}
+
+.erag-toast-content {
+  min-width: 0;
+  padding: 12px 0;
+}
+
+.erag-toast-content strong,
+.erag-toast-content span {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.erag-toast-content strong {
+  margin-bottom: 0;
+  font-size: 0.9rem;
+  line-height: 1.35;
+}
+
+.erag-toast-content span {
+  font-size: 0.9rem;
+  line-height: 1.35;
+}
+
+/* Admin workspace: shared structure and the same material palette as landing. */
+.admin-layout .d-flex {
+  display: flex;
+}
+.admin-layout .flex-column {
+  flex-direction: column;
+}
+.admin-layout .align-items-center {
+  align-items: center;
+}
+.admin-layout .justify-content-between {
+  justify-content: space-between;
+}
+.admin-layout .justify-content-center {
+  justify-content: center;
+}
+.admin-layout .text-center {
+  text-align: center;
+}
+.admin-layout .text-end {
+  text-align: right;
+}
+.admin-layout .text-muted {
+  color: var(--text-muted) !important;
+}
+.admin-layout .fw-bold {
+  font-weight: 700;
+}
+.admin-layout .small {
+  font-size: 0.82rem;
+}
+.admin-layout .d-block {
+  display: block;
+}
+.admin-layout .gap-2 {
+  gap: 0.5rem;
+}
+.admin-layout .g-4 {
+  gap: 1.5rem;
+}
+.admin-layout .mb-0 {
+  margin-bottom: 0;
+}
+.admin-layout .mb-3 {
+  margin-bottom: 1rem;
+}
+.admin-layout .mb-4 {
+  margin-bottom: 1.5rem;
+}
+.admin-layout .mt-3 {
+  margin-top: 1rem;
+}
+.admin-layout .py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+.admin-layout .py-3 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+.admin-layout .py-5 {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+.admin-layout .row {
+  display: flex;
+  flex-wrap: wrap;
+}
+.admin-layout .row > * {
+  flex: 1 1 0;
+  min-width: 0;
+}
+.admin-layout .table-responsive {
+  overflow-x: auto;
+}
+
+@media (min-width: 768px) {
+  .admin-layout .col-md-3 {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+  .admin-layout .col-md-4 {
+    flex: 0 0 33.333%;
+    max-width: 33.333%;
+  }
+  .admin-layout .col-md-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+  .admin-layout .col-md-9 {
+    flex: 0 0 75%;
+    max-width: 75%;
+  }
+}
+
+.admin-layout .container-fluid {
+  width: 100%;
+}
+
+.admin-layout h2 {
+  color: var(--primary-dark);
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  line-height: 1;
+}
+
+.admin-layout .card {
+  border: 1px solid rgba(47, 111, 99, 0.08);
+  box-shadow: 0 8px 24px rgba(28, 38, 32, 0.06);
+}
+
+.admin-layout .card-header {
+  padding: 1.1rem 1.5rem;
+  background: var(--surface-alt);
+  border-bottom: 1px solid rgba(47, 111, 99, 0.08);
+  color: var(--primary-dark);
+}
+
+.admin-layout .card-header h5,
+.admin-layout .card-header h6 {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.admin-layout .table {
+  width: 100%;
+  margin-bottom: 0;
+  border-collapse: collapse;
+  color: var(--text-soft);
+  font-size: 0.9rem;
+}
+
+.admin-layout .table th {
+  padding: 0.85rem 0.75rem;
+  background: var(--soft-green);
+  color: var(--primary-dark);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.admin-layout .table td {
+  padding: 0.9rem 0.75rem;
+  border-bottom: 1px solid rgba(47, 111, 99, 0.08);
+  vertical-align: middle;
+}
+
+.admin-layout .table-hover tbody tr:hover {
+  background: var(--soft-mint);
+}
+
+.admin-layout .form-label {
+  display: inline-block;
+  margin-bottom: 0.45rem;
+  color: var(--primary-dark);
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.admin-layout .form-control,
+.admin-layout .form-select,
+.admin-layout textarea {
+  min-height: 44px;
+  border: 1px solid rgba(47, 111, 99, 0.15);
+  background: var(--surface);
+}
+
+.admin-layout .btn-primary {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+}
+
+.admin-layout .btn-secondary {
+  background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
+}
+
+.admin-layout .btn-outline-primary,
+.admin-layout .btn-outline-secondary,
+.admin-layout .btn-outline-success,
+.admin-layout .btn-outline-danger {
+  border: 1px solid rgba(47, 111, 99, 0.2);
+  color: var(--primary-dark);
+  background: transparent;
+}
+
+.admin-layout .btn-outline-danger {
+  color: var(--secondary-dark);
+}
+
+.admin-layout .pagination {
+  display: flex;
+  gap: 0.3rem;
+  padding-left: 0;
+  list-style: none;
+}
+
+.admin-layout .page-link {
+  display: block;
+  padding: 0.4rem 0.7rem;
+  border-radius: var(--radius-sm);
+  color: var(--primary-dark);
+  background: var(--surface);
+  border: 1px solid rgba(47, 111, 99, 0.12);
+}
+
+.admin-layout .page-item.active .page-link {
+  color: #fff;
   background: var(--primary);
+  border-color: var(--primary);
 }
-.Vue-Toastification__toast--error {
-  background: var(--secondary);
+
+.admin-layout .bg-success {
+  background: var(--primary) !important;
 }
-.Vue-Toastification__toast--warning {
-  background: var(--secondary);
+.admin-layout .bg-warning {
+  background: var(--gold) !important;
+  color: #fff !important;
 }
-.Vue-Toastification__toast--info {
-  background: var(--primary-dark);
+.admin-layout .bg-danger {
+  background: var(--secondary) !important;
+}
+.admin-layout .bg-info {
+  background: #668b86 !important;
+}
+.admin-layout .bg-secondary {
+  background: var(--text-muted) !important;
+}
+
+@media (max-width: 768px) {
+  .admin-layout .d-flex.justify-content-between {
+    align-items: flex-start !important;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .admin-layout .d-flex.justify-content-between > .d-flex {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .admin-layout .d-flex.justify-content-between > .d-flex .form-control,
+  .admin-layout .d-flex.justify-content-between > .d-flex .form-select {
+    flex: 1 1 160px;
+    width: auto !important;
+  }
+
+  .admin-layout .card-body {
+    padding: 1.1rem;
+  }
 }

@@ -85,24 +85,35 @@ const authStore = useAuthStore()
 </script>
 
 <style scoped>
+.admin-sidebar {
+  min-height: calc(100vh - 76px);
+  padding: 1.5rem 1rem;
+  background: var(--surface);
+  border-right: 1px solid var(--surface-border);
+}
+
 .admin-sidebar .nav-link {
-  color: rgba(255, 255, 255, 0.7);
-  padding: 10px 20px;
-  border-radius: 8px;
+  color: var(--text-soft);
+  padding: 0.72rem 1rem;
+  border-radius: var(--radius-sm);
   transition: all 0.3s;
   display: flex;
   align-items: center;
   gap: 10px;
+  font-size: 0.9rem;
+  font-weight: 500;
 }
 
 .admin-sidebar .nav-link:hover {
-  color: white;
-  background: rgba(255, 255, 255, 0.1);
+  color: var(--primary-dark);
+  background: var(--primary-light);
 }
 
 .admin-sidebar .nav-link.active {
-  color: white;
-  background: rgba(255, 255, 255, 0.15);
+  color: var(--primary-dark);
+  background: var(--primary-light);
+  box-shadow: inset 3px 0 0 var(--primary);
+  font-weight: 700;
 }
 
 .admin-sidebar .nav-link i {
@@ -112,11 +123,37 @@ const authStore = useAuthStore()
 }
 
 .admin-sidebar .nav-header {
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--text-muted);
   font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 1px;
-  padding: 15px 20px 8px;
+  padding: 1.5rem 1rem 0.5rem;
   font-weight: bold;
+}
+
+.admin-sidebar .nav-link.text-danger {
+  color: var(--secondary-dark) !important;
+}
+
+@media (max-width: 768px) {
+  .admin-sidebar {
+    min-height: auto;
+    padding: 0.75rem;
+    overflow-x: auto;
+  }
+  .admin-sidebar .nav {
+    flex-direction: row !important;
+    flex-wrap: nowrap;
+    gap: 0.25rem;
+  }
+  .admin-sidebar .nav-header {
+    display: none;
+  }
+  .admin-sidebar .nav-link {
+    white-space: nowrap;
+  }
+  .admin-sidebar .nav-item.mt-3 {
+    margin-top: 0 !important;
+  }
 }
 </style>

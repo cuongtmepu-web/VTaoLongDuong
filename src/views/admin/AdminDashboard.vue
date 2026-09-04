@@ -131,25 +131,25 @@ const statsData = computed(() => [
     title: 'Người dùng',
     value: stats.value.totalUsers,
     icon: 'bi bi-people',
-    color: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    color: 'linear-gradient(135deg, var(--primary), var(--primary-dark))',
   },
   {
     title: 'Bác sĩ',
     value: stats.value.totalDoctors,
     icon: 'bi bi-person-heart',
-    color: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+    color: 'linear-gradient(135deg, var(--secondary), var(--secondary-dark))',
   },
   {
     title: 'Lịch hẹn',
     value: stats.value.totalAppointments,
     icon: 'bi bi-calendar-check',
-    color: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+    color: 'linear-gradient(135deg, #668b86, var(--primary))',
   },
   {
     title: 'Doanh thu',
     value: formatCurrency(stats.value.totalRevenue),
     icon: 'bi bi-currency-dollar',
-    color: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
+    color: 'linear-gradient(135deg, var(--gold), var(--secondary))',
   },
 ])
 

@@ -6,13 +6,14 @@ import router from './router'
 import VueToast from '@erag/vue-toastification'
 import '@/styles/main.css'
 import 'bootstrap-icons/font/bootstrap-icons.css'
+import '@erag/vue-toastification/dist/style.css'
 
 const app = createApp(App)
 
 app.use(createPinia())
 app.use(router)
 app.use(VueToast, {
-  position: 'top-right',
+  position: 'top-center',
   timeout: 5000,
   closeOnClick: true,
   pauseOnFocusLoss: true,
