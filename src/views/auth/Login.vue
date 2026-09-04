@@ -93,10 +93,8 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
 import { useAuthStore } from '@/api/stores/auth'
-import { useRouter } from 'vue-router'
 
 const authStore = useAuthStore()
-const router = useRouter()
 const loading = ref(false)
 const showPassword = ref(false)
 
@@ -107,14 +105,8 @@ const form = reactive({
 
 const handleLogin = async () => {
   loading.value = true
-  const success = await authStore.login(form.username, form.password)
+  await authStore.login(form.username, form.password)
   loading.value = false
-
-  debugger
-  if (success) {
-    // Redirect based on role will be handled in the store
-    router.push('dashboard')
-  }
 }
 </script>
 

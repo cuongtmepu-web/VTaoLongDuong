@@ -295,7 +295,15 @@ const router = createRouter({
 // ===== NAVIGATION GUARD =====
 router.beforeEach((to, from, next) => {
   const token = localStorage.getItem('token')
-  const userRole = localStorage.getItem('role')
+  const storedRole = localStorage.getItem('role')
+  const userRole =
+    storedRole === '1' || storedRole === 'Admin'
+      ? 'Admin'
+      : storedRole === '2' || storedRole === 'Doctor'
+        ? 'Doctor'
+        : storedRole === '3' || storedRole === 'User'
+          ? 'User'
+          : storedRole
 
   // Check if route requires authentication
   if (to.meta.requiresAuth) {
@@ -312,9 +320,9 @@ router.beforeEach((to, from, next) => {
     if (to.meta.role) {
       if (to.meta.role !== userRole) {
         // Redirect to appropriate dashboard
-        if (userRole === '1') {
+        if (userRole === 'Admin') {
           next('/admin/dashboard')
-        } else if (userRole === '3') {
+        } else if (userRole === 'User') {
           next('/user/dashboard')
         } else {
           next('/login')

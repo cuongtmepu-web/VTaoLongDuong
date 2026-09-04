@@ -12,6 +12,14 @@ import {
 
 const toast = useToast()
 
+const normalizeRole = (role: unknown): User['role'] => {
+  const roleValue = String(role)
+
+  if (roleValue === '1' || roleValue === 'Admin') return 'Admin'
+  if (roleValue === '2' || roleValue === 'Doctor') return 'Doctor'
+  return 'User'
+}
+
 interface AuthState {
   user: User | null
   token: string | null
@@ -40,17 +48,22 @@ export const useAuthStore = defineStore('auth', {
         const data = response.data
 
         if (data.success) {
-          this.user = data.data.user
+          const user = {
+            ...data.data.user,
+            role: normalizeRole(data.data.user.role),
+          }
+
+          this.user = user
           this.token = data.data.token
           this.isAuthenticated = true
 
           localStorage.setItem('token', data.data.token)
-          localStorage.setItem('user', JSON.stringify(data.data.user))
-          localStorage.setItem('role', data.data.user.role)
+          localStorage.setItem('user', JSON.stringify(user))
+          localStorage.setItem('role', user.role)
 
           toast.success('Đăng nhập thành công!')
 
-          if (data.data.user.role === 'Admin') {
+          if (user.role === 'Admin') {
             router.push('/admin/dashboard')
           } else {
             router.push('/user/dashboard')
