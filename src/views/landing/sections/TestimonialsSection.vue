@@ -89,7 +89,6 @@ const loading = ref(false)
 const showAll = ref(false)
 
 const sectionData = computed(() => landingStore.getSection('testimonials'))
-debugger
 const defaultTestimonials: Testimonial[] = [
   {
     name: 'Nguyễn Thị Hương',
@@ -99,43 +98,47 @@ const defaultTestimonials: Testimonial[] = [
     role: 'Khách hàng',
     date: '2024-01-15',
   },
-  // {
-  //   name: 'Trần Văn Minh',
-  //   content:
-  //     'Phương pháp điều trị của Tảo Long Đường rất hiệu quả. Tôi đã giới thiệu cho nhiều người thân và bạn bè.',
-  //   rating: 5,
-  //   role: 'Khách hàng',
-  //   date: '2024-01-10',
-  // },
-  // {
-  //   name: 'Lê Thị Lan',
-  //   content:
-  //     'Dịch vụ tuyệt vời, nhân viên thân thiện, bác sĩ chuyên nghiệp. Tôi rất hài lòng với kết quả điều trị.',
-  //   rating: 4,
-  //   role: 'Khách hàng',
-  //   date: '2024-01-05',
-  // },
-  // {
-  //   name: 'Phạm Văn Đức',
-  //   content:
-  //     'Sau khi điều trị tại Tảo Long Đường, bệnh của tôi đã thuyên giảm nhiều. Cảm ơn đội ngũ bác sĩ rất nhiều!',
-  //   rating: 5,
-  //   role: 'Khách hàng',
-  //   date: '2023-12-20',
-  // },
-  // {
-  //   name: 'Nguyễn Thị Mai',
-  //   content:
-  //     'Môi trường phòng khám sạch sẽ, thoải mái. Bác sĩ rất tận tình giải thích và hướng dẫn điều trị.',
-  //   rating: 4,
-  //   role: 'Khách hàng',
-  //   date: '2023-12-15',
-  // },
+  {
+    name: 'Trần Văn Minh',
+    content:
+      'Phương pháp điều trị của Tảo Long Đường rất hiệu quả. Tôi đã giới thiệu cho nhiều người thân và bạn bè.',
+    rating: 5,
+    role: 'Khách hàng',
+    date: '2024-01-10',
+  },
+  {
+    name: 'Lê Thị Lan',
+    content:
+      'Dịch vụ tuyệt vời, nhân viên thân thiện, bác sĩ chuyên nghiệp. Tôi rất hài lòng với kết quả điều trị.',
+    rating: 4,
+    role: 'Khách hàng',
+    date: '2024-01-05',
+  },
+  {
+    name: 'Phạm Văn Đức',
+    content:
+      'Sau khi điều trị tại Tảo Long Đường, bệnh của tôi đã thuyên giảm nhiều. Cảm ơn đội ngũ bác sĩ rất nhiều!',
+    rating: 5,
+    role: 'Khách hàng',
+    date: '2023-12-20',
+  },
+  {
+    name: 'Nguyễn Thị Mai',
+    content:
+      'Môi trường phòng khám sạch sẽ, thoải mái. Bác sĩ rất tận tình giải thích và hướng dẫn điều trị.',
+    rating: 4,
+    role: 'Khách hàng',
+    date: '2023-12-15',
+  },
 ]
 
 const testimonials = computed<Testimonial[]>(() => {
-  const data = sectionData.value.items || defaultTestimonials
-  return data
+  const content = sectionData.value
+  const data = Array.isArray(content)
+    ? content
+    : content.items || content.testimonials || content.data
+
+  return Array.isArray(data) && data.length > 0 ? data : defaultTestimonials
 })
 
 const displayedTestimonials = computed(() => {

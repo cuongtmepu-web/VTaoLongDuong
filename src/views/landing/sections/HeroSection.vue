@@ -88,7 +88,6 @@ const landingStore = useLandingStore()
 const authStore = useAuthStore()
 
 const sectionData = computed(() => landingStore.getSection('hero'))
-debugger
 </script>
 
 <style scoped>
