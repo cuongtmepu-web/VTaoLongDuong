@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
-import { landingApi, type LandingSectionContent } from '@/api/admin/adminLanding'
+import { landingApi } from '@/api/Landing'
 import { useToast } from '@erag/vue-toastification'
+import { type LandingSectionContent } from '@/api/types/landing'
 
 const toast = useToast()
 
@@ -43,21 +44,6 @@ export const useLandingStore = defineStore('landing', {
         toast.error('Không thể tải nội dung trang chủ')
       } finally {
         this.loading = false
-      }
-    },
-
-    async updateSection(key: string, data: LandingSectionContent): Promise<boolean> {
-      try {
-        const response = await landingApi.update(key, { contentJson: JSON.stringify(data) })
-        if (response.data.success) {
-          this.sections[key] = data
-          toast.success('Cập nhật thành công!')
-          return true
-        }
-        return false
-      } catch (error: any) {
-        toast.error(error.response?.data?.message || 'Cập nhật thất bại')
-        return false
       }
     },
   },

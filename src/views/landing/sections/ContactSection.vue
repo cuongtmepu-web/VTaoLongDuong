@@ -80,7 +80,7 @@
                 <form @submit.prevent="handleSubmit">
                   <div class="row">
                     <div class="col-md-6 mb-3">
-                      <label class="form-label">Họ và tên *</label>
+                      <label class="form-label">Họ và tên <span style="color: red">*</span></label>
                       <input
                         type="text"
                         class="form-control"
@@ -90,7 +90,7 @@
                       />
                     </div>
                     <div class="col-md-6 mb-3">
-                      <label class="form-label">Email *</label>
+                      <label class="form-label">Email <span style="color: red">*</span></label>
                       <input
                         type="email"
                         class="form-control"
@@ -126,7 +126,7 @@
                   </div>
 
                   <div class="mb-3">
-                    <label class="form-label">Nội dung *</label>
+                    <label class="form-label">Nội dung <span style="color: red">*</span></label>
                     <textarea
                       class="form-control"
                       v-model="form.message"
@@ -151,7 +151,7 @@
       <div class="mt-5">
         <div class="map-wrapper">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.123456!2d106.700000!3d10.800000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3175290000000000%3A0x0000000000000000!2zTmjDoCB2xINuIFThuqVvIExvbmcgxJBhbmcgLSBQaMOybmcga8OhbSDEkMO0bmcgeQ!5e0!3m2!1svi!2s!4v1700000000000!5m2!1svi!2s"
+            src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d12505.711310427983!2d106.09500752664984!3d21.27264647408584!3m2!1i1024!2i768!4f13.1!5e0!3m2!1svi!2sus!4v1788761359425!5m2!1svi!2sus"
             width="100%"
             height="300"
             style="border: 0; border-radius: 12px"
@@ -211,7 +211,7 @@ const handleSubmit = async () => {
   padding: 5.5rem 0 0 0;
   background: linear-gradient(180deg, var(--soft-green) 0%, var(--surface) 100%);
   border: none;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .eyebrow-tag {
@@ -330,6 +330,14 @@ const handleSubmit = async () => {
   border: 1px solid var(--surface-border) !important;
   box-shadow: 0 18px 40px rgba(28, 38, 32, 0.06) !important;
   background: var(--surface);
+  overflow: visible;
+}
+.contact-form-wrapper {
+  position: relative;
+  z-index: 2;
+}
+.contact-form-wrapper .card-body {
+  overflow: visible;
 }
 .contact-form-wrapper .card-body h5 {
   font-family: var(--font-heading);

@@ -13,21 +13,21 @@ export interface LandingSectionContent {
 }
 
 export const landingApi = {
-  getAll: () => api.get<ApiResponse<LandingSection[]>>('/admin/landing'),
+  getAll: () => api.get<ApiResponse<LandingSection[]>>('/admin/adminlanding'),
 
-  getSection: (key: string) => api.get<ApiResponse<LandingSection>>(`/admin/landing/${key}`),
+  getSection: (key: string) => api.get<ApiResponse<LandingSection>>(`/admin/adminlanding/${key}`),
 
   update: (key: string, data: { contentJson: string }) =>
-    api.put<ApiResponse<null>>(`/admin/landing/${key}`, data),
+    api.put<ApiResponse<null>>(`/admin/adminlanding/${key}`, data),
 
   uploadImage: (file: File) => {
     const formData = new FormData()
     formData.append('image', file)
-    return api.post<ApiResponse<{ url: string }>>('/admin/landing/upload-image', formData, {
+    return api.post<ApiResponse<{ url: string }>>('/admin/adminlanding/upload-image', formData, {
       headers: { 'Content-Type': 'multipart/form-data' },
     })
   },
 
   deleteImage: (url: string) =>
-    api.delete<ApiResponse<null>>('/admin/landing/image', { data: { url } }),
+    api.delete<ApiResponse<null>>('/admin/adminlanding/image', { data: { url } }),
 }

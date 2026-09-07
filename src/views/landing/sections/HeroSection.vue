@@ -22,7 +22,7 @@
 
         <h1>
           {{ sectionData.title || 'Tảo Long Đường' }}
-          <span class="hero-sub-title">Đông y gia truyền</span>
+          <span class="hero-sub-title">{{ sectionData.titleDetail || 'Đông y gia truyền' }}</span>
         </h1>
 
         <p class="hero-description">
@@ -88,6 +88,7 @@ const landingStore = useLandingStore()
 const authStore = useAuthStore()
 
 const sectionData = computed(() => landingStore.getSection('hero'))
+debugger
 </script>
 
 <style scoped>
