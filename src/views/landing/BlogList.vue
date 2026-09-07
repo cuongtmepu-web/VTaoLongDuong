@@ -201,6 +201,12 @@ onMounted(async () => {
   overflow: hidden;
 }
 
+.blog-list-page > .container {
+  width: 80%;
+  max-width: none;
+  margin: 0 auto;
+}
+
 .page-header {
   text-align: center;
   margin-bottom: 2.6rem;
@@ -226,16 +232,16 @@ onMounted(async () => {
 
 .blog-card {
   background: var(--surface);
-  border-radius: 22px;
+  border-radius: var(--radius-lg);
   overflow: hidden;
   border: 1px solid var(--surface-border);
-  box-shadow: 0 12px 24px rgba(28, 38, 32, 0.04);
+  box-shadow: var(--shadow-sm);
   transition: all 0.35s var(--ease);
   height: 100%;
 }
 .blog-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 18px 32px rgba(28, 38, 32, 0.1);
+  box-shadow: var(--shadow-md);
   border-color: var(--gold-light);
 }
 .blog-image {
@@ -318,5 +324,19 @@ onMounted(async () => {
   background: var(--primary);
   color: #fff;
   border-color: var(--primary);
+}
+
+@media (max-width: 576px), (max-width: 786px), (max-width: 1024px) {
+  .blog-list-page {
+    padding: 6rem 0 3rem;
+  }
+
+  .blog-list-page > .container {
+    width: calc(100% - 30px);
+  }
+
+  .blog-list-page .filters {
+    padding: 0;
+  }
 }
 </style>

@@ -178,24 +178,45 @@ onMounted(() => {
 
 <style scoped>
 .blog-detail-page {
-  padding: 6rem 0 3rem;
-  background: var(--bg);
+  position: relative;
+  padding: 7rem 0 4rem;
+  background: linear-gradient(180deg, var(--soft-sand) 0%, var(--bg) 100%);
   min-height: 100vh;
+  overflow: hidden;
+}
+
+.blog-detail-page > .container {
+  width: 80%;
+  max-width: none;
+  margin: 0 auto;
 }
 
 .blog-detail {
-  max-width: 820px;
+  position: relative;
+  z-index: 1;
+  max-width: 960px;
   margin: 0 auto;
-  padding: 0 2rem;
+}
+
+.blog-detail .breadcrumb {
+  margin-bottom: 1.8rem;
+  color: var(--text-muted);
+}
+.blog-detail .breadcrumb-item.active {
+  color: var(--text-soft);
+}
+.blog-detail .breadcrumb-item a:hover {
+  color: var(--primary);
 }
 
 .blog-detail .post-header {
   margin-bottom: 2rem;
 }
 .blog-detail .post-header h1 {
-  font-size: 2.8rem;
+  color: var(--text);
+  font-family: var(--font-heading);
+  font-size: clamp(2.2rem, 3.4vw, 3rem);
   font-weight: 800;
-  letter-spacing: -0.02em;
   line-height: 1.2;
 }
 .blog-detail .post-meta {
@@ -216,10 +237,28 @@ onMounted(() => {
   box-shadow: var(--shadow-sm);
 }
 
-.comment-section {
+.post-featured-image img {
+  width: 100%;
+  max-height: 480px;
+  object-fit: cover;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--shadow-md) !important;
+}
+
+.blog-detail .post-actions {
+  flex-wrap: wrap;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--surface-border);
+}
+
+.comments-section {
   margin-top: 3rem;
-  border-top: 1px solid var(--surface-border);
   padding-top: 2rem;
+}
+.comments-section h4 {
+  color: var(--text);
+  font-family: var(--font-heading);
+  font-weight: 700;
 }
 .comment-item {
   background: var(--surface);
@@ -228,16 +267,41 @@ onMounted(() => {
   border: 1px solid var(--surface-border);
   margin-bottom: 0.8rem;
 }
-.comment-item .author {
+.comment-item .comment-author {
   font-weight: 600;
 }
-.comment-item .date {
+.comment-item .comment-author strong {
+  color: var(--text);
+}
+.comment-item .comment-author .text-muted {
   color: var(--text-muted);
   font-size: 0.8rem;
   margin-left: 0.8rem;
 }
-.comment-item .content {
+.comment-item .comment-content {
   color: var(--text-soft);
   margin-top: 0.2rem;
+}
+
+@media (max-width: 576px), (max-width: 786px), (max-width: 1024px) {
+  .blog-detail-page {
+    padding: 6rem 0 3rem;
+  }
+
+  .blog-detail-page > .container {
+    width: calc(100% - 30px);
+  }
+
+  .blog-detail {
+    max-width: none;
+  }
+
+  .blog-detail .post-meta {
+    gap: 0.75rem 1rem;
+  }
+
+  .blog-detail .post-content {
+    font-size: 1rem;
+  }
 }
 </style>
