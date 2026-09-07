@@ -22,8 +22,8 @@
         </div>
 
         <!-- Search & Filter -->
-        <div class="row g-3 mb-4">
-          <div class="col-md-4">
+        <div class="blog-filters">
+          <div class="blog-filter-search">
             <input
               type="text"
               class="form-control"
@@ -32,16 +32,15 @@
               @input="onSearch"
             />
           </div>
-          <div class="col-md-3">
-            <select class="form-select" v-model="categoryFilter" @change="onSearch">
-              <option value="">Tất cả danh mục</option>
-              <option v-for="cat in categories" :key="cat.categoryId" :value="cat.categoryId">
-                {{ cat.categoryName }}
-              </option>
-            </select>
+          <div class="blog-filter-category">
+            <BaseSelect
+              v-model="categoryFilter"
+              :options="categoryOptions"
+              @update:model-value="onSearch"
+            />
           </div>
-          <div class="col-md-2">
-            <button class="btn btn-primary w-100" @click="fetchPosts">
+          <div class="blog-filter-action">
+            <button class="btn btn-primary" @click="fetchPosts">
               <i class="bi bi-search"></i> Tìm
             </button>
           </div>
@@ -134,6 +133,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import DefaultLayout from '@/layouts/DefaultLayout.vue'
+import BaseSelect from '@/components/common/BaseSelect.vue'
 import { useBlogStore } from '@/api/stores/blog'
 import dayjs from 'dayjs'
 import { debounce } from 'lodash'
@@ -146,6 +146,13 @@ const categoryFilter = ref('')
 const posts = computed(() => blogStore.posts)
 const categories = computed(() => blogStore.categories)
 const pagination = computed(() => blogStore.pagination)
+const categoryOptions = computed(() => [
+  { value: '', label: 'Tất cả danh mục' },
+  ...categories.value.map((category) => ({
+    value: String(category.categoryId),
+    label: category.categoryName,
+  })),
+])
 
 const totalPages = computed(() => {
   return Math.ceil(pagination.value.totalCount / pagination.value.pageSize)
@@ -230,6 +237,21 @@ onMounted(async () => {
   margin-top: 1rem;
 }
 
+.blog-filters {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(220px, 1fr) auto;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+.blog-filter-action .btn {
+  min-width: 108px;
+  min-height: 52px;
+}
+.blog-filter-search .form-control {
+  min-height: 52px;
+}
+
 .blog-card {
   background: var(--surface);
   border-radius: var(--radius-lg);
@@ -271,6 +293,9 @@ onMounted(async () => {
 }
 .blog-content {
   padding: 1.3rem 1.2rem 1.4rem;
+}
+.blog-content p {
+  line-height: 1.8;
 }
 .blog-content h5 {
   font-weight: 700;
@@ -335,8 +360,14 @@ onMounted(async () => {
     width: calc(100% - 30px);
   }
 
-  .blog-list-page .filters {
-    padding: 0;
+  .blog-filters {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+    margin-bottom: 2rem;
+  }
+
+  .blog-filter-action .btn {
+    width: 100%;
   }
 }
 </style>

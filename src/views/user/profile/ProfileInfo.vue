@@ -34,12 +34,15 @@
 
                   <div class="col-md-6 mb-3">
                     <label class="form-label">Giới tính</label>
-                    <select class="form-select" v-model="form.gender">
-                      <option value="">Chọn giới tính</option>
-                      <option value="1">Nam</option>
-                      <option value="2">Nữ</option>
-                      <option value="3">Khác</option>
-                    </select>
+                    <BaseSelect
+                      v-model="form.gender"
+                      :options="[
+                        { value: '', label: 'Chọn giới tính' },
+                        { value: '1', label: 'Nam' },
+                        { value: '2', label: 'Nữ' },
+                        { value: '3', label: 'Khác' },
+                      ]"
+                    />
                   </div>
                 </div>
 
@@ -98,6 +101,7 @@
 <script setup lang="ts">
 import { ref, reactive, onMounted } from 'vue'
 import UserLayout from '@/layouts/UserLayout.vue'
+import BaseSelect from '@/components/common/BaseSelect.vue'
 import { useAuthStore } from '@/api/stores/auth'
 import { useToast } from '@erag/vue-toastification'
 import dayjs from 'dayjs'

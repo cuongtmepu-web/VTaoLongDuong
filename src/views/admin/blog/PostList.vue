@@ -19,27 +19,28 @@
               style="width: 250px"
               @input="onSearch"
             />
-            <select
-              class="form-select"
+            <BaseSelect
               v-model="categoryFilter"
+              :options="[
+                { value: '', label: 'Tất cả danh mục' },
+                ...categories.map((cat) => ({
+                  value: String(cat.categoryId),
+                  label: cat.categoryName,
+                })),
+              ]"
               style="width: 150px"
-              @change="onSearch"
-            >
-              <option value="">Tất cả danh mục</option>
-              <option v-for="cat in categories" :key="cat.categoryId" :value="cat.categoryId">
-                {{ cat.categoryName }}
-              </option>
-            </select>
-            <select
-              class="form-select"
+              @update:model-value="onSearch"
+            />
+            <BaseSelect
               v-model="statusFilter"
+              :options="[
+                { value: '', label: 'Tất cả trạng thái' },
+                { value: 'true', label: 'Đã đăng' },
+                { value: 'false', label: 'Bản nháp' },
+              ]"
               style="width: 150px"
-              @change="onSearch"
-            >
-              <option value="">Tất cả trạng thái</option>
-              <option value="true">Đã đăng</option>
-              <option value="false">Bản nháp</option>
-            </select>
+              @update:model-value="onSearch"
+            />
             <button class="btn btn-primary" @click="fetchPosts">
               <i class="bi bi-search"></i> Tìm
             </button>
@@ -148,6 +149,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import AdminLayout from '@/layouts/AdminLayout.vue'
+import BaseSelect from '@/components/common/BaseSelect.vue'
 import { adminBlogApi } from '@/api/admin/adminBlog'
 import type { BlogPost, BlogCategory } from '@/api/types/blog'
 import { useToast } from '@erag/vue-toastification'

@@ -14,37 +14,45 @@
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label class="form-label">Người dùng *</label>
-                <select class="form-select" v-model="form.userId" required>
-                  <option value="">Chọn người dùng</option>
-                  <option v-for="user in users" :key="user.userId" :value="user.userId">
-                    {{ user.fullName }} ({{ user.email }})
-                  </option>
-                </select>
+                <BaseSelect
+                  v-model="form.userId"
+                  :options="[
+                    { value: null, label: 'Chọn người dùng' },
+                    ...users.map((user) => ({
+                      value: user.userId,
+                      label: `${user.fullName} (${user.email})`,
+                    })),
+                  ]"
+                />
               </div>
               <div class="col-md-6 mb-3">
                 <label class="form-label">Bác sĩ *</label>
-                <select class="form-select" v-model="form.doctorId" required>
-                  <option value="">Chọn bác sĩ</option>
-                  <option v-for="doctor in doctors" :key="doctor.doctorId" :value="doctor.doctorId">
-                    {{ doctor.fullName }}
-                  </option>
-                </select>
+                <BaseSelect
+                  v-model="form.doctorId"
+                  :options="[
+                    { value: null, label: 'Chọn bác sĩ' },
+                    ...doctors.map((doctor) => ({
+                      value: doctor.doctorId,
+                      label: doctor.fullName,
+                    })),
+                  ]"
+                />
               </div>
             </div>
 
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label class="form-label">Lịch hẹn (tùy chọn)</label>
-                <select class="form-select" v-model="form.appointmentId">
-                  <option value="">Chọn lịch hẹn</option>
-                  <option
-                    v-for="appt in appointments"
-                    :key="appt.appointmentId"
-                    :value="appt.appointmentId"
-                  >
-                    {{ appt.userName }} - {{ formatDate(appt.appointmentDate) }}
-                  </option>
-                </select>
+                <BaseSelect
+                  v-model="form.appointmentId"
+                  :options="[
+                    { value: null, label: 'Chọn lịch hẹn' },
+                    ...appointments.map((appt) => ({
+                      value: appt.appointmentId,
+                      label: `${appt.userName} - ${formatDate(appt.appointmentDate)}`,
+                    })),
+                  ]"
+                />
               </div>
               <div class="col-md-6 mb-3">
                 <label class="form-label">Ngày tái khám</label>
@@ -110,6 +118,7 @@
 import { ref, reactive, computed, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import AdminLayout from '@/layouts/AdminLayout.vue'
+import BaseSelect from '@/components/common/BaseSelect.vue'
 import { adminMedicalRecordApi } from '@/api/admin/adminMedicalRecord'
 import { adminUserApi } from '@/api/admin/adminUser'
 import { adminDoctorApi } from '@/api/admin/adminDoctor'

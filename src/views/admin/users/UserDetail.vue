@@ -72,12 +72,15 @@
                   </div>
                   <div class="col-md-6 mb-3">
                     <label class="form-label">Giới tính</label>
-                    <select class="form-select" v-model="editForm.gender">
-                      <option value="">Chọn giới tính</option>
-                      <option value="1">Nam</option>
-                      <option value="2">Nữ</option>
-                      <option value="3">Khác</option>
-                    </select>
+                    <BaseSelect
+                      v-model="editForm.gender"
+                      :options="[
+                        { value: '', label: 'Chọn giới tính' },
+                        { value: '1', label: 'Nam' },
+                        { value: '2', label: 'Nữ' },
+                        { value: '3', label: 'Khác' },
+                      ]"
+                    />
                   </div>
                 </div>
 
@@ -88,11 +91,14 @@
 
                 <div class="mb-3">
                   <label class="form-label">Vai trò</label>
-                  <select class="form-select" v-model="editForm.role">
-                    <option value="User">Người dùng</option>
-                    <option value="Doctor">Bác sĩ</option>
-                    <option value="Admin">Quản trị viên</option>
-                  </select>
+                  <BaseSelect
+                    v-model="editForm.role"
+                    :options="[
+                      { value: 'User', label: 'Người dùng' },
+                      { value: 'Doctor', label: 'Bác sĩ' },
+                      { value: 'Admin', label: 'Quản trị viên' },
+                    ]"
+                  />
                 </div>
 
                 <div class="mb-3">
@@ -198,6 +204,7 @@
 import { ref, reactive, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import AdminLayout from '@/layouts/AdminLayout.vue'
+import BaseSelect from '@/components/common/BaseSelect.vue'
 import { adminUserApi } from '@/api/admin/adminUser'
 import type { User } from '@/api/types/auth'
 import { useToast } from '@erag/vue-toastification'

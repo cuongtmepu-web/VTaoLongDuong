@@ -77,16 +77,17 @@
 
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Giờ hẹn</label>
-                      <select
-                        class="form-select"
+                      <BaseSelect
                         v-model="appointment.time"
+                        :options="[
+                          { value: '', label: 'Chọn giờ' },
+                          ...availableSlots.map((slot) => ({
+                            value: slot,
+                            label: formatTime(slot),
+                          })),
+                        ]"
                         :disabled="!appointment.date || loadingSlots"
-                      >
-                        <option value="">Chọn giờ</option>
-                        <option v-for="slot in availableSlots" :key="slot" :value="slot">
-                          {{ formatTime(slot) }}
-                        </option>
-                      </select>
+                      />
                       <small v-if="loadingSlots" class="text-muted">Đang tải...</small>
                     </div>
                   </div>
@@ -206,6 +207,7 @@
 import { ref, computed, onMounted, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import UserLayout from '@/layouts/UserLayout.vue'
+import BaseSelect from '@/components/common/BaseSelect.vue'
 import { useAppointmentStore } from '@/api/stores/appointment'
 import { doctorApi } from '@/api/doctor'
 import type { Doctor } from '@/api/types/doctor'

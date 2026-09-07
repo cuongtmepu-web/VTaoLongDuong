@@ -12,18 +12,18 @@
             style="width: 200px"
             @input="onSearch"
           />
-          <select
-            class="form-select"
+          <BaseSelect
             v-model="statusFilter"
+            :options="[
+              { value: '', label: 'Tất cả trạng thái' },
+              { value: 'Pending', label: 'Chờ thanh toán' },
+              { value: 'Paid', label: 'Đã thanh toán' },
+              { value: 'Failed', label: 'Thất bại' },
+              { value: 'Refunded', label: 'Đã hoàn' },
+            ]"
             style="width: 150px"
-            @change="onSearch"
-          >
-            <option value="">Tất cả trạng thái</option>
-            <option value="Pending">Chờ thanh toán</option>
-            <option value="Paid">Đã thanh toán</option>
-            <option value="Failed">Thất bại</option>
-            <option value="Refunded">Đã hoàn</option>
-          </select>
+            @update:model-value="onSearch"
+          />
           <button class="btn btn-primary" @click="fetchOrders">
             <i class="bi bi-search"></i> Tìm
           </button>
@@ -129,6 +129,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import AdminLayout from '@/layouts/AdminLayout.vue'
+import BaseSelect from '@/components/common/BaseSelect.vue'
 import { orderApi } from '@/api/admin/order'
 import type { Order } from '@/api/types/payment'
 import { useToast } from '@erag/vue-toastification'

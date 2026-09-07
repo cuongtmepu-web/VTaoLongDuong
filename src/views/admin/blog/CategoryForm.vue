@@ -29,16 +29,16 @@
 
             <div class="mb-3">
               <label class="form-label">Danh mục cha</label>
-              <select class="form-select" v-model="form.parentId">
-                <option value="">Không có</option>
-                <option
-                  v-for="cat in parentCategories"
-                  :key="cat.categoryId"
-                  :value="cat.categoryId"
-                >
-                  {{ cat.categoryName }}
-                </option>
-              </select>
+              <BaseSelect
+                v-model="form.parentId"
+                :options="[
+                  { value: null, label: 'Không có' },
+                  ...parentCategories.map((cat) => ({
+                    value: cat.categoryId,
+                    label: cat.categoryName,
+                  })),
+                ]"
+              />
             </div>
 
             <div class="mb-3">
@@ -71,6 +71,7 @@
 import { ref, reactive, computed, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import AdminLayout from '@/layouts/AdminLayout.vue'
+import BaseSelect from '@/components/common/BaseSelect.vue'
 import { adminBlogApi } from '@/api/admin/adminBlog'
 import type { BlogCategory } from '@/api/types/blog'
 import { useToast } from '@erag/vue-toastification'

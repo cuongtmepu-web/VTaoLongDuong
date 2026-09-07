@@ -12,12 +12,17 @@
             style="width: 250px"
             @input="onSearch"
           />
-          <select class="form-select" v-model="roleFilter" style="width: 150px" @change="onSearch">
-            <option value="">Tất cả vai trò</option>
-            <option value="Admin">Quản trị</option>
-            <option value="Doctor">Bác sĩ</option>
-            <option value="User">Người dùng</option>
-          </select>
+          <BaseSelect
+            v-model="roleFilter"
+            :options="[
+              { value: '', label: 'Tất cả vai trò' },
+              { value: 'Admin', label: 'Quản trị' },
+              { value: 'Doctor', label: 'Bác sĩ' },
+              { value: 'User', label: 'Người dùng' },
+            ]"
+            style="width: 150px"
+            @update:model-value="onSearch"
+          />
           <button class="btn btn-primary" @click="fetchUsers">
             <i class="bi bi-search"></i> Tìm
           </button>
@@ -132,6 +137,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import AdminLayout from '@/layouts/AdminLayout.vue'
+import BaseSelect from '@/components/common/BaseSelect.vue'
 import { adminUserApi } from '@/api/admin/adminUser'
 import type { User } from '@/api/types/auth'
 import { useToast } from '@erag/vue-toastification'

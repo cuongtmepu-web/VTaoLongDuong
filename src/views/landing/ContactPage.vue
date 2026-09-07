@@ -88,13 +88,16 @@
                     </div>
                     <div class="mb-3">
                       <label class="form-label">Chủ đề</label>
-                      <select class="form-select" v-model="form.subject">
-                        <option value="">Chọn chủ đề</option>
-                        <option value="tu-van">Tư vấn sức khỏe</option>
-                        <option value="dat-lich">Đặt lịch hẹn</option>
-                        <option value="phan-hoi">Phản hồi</option>
-                        <option value="khac">Khác</option>
-                      </select>
+                      <BaseSelect
+                        v-model="form.subject"
+                        :options="[
+                          { value: '', label: 'Chọn chủ đề' },
+                          { value: 'tu-van', label: 'Tư vấn sức khỏe' },
+                          { value: 'dat-lich', label: 'Đặt lịch hẹn' },
+                          { value: 'phan-hoi', label: 'Phản hồi' },
+                          { value: 'khac', label: 'Khác' },
+                        ]"
+                      />
                     </div>
                     <div class="mb-3">
                       <label class="form-label">Nội dung *</label>
@@ -137,6 +140,7 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
 import DefaultLayout from '@/layouts/DefaultLayout.vue'
+import BaseSelect from '@/components/common/BaseSelect.vue'
 import { useToast } from '@erag/vue-toastification'
 
 const toast = useToast()

@@ -110,21 +110,27 @@
             <div class="card-body">
               <div class="mb-3">
                 <label class="form-label">Trạng thái thanh toán</label>
-                <select class="form-select" v-model="updateData.paymentStatus">
-                  <option value="Pending">Chờ thanh toán</option>
-                  <option value="Paid">Đã thanh toán</option>
-                  <option value="Failed">Thất bại</option>
-                  <option value="Refunded">Đã hoàn</option>
-                </select>
+                <BaseSelect
+                  v-model="updateData.paymentStatus"
+                  :options="[
+                    { value: 'Pending', label: 'Chờ thanh toán' },
+                    { value: 'Paid', label: 'Đã thanh toán' },
+                    { value: 'Failed', label: 'Thất bại' },
+                    { value: 'Refunded', label: 'Đã hoàn' },
+                  ]"
+                />
               </div>
               <div class="mb-3">
                 <label class="form-label">Trạng thái đơn hàng</label>
-                <select class="form-select" v-model="updateData.orderStatus">
-                  <option value="New">Mới</option>
-                  <option value="Processing">Đang xử lý</option>
-                  <option value="Completed">Hoàn thành</option>
-                  <option value="Cancelled">Đã hủy</option>
-                </select>
+                <BaseSelect
+                  v-model="updateData.orderStatus"
+                  :options="[
+                    { value: 'New', label: 'Mới' },
+                    { value: 'Processing', label: 'Đang xử lý' },
+                    { value: 'Completed', label: 'Hoàn thành' },
+                    { value: 'Cancelled', label: 'Đã hủy' },
+                  ]"
+                />
               </div>
               <button class="btn btn-primary w-100" @click="updateOrder" :disabled="updating">
                 <span v-if="updating" class="spinner-border spinner-border-sm me-2"></span>
@@ -156,6 +162,7 @@
 import { ref, reactive, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import AdminLayout from '@/layouts/AdminLayout.vue'
+import BaseSelect from '@/components/common/BaseSelect.vue'
 import { orderApi } from '@/api/admin/order'
 import type { Order } from '@/api/types/payment'
 import { useToast } from '@erag/vue-toastification'

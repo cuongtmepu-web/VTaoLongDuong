@@ -24,12 +24,16 @@
               </div>
               <div class="col-md-6 mb-3">
                 <label class="form-label">Danh mục *</label>
-                <select class="form-select" v-model="form.categoryId" required>
-                  <option value="">Chọn danh mục</option>
-                  <option v-for="cat in categories" :key="cat.categoryId" :value="cat.categoryId">
-                    {{ cat.categoryName }}
-                  </option>
-                </select>
+                <BaseSelect
+                  v-model="form.categoryId"
+                  :options="[
+                    { value: null, label: 'Chọn danh mục' },
+                    ...categories.map((cat) => ({
+                      value: cat.categoryId,
+                      label: cat.categoryName,
+                    })),
+                  ]"
+                />
               </div>
             </div>
 
@@ -114,6 +118,7 @@
 import { ref, reactive, computed, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import AdminLayout from '@/layouts/AdminLayout.vue'
+import BaseSelect from '@/components/common/BaseSelect.vue'
 import { adminBlogApi } from '@/api/admin/adminBlog'
 import type { BlogCategory } from '@/api/types/blog'
 import { useToast } from '@erag/vue-toastification'

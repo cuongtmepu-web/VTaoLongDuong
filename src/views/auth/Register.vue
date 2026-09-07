@@ -117,12 +117,14 @@
 
                   <div class="col-md-6 mb-3">
                     <label class="form-label">Giới tính</label>
-                    <select class="form-select" v-model.number="form.gender">
-                      <option :value="null">Chọn giới tính</option>
-                      <option :value="1">Nam</option>
-                      <option :value="2">Nữ</option>
-                      <option :value="3">Khác</option>
-                    </select>
+                    <BaseSelect
+                      v-model="form.gender"
+                      :options="[
+                        { value: null, label: 'Chọn giới tính' },
+                        { value: 1, label: 'Nam' },
+                        { value: 2, label: 'Nữ' },
+                      ]"
+                    />
                   </div>
                 </div>
 
@@ -160,6 +162,7 @@
 import { ref, reactive } from 'vue'
 import { useAuthStore } from '@/api/stores/auth'
 import { useToast } from '@erag/vue-toastification'
+import BaseSelect from '@/components/common/BaseSelect.vue'
 
 const authStore = useAuthStore()
 const toast = useToast()

@@ -4,12 +4,16 @@
       <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="mb-0">Báo cáo doanh thu</h2>
         <div class="d-flex gap-2">
-          <select class="form-select" v-model="year" style="width: 100px">
-            <option v-for="y in years" :key="y" :value="y">{{ y }}</option>
-          </select>
-          <select class="form-select" v-model="month" style="width: 100px">
-            <option v-for="m in months" :key="m.value" :value="m.value">{{ m.label }}</option>
-          </select>
+          <BaseSelect
+            v-model="year"
+            :options="years.map((y) => ({ value: y, label: String(y) }))"
+            style="width: 100px"
+          />
+          <BaseSelect
+            v-model="month"
+            :options="months.map((m) => ({ value: m.value, label: m.label }))"
+            style="width: 100px"
+          />
           <button class="btn btn-primary" @click="fetchReport">
             <i class="bi bi-search"></i> Xem
           </button>
@@ -125,6 +129,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import AdminLayout from '@/layouts/AdminLayout.vue'
+import BaseSelect from '@/components/common/BaseSelect.vue'
 import RevenueChart from '@/components/charts/RevenueChart.vue'
 import { adminDashboardApi } from '@/api/admin/adminDashboard'
 import { useToast } from '@erag/vue-toastification'

@@ -14,12 +14,17 @@
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label class="form-label">Chọn người dùng *</label>
-                <select class="form-select" v-model="form.userId" required :disabled="isEdit">
-                  <option value="">Chọn người dùng</option>
-                  <option v-for="user in users" :key="user.userId" :value="user.userId">
-                    {{ user.fullName }} ({{ user.email }})
-                  </option>
-                </select>
+                <BaseSelect
+                  v-model="form.userId"
+                  :options="[
+                    { value: null, label: 'Chọn người dùng' },
+                    ...users.map((user) => ({
+                      value: user.userId,
+                      label: `${user.fullName} (${user.email})`,
+                    })),
+                  ]"
+                  :disabled="isEdit"
+                />
               </div>
               <div class="col-md-6 mb-3">
                 <label class="form-label">Chuyên khoa</label>
@@ -85,6 +90,7 @@
 import { ref, reactive, onMounted, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import AdminLayout from '@/layouts/AdminLayout.vue'
+import BaseSelect from '@/components/common/BaseSelect.vue'
 import { adminDoctorApi } from '@/api/admin/adminDoctor'
 import { adminUserApi } from '@/api/admin/adminUser'
 import type { User } from '@/api/types/auth'
