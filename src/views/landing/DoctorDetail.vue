@@ -7,13 +7,24 @@
         </div>
 
         <div v-else-if="doctor" class="doctor-detail">
-          <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item"><router-link to="/">Trang chủ</router-link></li>
-              <li class="breadcrumb-item"><router-link to="/bac-si">Bác sĩ</router-link></li>
-              <li class="breadcrumb-item active">{{ doctor.fullName }}</li>
-            </ol>
-          </nav>
+          <div class="doctor-detail-header">
+            <span class="eyebrow-tag">Xem hồ sơ</span>
+            <h2>Hồ sơ chi tiết</h2>
+            <p class="text-center page-sub mb-3">Thông tin chi tiết về {{ doctor.fullName }}</p>
+            <div class="section-divider">
+              <span class="line"></span>
+              <svg class="taiji-icon" viewBox="0 0 100 100" aria-hidden="true">
+                <circle cx="50" cy="50" r="47" fill="none" stroke="currentColor" stroke-width="3" />
+                <path
+                  d="M50,3 A23.5,23.5 0 0,1 50,50 A23.5,23.5 0 0,0 50,97 A47,47 0 0,1 50,3 Z"
+                  fill="currentColor"
+                />
+                <circle cx="50" cy="26.5" r="7" fill="var(--surface)" />
+                <circle cx="50" cy="73.5" r="7" fill="currentColor" />
+              </svg>
+              <span class="line right"></span>
+            </div>
+          </div>
 
           <div class="row g-4">
             <div class="col-md-4">
@@ -183,18 +194,52 @@ onMounted(() => {
 
 <style scoped>
 .doctor-detail-page {
-  padding: 6rem 0 3rem;
-  background: var(--bg);
+  position: relative;
+  padding: 7rem 0 4rem;
+  background: linear-gradient(180deg, var(--soft-green) 0%, var(--bg) 100%);
   min-height: 100vh;
+  overflow: hidden;
 }
 
-.doctor-detail-grid {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 2.5rem;
-  max-width: 1280px;
+.doctor-detail-page > .container {
+  width: 80%;
+  max-width: none;
   margin: 0 auto;
-  padding: 0 2rem;
+}
+
+.doctor-detail {
+  position: relative;
+  z-index: 1;
+}
+
+.eyebrow-tag {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.page-sub {
+  color: var(--text-soft);
+  font-size: 1rem;
+}
+
+.doctor-detail .section-divider {
+  margin-top: 0.6rem;
+}
+
+.doctor-detail .breadcrumb {
+  margin-bottom: 1.8rem;
+  color: var(--text-muted);
+}
+.doctor-detail .breadcrumb-item.active {
+  color: var(--text-soft);
+}
+.doctor-detail .breadcrumb-item a:hover {
+  color: var(--primary);
 }
 
 .doctor-profile-card {
@@ -211,13 +256,41 @@ onMounted(() => {
   border-radius: 50%;
   object-fit: cover;
   border: 4px solid var(--primary-light);
-  margin-bottom: 1rem;
+  margin: 0 auto 1rem;
+}
+.doctor-detail-header {
+  text-align: center;
+  margin-bottom: 2.6rem;
+}
+.doctor-detail-header h2 {
+  margin: 0;
+  color: var(--text);
+  font-family: var(--font-heading);
+  font-size: clamp(2.2rem, 3.4vw, 3rem);
+  font-weight: 600;
 }
 .doctor-profile-card h3 {
   font-weight: 700;
 }
-.doctor-profile-card .specialty {
-  color: var(--text-muted);
+.doctor-profile-card hr {
+  border-color: var(--surface-border);
+  opacity: 1;
+  margin: 1.5rem 0;
+}
+.doctor-profile-card p {
+  color: var(--text-soft);
+  margin-bottom: 0.7rem;
+}
+.doctor-profile-card strong {
+  color: var(--text);
+}
+.doctor-profile-card .text-success {
+  background: var(--primary-light);
+  color: var(--primary-dark) !important;
+}
+.doctor-profile-card .text-danger {
+  background: var(--secondary-light);
+  color: var(--secondary-dark) !important;
 }
 
 .doctor-info-card {
@@ -228,19 +301,77 @@ onMounted(() => {
   box-shadow: var(--shadow-sm);
 }
 
+.doctor-detail .card {
+  border: 1px solid var(--surface-border);
+}
+.doctor-detail .card-body {
+  padding: 2rem;
+}
+.doctor-detail h4 {
+  color: var(--text);
+  font-weight: 700;
+}
+.doctor-bio {
+  color: var(--text-soft);
+  line-height: 1.8;
+}
+.schedule-grid {
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-sm);
+  padding: 0.35rem 1rem;
+}
+
 .schedule-item {
   display: flex;
   justify-content: space-between;
-  padding: 0.5rem 0;
+  gap: 1rem;
+  padding: 0.7rem 0;
   border-bottom: 1px solid var(--surface-border);
 }
 .schedule-item:last-child {
   border-bottom: none;
 }
+.schedule-item .day {
+  color: var(--text);
+  font-weight: 600;
+}
+.schedule-item .hours {
+  color: var(--text-soft);
+  text-align: right;
+}
+.review-item {
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--surface-border);
+}
+.review-item:last-child {
+  border-bottom: none;
+}
+.review-item strong {
+  color: var(--text);
+}
 
-@media (max-width: 768px) {
-  .doctor-detail-grid {
-    grid-template-columns: 1fr;
+@media (max-width: 576px), (max-width: 786px), (max-width: 1024px) {
+  .doctor-detail-page {
+    padding: 6rem 0 3rem;
+  }
+
+  .doctor-detail-page > .container {
+    width: calc(100% - 30px);
+  }
+
+  .doctor-detail .card-body,
+  .doctor-profile-card {
+    padding: 1.5rem;
+  }
+
+  .schedule-item {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .schedule-item .hours {
+    text-align: left;
   }
 }
 </style>

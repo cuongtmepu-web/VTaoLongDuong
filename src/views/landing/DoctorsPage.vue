@@ -128,6 +128,12 @@ onMounted(() => {
   overflow: hidden;
 }
 
+.doctors-page > .container {
+  width: 80%;
+  max-width: none;
+  margin: 0 auto;
+}
+
 .page-header {
   text-align: center;
   margin-bottom: 2.6rem;
@@ -157,17 +163,17 @@ onMounted(() => {
 
 .doctor-card {
   background: var(--surface);
-  border-radius: 22px;
+  border-radius: var(--radius-lg);
   padding: 2.1rem 1.5rem 1.8rem;
   text-align: center;
   border: 1px solid var(--surface-border);
-  box-shadow: 0 12px 24px rgba(28, 38, 32, 0.04);
+  box-shadow: var(--shadow-sm);
   transition: all 0.35s var(--ease);
   height: 100%;
 }
 .doctor-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 18px 32px rgba(28, 38, 32, 0.1);
+  box-shadow: var(--shadow-md);
   border-color: var(--gold-light);
 }
 .doctor-image {
@@ -214,5 +220,15 @@ onMounted(() => {
 }
 .doctor-info .text-success {
   color: var(--gold) !important;
+}
+
+@media (max-width: 576px), (max-width: 786px), (max-width: 1024px) {
+  .doctors-page {
+    padding: 6rem 0 3rem;
+  }
+
+  .doctors-page > .container {
+    width: calc(100% - 30px);
+  }
 }
 </style>

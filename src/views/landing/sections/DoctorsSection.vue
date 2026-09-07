@@ -30,8 +30,8 @@
         <p class="text-muted">Chưa có thông tin bác sĩ</p>
       </div>
 
-      <div v-else class="row g-4">
-        <div class="col-md-4" v-for="doctor in doctors" :key="doctor.doctorId">
+      <div v-else class="doctor-grid">
+        <div v-for="doctor in doctors" :key="doctor.doctorId" class="doctor-grid-item">
           <div class="doctor-card">
             <div class="doctor-image">
               <img
@@ -159,6 +159,12 @@ onMounted(() => {
   margin-top: 1rem;
 }
 
+.doctor-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
 .doctor-card {
   background: var(--surface);
   border-radius: 22px;
@@ -219,9 +225,19 @@ onMounted(() => {
   color: var(--primary) !important;
 }
 
+@media (max-width: 1024px) {
+  .doctor-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 576px) {
   .doctors-section {
     padding: 4rem 0;
+  }
+
+  .doctor-grid {
+    grid-template-columns: 1fr;
   }
 }
 </style>
