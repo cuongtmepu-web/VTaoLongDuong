@@ -130,8 +130,25 @@ const sectionData = computed(() => landingStore.getSection('hero'))
   height: min(46vw, 620px);
   transform: translateY(-50%);
   color: rgba(233, 216, 179, 0.08);
-  animation: taijiSpin 90s linear infinite;
-  pointer-events: none;
+  animation: taijiWatermarkSpin 90s linear infinite;
+  /* pointer-events: none; */
+}
+@keyframes taijiWatermarkSpin {
+  from {
+    transform: translateY(-50%) translateX(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(calc(-50% - 82px)) translateX(-68px) rotate(90deg);
+  }
+  50% {
+    transform: translateY(-50%) translateX(0) rotate(180deg);
+  }
+  75% {
+    transform: translateY(calc(-50% + 82px)) translateX(68px) rotate(270deg);
+  }
+  to {
+    transform: translateY(-50%) translateX(0) rotate(360deg);
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .taiji-watermark {
