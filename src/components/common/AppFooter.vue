@@ -23,9 +23,12 @@
       <div class="footer-block">
         <h6>Liên hệ</h6>
         <ul>
-          <li><i class="bi bi-geo-alt"></i> Số 123, Đường ABC, Quận XYZ, TP.HCM</li>
-          <li><i class="bi bi-phone"></i> 0987 654 321</li>
-          <li><i class="bi bi-envelope"></i> contact@taolongduong.com</li>
+          <li>
+            <i class="bi bi-geo-alt"></i> Số 6, trại Hậu, TDP Đông Lương, Phường Việt Yên, Thành phố
+            Bắc Ninh
+          </li>
+          <li><i class="bi bi-phone"></i> 0364 145 761</li>
+          <li><i class="bi bi-envelope"></i> cuongtm@taolongduong.com</li>
         </ul>
       </div>
 

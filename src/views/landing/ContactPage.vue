@@ -31,21 +31,21 @@
                   <i class="bi bi-geo-alt"></i>
                   <div>
                     <h6>Địa chỉ</h6>
-                    <p>Số 123, Đường ABC, Quận XYZ, TP.HCM</p>
+                    <p>Số 6, trại Hậu, TDP Đông Lương, Phường Việt Yên, Thành phố Bắc Ninh</p>
                   </div>
                 </div>
                 <div class="contact-item">
                   <i class="bi bi-phone"></i>
                   <div>
                     <h6>Điện thoại</h6>
-                    <p>0987 654 321</p>
+                    <p>0364 145 761</p>
                   </div>
                 </div>
                 <div class="contact-item">
                   <i class="bi bi-envelope"></i>
                   <div>
                     <h6>Email</h6>
-                    <p>contact@taolongduong.com</p>
+                    <p>cuongtm@taolongduong.com</p>
                   </div>
                 </div>
                 <div class="contact-item">
@@ -122,7 +122,7 @@
           <div class="mt-5">
             <div class="map-wrapper">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.123456!2d106.700000!3d10.800000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3175290000000000%3A0x0000000000000000!2zTmjDoCB2xINuIFThuqVvIExvbmcgxJBhbmcgLSBQaMOybmcga8OhbSDEkMO0bmcgeQ!5e0!3m2!1svi!2s!4v1700000000000!5m2!1svi!2s"
+                src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d12505.711310427983!2d106.09500752664984!3d21.27264647408584!3m2!1i1024!2i768!4f13.1!5e0!3m2!1svi!2sus!4v1788761359425!5m2!1svi!2sus"
                 width="100%"
                 height="350"
                 style="border: 0; border-radius: 12px"
