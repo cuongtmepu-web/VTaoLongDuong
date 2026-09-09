@@ -31,6 +31,12 @@ const sidebarCollapsed = ref(false)
 }
 
 .user-shell {
+  min-height: 100vh;
+  background: var(--bg);
+  overflow-x: clip;
+}
+
+.user-shell {
   display: grid;
   grid-template-columns: 248px minmax(0, 1fr);
   min-height: calc(100vh - 76px);
@@ -41,14 +47,19 @@ const sidebarCollapsed = ref(false)
   grid-template-columns: 72px minmax(0, 1fr);
 }
 
-.sidebar-collapsed .sidebar {
-  min-width: 72px;
+.sidebar {
+  position: sticky;
+  top: 76px;
+  align-self: start;
+  height: calc(100vh - 76px);
+  min-width: 248px;
+  display: grid;
+  transition: grid-template-columns 0.6s var(--ease);
 }
 
-.main-content {
-  padding: 20px;
-  background: #f8f9fa;
-  min-height: calc(100vh - 76px);
+.user-shell.sidebar-collapsed {
+  min-width: 0;
+  overflow-x: hidden;
 }
 
 @media (max-width: 768px) {
@@ -58,6 +69,9 @@ const sidebarCollapsed = ref(false)
 
   .sidebar {
     min-width: 0;
+    position: relative;
+    top: auto;
+    height: auto;
   }
 
   .sidebar-collapsed .sidebar {

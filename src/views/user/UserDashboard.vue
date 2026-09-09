@@ -1,62 +1,37 @@
 <template>
   <UserLayout>
     <div class="user-dashboard">
-      <h2 class="mb-4">Dashboard</h2>
+      <div class="dashboard-heading">
+        <div>
+          <p class="eyebrow mb-1">Không gian sức khỏe của bạn</p>
+          <h1>Xin chào, {{ authStore.user?.fullName || 'bạn' }}</h1>
+          <p class="text-muted mb-0">Theo dõi lịch khám và hồ sơ điều trị của bạn.</p>
+        </div>
+        <i class="bi bi-heart-pulse heading-icon" aria-hidden="true"></i>
+      </div>
 
-      <!-- Stats Cards -->
-      <div class="row g-4 mb-4">
-        <div class="col-md-3">
-          <div class="stat-card bg-primary text-white">
-            <div class="stat-icon">
-              <i class="bi bi-calendar-check"></i>
-            </div>
+      <div class="row g-3">
+        <div v-for="stat in statCards" :key="stat.label" class="col-sm-6 col-xl-3">
+          <div class="stat-card" :class="stat.className">
+            <i :class="stat.icon" aria-hidden="true"></i>
             <div class="stat-info">
-              <h3>{{ stats.totalAppointments }}</h3>
-              <p>Tổng lịch hẹn</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="stat-card bg-warning text-white">
-            <div class="stat-icon">
-              <i class="bi bi-clock-history"></i>
-            </div>
-            <div class="stat-info">
-              <h3>{{ stats.pendingAppointments }}</h3>
-              <p>Đang chờ xác nhận</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="stat-card bg-success text-white">
-            <div class="stat-icon">
-              <i class="bi bi-check-circle"></i>
-            </div>
-            <div class="stat-info">
-              <h3>{{ stats.completedAppointments }}</h3>
-              <p>Đã hoàn thành</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="stat-card bg-info text-white">
-            <div class="stat-icon">
-              <i class="bi bi-file-medical"></i>
-            </div>
-            <div class="stat-info">
-              <h3>{{ stats.medicalRecords }}</h3>
-              <p>Hồ sơ bệnh án</p>
+              <strong>{{ stat.value }}</strong>
+              <span>{{ stat.label }}</span>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Recent Appointments -->
-      <div class="row">
-        <div class="col-md-8">
-          <div class="card">
-            <div class="card-header">
-              <h5 class="mb-0">Lịch hẹn gần đây</h5>
+      <AppointmentAnalytics :appointments="appointmentStore.appointments" />
+
+      <div class="row g-4 mt-1">
+        <div class="col-lg-8">
+          <section class="dashboard-panel">
+            <div class="panel-heading">
+              <h2>Lịch hẹn gần đây</h2>
+              <router-link to="/user-appointments" class="btn btn-sm btn-primary"
+                >Xem tất cả</router-link
+              >
             </div>
             <div class="card-body">
               <div v-if="loading" class="text-center py-4">
@@ -64,7 +39,7 @@
               </div>
               <div v-else-if="recentAppointments.length === 0" class="text-center py-4">
                 <p class="text-muted">Chưa có lịch hẹn nào</p>
-                <router-link to="/user/appointments/book" class="btn btn-primary">
+                <router-link to="/user-appointments/book" class="btn btn-primary">
                   Đặt lịch ngay
                 </router-link>
               </div>
@@ -87,32 +62,29 @@
                 </div>
               </div>
             </div>
-          </div>
+          </section>
         </div>
 
-        <!-- Quick Actions -->
-        <div class="col-md-4">
-          <div class="card">
-            <div class="card-header">
-              <h5 class="mb-0">Thao tác nhanh</h5>
-            </div>
-            <div class="card-body">
+        <div class="col-lg-4">
+          <section class="dashboard-panel quick-panel">
+            <div class="panel-heading"><h2>Thao tác nhanh</h2></div>
+            <div class="quick-actions">
               <div class="d-grid gap-3">
-                <router-link to="/user/appointments/book" class="btn btn-primary">
+                <router-link to="/user-appointments/book" class="btn btn-primary">
                   <i class="bi bi-calendar-plus"></i> Đặt lịch hẹn
                 </router-link>
-                <router-link to="/user/appointments" class="btn btn-outline-primary">
+                <router-link to="/user-appointments" class="btn btn-outline-primary">
                   <i class="bi bi-calendar-check"></i> Xem lịch hẹn
                 </router-link>
-                <router-link to="/user/medical-records" class="btn btn-outline-success">
+                <router-link to="/user-medical-records" class="btn btn-outline-success">
                   <i class="bi bi-file-medical"></i> Hồ sơ bệnh án
                 </router-link>
-                <router-link to="/user/profile" class="btn btn-outline-secondary">
+                <router-link to="/user-profile" class="btn btn-outline-secondary">
                   <i class="bi bi-person-gear"></i> Cập nhật thông tin
                 </router-link>
               </div>
             </div>
-          </div>
+          </section>
         </div>
       </div>
     </div>
@@ -122,6 +94,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import UserLayout from '@/layouts/UserLayout.vue'
+import AppointmentAnalytics from '@/components/charts/AppointmentAnalytics.vue'
 import { useAppointmentStore } from '@/api/stores/appointment'
 import { useAuthStore } from '@/api/stores/auth'
 import { medicalRecordApi } from '@/api/medicalRecord'
@@ -139,6 +112,33 @@ const stats = computed(() => ({
   completedAppointments: appointmentStore.completedAppointments.length,
   medicalRecords: medicalRecords.value.length,
 }))
+
+const statCards = computed(() => [
+  {
+    label: 'Tổng lịch hẹn',
+    value: stats.value.totalAppointments,
+    icon: 'bi bi-calendar-check',
+    className: 'stat-green',
+  },
+  {
+    label: 'Chờ xác nhận',
+    value: stats.value.pendingAppointments,
+    icon: 'bi bi-hourglass-split',
+    className: 'stat-gold',
+  },
+  {
+    label: 'Đã hoàn thành',
+    value: stats.value.completedAppointments,
+    icon: 'bi bi-check-circle',
+    className: 'stat-teal',
+  },
+  {
+    label: 'Hồ sơ bệnh án',
+    value: stats.value.medicalRecords,
+    icon: 'bi bi-file-medical',
+    className: 'stat-brown',
+  },
+])
 
 const recentAppointments = computed(() => appointmentStore.appointments.slice(0, 5))
 
@@ -190,33 +190,124 @@ onMounted(() => {
 
 <style scoped>
 .user-dashboard {
-  padding: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.dashboard-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+
+.eyebrow {
+  color: var(--secondary-dark);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.dashboard-heading h1 {
+  margin: 0;
+  color: var(--primary-dark);
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, 2.7rem);
+}
+
+.heading-icon {
+  color: var(--gold);
+  font-size: 3rem;
 }
 
 .stat-card {
-  padding: 20px;
-  border-radius: 10px;
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 1rem;
+  min-height: 112px;
+  padding: 1.15rem;
+  color: var(--surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
 }
 
-.stat-icon {
-  font-size: 2.5rem;
+.stat-green {
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+}
+.stat-gold {
+  background: linear-gradient(135deg, var(--secondary-dark), var(--secondary));
+}
+.stat-teal {
+  background: linear-gradient(135deg, #477f76, #6d9d94);
+}
+.stat-brown {
+  background: linear-gradient(135deg, #987544, var(--gold));
 }
 
-.stat-info h3 {
-  margin: 0;
+.stat-card > i {
   font-size: 2rem;
-  font-weight: bold;
+  opacity: 0.86;
 }
 
-.stat-info p {
+.stat-info strong,
+.stat-info span {
+  display: block;
+}
+
+.stat-info strong {
+  font-size: 1.55rem;
+}
+
+.stat-info span {
+  font-size: 0.8rem;
+  opacity: 0.86;
+}
+
+.dashboard-panel {
+  height: 100%;
+  padding: 1.25rem;
+  background: rgba(255, 253, 248, 0.9);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.panel-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.panel-heading h2 {
   margin: 0;
-  opacity: 0.8;
+  color: var(--primary-dark);
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+}
+
+.dashboard-panel .card-body {
+  padding: 0;
+}
+
+.quick-panel .quick-actions {
+  padding-top: 0.25rem;
 }
 
 .appointment-item:last-child {
   border-bottom: none !important;
+}
+
+@media (max-width: 768px) {
+  .dashboard-heading {
+    align-items: flex-start;
+  }
+
+  .heading-icon {
+    font-size: 2.25rem;
+  }
 }
 </style>

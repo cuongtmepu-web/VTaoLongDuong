@@ -24,6 +24,7 @@ const sidebarCollapsed = ref(false)
 .admin-layout {
   min-height: 100vh;
   background: var(--bg);
+  overflow-x: clip;
 }
 
 .admin-shell {
@@ -38,6 +39,10 @@ const sidebarCollapsed = ref(false)
 }
 
 .sidebar {
+  position: sticky;
+  top: 76px;
+  align-self: start;
+  height: calc(100vh - 76px);
   min-width: 248px;
   overflow: visible;
   transition: min-width 0.9s var(--ease);
@@ -51,6 +56,8 @@ const sidebarCollapsed = ref(false)
   padding: 2.25rem clamp(1rem, 3vw, 3rem);
   background: linear-gradient(135deg, rgba(255, 253, 248, 0.62), transparent 46%), var(--bg);
   min-width: 0;
+  min-height: calc(100vh - 76px);
+  overflow-x: hidden;
 }
 
 @media (max-width: 768px) {
@@ -60,6 +67,9 @@ const sidebarCollapsed = ref(false)
 
   .sidebar {
     min-width: 0;
+    position: relative;
+    top: auto;
+    height: auto;
   }
 
   .sidebar-collapsed .sidebar {

@@ -10,9 +10,9 @@
         <i class="bi bi-heart-pulse page-icon" aria-hidden="true"></i>
       </div>
 
-      <div class="row g-4">
-        <div v-for="stat in stats" :key="stat.label" class="col-md-4">
-          <div class="stat-card">
+      <div class="row g-3">
+        <div v-for="stat in stats" :key="stat.label" class="col-sm-6 col-xl-3">
+          <div class="stat-card" :class="stat.className">
             <i :class="stat.icon" aria-hidden="true"></i>
             <div>
               <strong>{{ stat.value }}</strong>
@@ -22,16 +22,60 @@
         </div>
       </div>
 
-      <div class="quick-actions">
-        <h2>Truy cập nhanh</h2>
-        <div class="row g-3">
-          <div v-for="action in actions" :key="action.to" class="col-md-4">
-            <router-link :to="action.to" class="action-link">
-              <i :class="action.icon" aria-hidden="true"></i>
-              <span>{{ action.label }}</span>
-              <i class="bi bi-arrow-right" aria-hidden="true"></i>
-            </router-link>
-          </div>
+      <AppointmentAnalytics :appointments="appointmentStore.appointments" />
+
+      <div class="row g-4 dashboard-lower">
+        <div class="col-lg-8">
+          <section class="dashboard-panel">
+            <div class="panel-heading">
+              <h2>Lịch hẹn sắp tới</h2>
+              <router-link to="/doctor-appointments" class="btn btn-sm btn-primary"
+                >Xem tất cả</router-link
+              >
+            </div>
+            <div v-if="loading" class="empty-state">
+              <div class="spinner-border spinner-border-sm text-primary"></div>
+            </div>
+            <div v-else-if="upcomingAppointments.length === 0" class="empty-state">
+              <i class="bi bi-calendar2-check"></i>
+              <span>Chưa có lịch hẹn sắp tới</span>
+            </div>
+            <div v-else class="appointment-list">
+              <div
+                v-for="appointment in upcomingAppointments"
+                :key="appointment.appointmentId"
+                class="appointment-row"
+              >
+                <div>
+                  <strong>{{ appointment.userName }}</strong>
+                  <small
+                    >{{ formatDate(appointment.appointmentDate) }} ·
+                    {{ appointment.appointmentTime }}</small
+                  >
+                </div>
+                <span :class="getStatusClass(appointment.status)" class="badge">{{
+                  appointment.statusName
+                }}</span>
+              </div>
+            </div>
+          </section>
+        </div>
+        <div class="col-lg-4">
+          <section class="dashboard-panel quick-panel">
+            <div class="panel-heading"><h2>Truy cập nhanh</h2></div>
+            <div class="quick-actions">
+              <router-link
+                v-for="action in actions"
+                :key="action.to"
+                :to="action.to"
+                class="action-link"
+              >
+                <i :class="action.icon" aria-hidden="true"></i>
+                <span>{{ action.label }}</span>
+                <i class="bi bi-arrow-right" aria-hidden="true"></i>
+              </router-link>
+            </div>
+          </section>
         </div>
       </div>
     </div>
@@ -39,19 +83,79 @@
 </template>
 
 <script setup lang="ts">
+import { computed, onMounted, ref } from 'vue'
 import DoctorLayout from '@/layouts/DoctorLayout.vue'
+import AppointmentAnalytics from '@/components/charts/AppointmentAnalytics.vue'
+import { useAppointmentStore } from '@/api/stores/appointment'
+import { medicalRecordApi } from '@/api/medicalRecord'
+import dayjs from 'dayjs'
 
-const stats = [
-  { label: 'Lịch hẹn hôm nay', value: '--', icon: 'bi bi-calendar-check' },
-  { label: 'Hồ sơ cần xử lý', value: '--', icon: 'bi bi-file-medical' },
-  { label: 'Trạng thái làm việc', value: 'Đang hoạt động', icon: 'bi bi-heart-pulse' },
-]
+const appointmentStore = useAppointmentStore()
+const loading = ref(false)
+const medicalRecordCount = ref(0)
+
+const stats = computed(() => [
+  {
+    label: 'Lịch hẹn hôm nay',
+    value: appointmentStore.appointments.filter((item) =>
+      dayjs(item.appointmentDate).isSame(dayjs(), 'day'),
+    ).length,
+    icon: 'bi bi-calendar-check',
+    className: 'stat-green',
+  },
+  {
+    label: 'Hồ sơ cần xử lý',
+    value: medicalRecordCount.value,
+    icon: 'bi bi-file-medical',
+    className: 'stat-gold',
+  },
+  {
+    label: 'Lịch hẹn chờ xác nhận',
+    value: appointmentStore.pendingAppointments.length,
+    icon: 'bi bi-hourglass-split',
+    className: 'stat-teal',
+  },
+  {
+    label: 'Trạng thái làm việc',
+    value: 'Đang hoạt động',
+    icon: 'bi bi-heart-pulse',
+    className: 'stat-brown',
+  },
+])
+
+const upcomingAppointments = computed(() =>
+  appointmentStore.appointments
+    .filter((item) => ['Pending', 'Confirmed'].includes(item.status))
+    .slice(0, 5),
+)
 
 const actions = [
-  { label: 'Xem lịch hẹn', to: '/doctor/appointments', icon: 'bi bi-calendar-check' },
-  { label: 'Hồ sơ bệnh án', to: '/doctor/medical-records', icon: 'bi bi-file-medical' },
-  { label: 'Lịch làm việc', to: '/doctor/schedule', icon: 'bi bi-calendar-week' },
+  { label: 'Xem lịch hẹn', to: '/doctor-appointments', icon: 'bi bi-calendar-check' },
+  { label: 'Hồ sơ bệnh án', to: '/doctor-medical-records', icon: 'bi bi-file-medical' },
+  { label: 'Lịch làm việc', to: '/doctor-schedule', icon: 'bi bi-calendar-week' },
 ]
+
+const formatDate = (date: string) => dayjs(date).format('DD/MM/YYYY')
+const getStatusClass = (status: string) =>
+  ({
+    Pending: 'bg-warning',
+    Confirmed: 'bg-info',
+    Completed: 'bg-success',
+    Cancelled: 'bg-danger',
+  })[status] || 'bg-secondary'
+
+onMounted(async () => {
+  loading.value = true
+  try {
+    await appointmentStore.fetchAppointments()
+    const response = await medicalRecordApi.getAll()
+    if (response.data.success) medicalRecordCount.value = response.data.data.length
+  } catch (error) {
+    console.error('Failed to load doctor dashboard:', error)
+  } finally {
+    loading.value = false
+  }
+})
 </script>
 
 <style scoped>
@@ -87,13 +191,26 @@ h1 {
   gap: 1rem;
   min-height: 120px;
   padding: 1.25rem;
-  background: var(--surface);
-  border: 1px solid var(--surface-border);
+  color: var(--surface);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-sm);
 }
+
+.stat-green {
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+}
+.stat-gold {
+  background: linear-gradient(135deg, var(--secondary-dark), var(--secondary));
+}
+.stat-teal {
+  background: linear-gradient(135deg, #477f76, #6d9d94);
+}
+.stat-brown {
+  background: linear-gradient(135deg, #987544, var(--gold));
+}
+
 .stat-card > i {
-  color: var(--primary);
+  color: var(--surface);
   font-size: 2rem;
 }
 .stat-card strong,
@@ -101,20 +218,76 @@ h1 {
   display: block;
 }
 .stat-card strong {
-  color: var(--primary-dark);
+  color: var(--surface);
   font-size: 1.4rem;
 }
 .stat-card span {
-  color: var(--text-muted);
+  color: var(--surface);
+  opacity: 0.86;
   font-size: 0.85rem;
 }
-.quick-actions {
-  margin-top: 2rem;
+.dashboard-lower {
+  margin-top: 1.5rem;
 }
-h2 {
+.dashboard-panel {
+  height: 100%;
+  padding: 1.25rem;
+  background: rgba(255, 253, 248, 0.9);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+.panel-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
   margin-bottom: 1rem;
+}
+.panel-heading h2 {
+  margin: 0;
   color: var(--primary-dark);
-  font-size: 1.4rem;
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+}
+.empty-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 180px;
+  gap: 0.5rem;
+  color: var(--text-muted);
+}
+.empty-state i {
+  color: var(--gold);
+  font-size: 1.5rem;
+}
+.appointment-list {
+  display: grid;
+  gap: 0.7rem;
+}
+.appointment-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid var(--surface-border);
+}
+.appointment-row:last-child {
+  border-bottom: 0;
+}
+.appointment-row strong,
+.appointment-row small {
+  display: block;
+}
+.appointment-row small {
+  margin-top: 0.25rem;
+  color: var(--text-muted);
+}
+.quick-actions {
+  display: grid;
+  gap: 0.7rem;
 }
 .action-link {
   display: flex;
@@ -140,5 +313,15 @@ h2 {
 }
 .action-link > i:last-child {
   margin-left: auto;
+}
+
+@media (max-width: 576px) {
+  .page-heading {
+    align-items: flex-start;
+  }
+
+  .page-icon {
+    font-size: 2.25rem;
+  }
 }
 </style>

@@ -49,7 +49,6 @@ const routes: RouteRecordRaw[] = [
   // ===== USER ROUTES =====
   {
     path: '/user',
-    component: () => import('@/layouts/UserLayout.vue'),
     meta: { requiresAuth: true, role: 'User' },
     children: [
       {
@@ -113,7 +112,6 @@ const routes: RouteRecordRaw[] = [
   // ===== DOCTOR ROUTES =====
   {
     path: '/doctor',
-    component: () => import('@/layouts/DoctorLayout.vue'),
     meta: { requiresAuth: true, role: 'Doctor' },
     children: [
       {
@@ -152,7 +150,6 @@ const routes: RouteRecordRaw[] = [
   // ===== ADMIN ROUTES =====
   {
     path: '/admin',
-    component: () => import('@/layouts/AdminLayout.vue'),
     meta: { requiresAuth: true, role: 'Admin' },
     children: [
       {

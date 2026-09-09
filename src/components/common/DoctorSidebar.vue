@@ -152,7 +152,10 @@ const toggleSidebar = () => {
 <style scoped>
 .doctor-sidebar {
   position: relative;
-  min-height: calc(100vh - 76px);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
   padding: 1rem;
   background: var(--surface);
   border-right: 1px solid var(--surface-border);
@@ -218,7 +221,9 @@ const toggleSidebar = () => {
   transform: rotate(90deg);
 }
 .sidebar-menu {
-  max-height: calc(100vh - 195px);
+  flex: 1 1 auto;
+  min-height: 0;
+  max-height: none;
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: var(--primary-light) transparent;
@@ -347,6 +352,7 @@ const toggleSidebar = () => {
 }
 @media (max-width: 768px) {
   .doctor-sidebar {
+    height: auto;
     min-height: auto;
     padding: 0.75rem;
   }
