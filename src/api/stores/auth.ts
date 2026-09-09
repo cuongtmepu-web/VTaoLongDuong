@@ -65,6 +65,8 @@ export const useAuthStore = defineStore('auth', {
 
           if (user.role === 'Admin') {
             router.push('/admin/dashboard')
+          } else if (user.role === 'Doctor') {
+            router.push('/doctor/dashboard')
           } else {
             router.push('/user/dashboard')
           }

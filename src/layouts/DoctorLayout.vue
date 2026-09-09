@@ -1,9 +1,9 @@
 <template>
-  <div class="admin-layout">
-    <AdminHeader />
-    <div class="admin-shell" :class="{ 'sidebar-collapsed': sidebarCollapsed }">
+  <div class="doctor-layout">
+    <PortalHeader />
+    <div class="doctor-shell" :class="{ 'sidebar-collapsed': sidebarCollapsed }">
       <aside class="sidebar">
-        <AdminSidebar @update:collapsed="sidebarCollapsed = $event" />
+        <DoctorSidebar @update:collapsed="sidebarCollapsed = $event" />
       </aside>
       <main class="main-content">
         <slot />
@@ -14,33 +14,33 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import AdminHeader from '@/components/common/AdminHeader.vue'
-import AdminSidebar from '@/components/common/AdminSidebar.vue'
+import DoctorSidebar from '@/components/common/DoctorSidebar.vue'
+import PortalHeader from '@/components/common/PortalHeader.vue'
 
 const sidebarCollapsed = ref(false)
 </script>
 
 <style scoped>
-.admin-layout {
+.doctor-layout {
   min-height: 100vh;
   background: var(--bg);
 }
 
-.admin-shell {
+.doctor-shell {
   display: grid;
   grid-template-columns: 248px minmax(0, 1fr);
   min-height: calc(100vh - 76px);
-  transition: grid-template-columns 0.1s var(--ease);
+  transition: grid-template-columns 0.6s var(--ease);
 }
 
-.admin-shell.sidebar-collapsed {
+.doctor-shell.sidebar-collapsed {
   grid-template-columns: 72px minmax(0, 1fr);
 }
 
 .sidebar {
   min-width: 248px;
   overflow: visible;
-  transition: min-width 0.9s var(--ease);
+  transition: min-width 0.6s var(--ease);
 }
 
 .sidebar-collapsed .sidebar {
@@ -48,13 +48,14 @@ const sidebarCollapsed = ref(false)
 }
 
 .main-content {
+  min-width: 0;
+  min-height: calc(100vh - 76px);
   padding: 2.25rem clamp(1rem, 3vw, 3rem);
   background: linear-gradient(135deg, rgba(255, 253, 248, 0.62), transparent 46%), var(--bg);
-  min-width: 0;
 }
 
 @media (max-width: 768px) {
-  .admin-shell {
+  .doctor-shell {
     display: block;
   }
 

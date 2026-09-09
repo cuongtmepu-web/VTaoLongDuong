@@ -1,5 +1,5 @@
 <template>
-  <nav class="user-sidebar" :class="{ 'sidebar-collapsed': sidebarCollapsed }">
+  <nav class="doctor-sidebar" :class="{ 'sidebar-collapsed': sidebarCollapsed }">
     <div class="sidebar-toolbar">
       <label class="sidebar-search">
         <i class="bi bi-search" aria-hidden="true"></i>
@@ -25,7 +25,7 @@
     <div class="sidebar-menu">
       <ul class="nav flex-column">
         <li v-show="matchesMenu('Dashboard')" class="nav-item dashboard-item">
-          <router-link to="/user/dashboard" class="nav-link" active-class="active">
+          <router-link to="/doctor/dashboard" class="nav-link" active-class="active">
             <i class="bi bi-grid-1x2-fill"></i>
             <span class="menu-label">Dashboard</span>
           </router-link>
@@ -75,23 +75,10 @@
 import { computed, ref } from 'vue'
 import { useAuthStore } from '@/api/stores/auth'
 
-type MenuItem = {
-  label: string
-  path: string
-  icon: string
-}
+type MenuItem = { label: string; path: string; icon: string }
+type MenuGroup = { id: string; label: string; icon: string; items: MenuItem[] }
 
-type MenuGroup = {
-  id: string
-  label: string
-  icon: string
-  items: MenuItem[]
-}
-
-const emit = defineEmits<{
-  'update:collapsed': [value: boolean]
-}>()
-
+const emit = defineEmits<{ 'update:collapsed': [value: boolean] }>()
 const authStore = useAuthStore()
 const searchQuery = ref('')
 const sidebarCollapsed = ref(false)
@@ -103,31 +90,34 @@ const groups: MenuGroup[] = [
     label: 'Lịch hẹn',
     icon: 'bi bi-calendar-check-fill',
     items: [
-      { label: 'Lịch hẹn', path: '/user/appointments', icon: 'bi bi-calendar-check-fill' },
-      { label: 'Đặt lịch mới', path: '/user/appointments/book', icon: 'bi bi-calendar-plus-fill' },
+      {
+        label: 'Danh sách lịch hẹn',
+        path: '/doctor/appointments',
+        icon: 'bi bi-calendar-check-fill',
+      },
     ],
   },
   {
     id: 'records',
-    label: 'Hồ sơ bệnh án',
+    label: 'Bệnh án',
     icon: 'bi bi-file-medical-fill',
     items: [
-      { label: 'Hồ sơ bệnh án', path: '/user/medical-records', icon: 'bi bi-file-medical-fill' },
+      { label: 'Hồ sơ bệnh án', path: '/doctor/medical-records', icon: 'bi bi-file-medical-fill' },
     ],
   },
   {
-    id: 'orders',
-    label: 'Thanh toán',
-    icon: 'bi bi-receipt-fill',
-    items: [{ label: 'Lịch sử thanh toán', path: '/user/orders', icon: 'bi bi-receipt-fill' }],
+    id: 'schedule',
+    label: 'Lịch làm việc',
+    icon: 'bi bi-calendar-week-fill',
+    items: [{ label: 'Quản lý lịch làm việc', path: '/doctor/schedule', icon: 'bi bi-clock-fill' }],
   },
   {
     id: 'profile',
     label: 'Tài khoản',
     icon: 'bi bi-person-fill',
     items: [
-      { label: 'Thông tin cá nhân', path: '/user/profile', icon: 'bi bi-person-fill' },
-      { label: 'Đổi mật khẩu', path: '/user/change-password', icon: 'bi bi-key-fill' },
+      { label: 'Thông tin cá nhân', path: '/doctor/profile', icon: 'bi bi-person-fill' },
+      { label: 'Đổi mật khẩu', path: '/doctor/change-password', icon: 'bi bi-key-fill' },
     ],
   },
 ]
@@ -137,26 +127,18 @@ const normalize = (value: string) =>
     .toLocaleLowerCase('vi-VN')
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
-
 const matchesMenu = (label: string) =>
   !searchQuery.value || normalize(label).includes(normalize(searchQuery.value))
-
 const visibleGroups = computed(() =>
   groups
-    .map((group) => ({
-      ...group,
-      items: group.items.filter((item) => matchesMenu(item.label)),
-    }))
+    .map((group) => ({ ...group, items: group.items.filter((item) => matchesMenu(item.label)) }))
     .filter((group) => group.items.length > 0),
 )
-
 const isGroupOpen = (groupId: string) =>
   Boolean(openGroups.value[groupId]) || Boolean(searchQuery.value)
-
 const toggleGroup = (groupId: string) => {
   openGroups.value[groupId] = !openGroups.value[groupId]
 }
-
 const toggleSidebar = () => {
   sidebarCollapsed.value = !sidebarCollapsed.value
   if (sidebarCollapsed.value) {
@@ -168,7 +150,7 @@ const toggleSidebar = () => {
 </script>
 
 <style scoped>
-.user-sidebar {
+.doctor-sidebar {
   position: relative;
   min-height: calc(100vh - 76px);
   padding: 1rem;
@@ -182,7 +164,6 @@ const toggleSidebar = () => {
   align-items: center;
   margin-bottom: 0.75rem;
 }
-
 .sidebar-search {
   display: flex;
   align-items: center;
@@ -195,7 +176,6 @@ const toggleSidebar = () => {
   border: 1px solid var(--surface-border);
   border-radius: var(--radius-sm);
 }
-
 .sidebar-search input {
   width: 100%;
   min-width: 0;
@@ -206,7 +186,6 @@ const toggleSidebar = () => {
   font: inherit;
   font-size: 0.82rem;
 }
-
 .sidebar-toggle {
   display: inline-flex;
   align-items: center;
@@ -222,14 +201,12 @@ const toggleSidebar = () => {
     background 0.25s var(--ease),
     border-color 0.25s var(--ease);
 }
-
 .sidebar-toggle:hover,
 .sidebar-toggle:focus-visible {
   background: var(--gold-light);
   border-color: var(--gold);
   outline: none;
 }
-
 .toggle-icon {
   display: block;
   font-size: 1.35rem;
@@ -237,36 +214,29 @@ const toggleSidebar = () => {
   transform: rotate(0deg);
   transition: transform 0.6s var(--ease);
 }
-
 .sidebar-collapsed .toggle-icon {
   transform: rotate(90deg);
 }
-
 .sidebar-menu {
   max-height: calc(100vh - 195px);
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: var(--primary-light) transparent;
 }
-
-.user-sidebar.sidebar-collapsed {
+.doctor-sidebar.sidebar-collapsed {
   width: 72px;
   padding: 1rem 0.75rem;
 }
-
-.user-sidebar.sidebar-collapsed .sidebar-search {
+.doctor-sidebar.sidebar-collapsed .sidebar-search {
   display: none;
 }
-
-.user-sidebar.sidebar-collapsed .sidebar-toolbar {
+.doctor-sidebar.sidebar-collapsed .sidebar-toolbar {
   justify-content: center;
 }
-
-.user-sidebar.sidebar-collapsed .sidebar-menu {
+.doctor-sidebar.sidebar-collapsed .sidebar-menu {
   overflow: visible;
 }
-
-.user-sidebar .nav-link,
+.doctor-sidebar .nav-link,
 .menu-parent {
   display: flex;
   align-items: center;
@@ -280,23 +250,20 @@ const toggleSidebar = () => {
   text-align: left;
   transition: all 0.3s;
 }
-
-.user-sidebar .nav-link:hover,
+.doctor-sidebar .nav-link:hover,
 .menu-parent:hover,
 .menu-parent:focus-visible {
   color: var(--primary-dark);
   background: var(--primary-light);
   outline: none;
 }
-
-.user-sidebar .nav-link.active {
+.doctor-sidebar .nav-link.active {
   color: var(--surface);
   background: var(--primary-dark);
   box-shadow: inset 3px 0 0 var(--gold);
   font-weight: 700;
 }
-
-.user-sidebar .nav-link i,
+.doctor-sidebar .nav-link i,
 .menu-parent > i:first-child {
   flex: 0 0 24px;
   width: 24px;
@@ -304,7 +271,6 @@ const toggleSidebar = () => {
   font-size: 1.2rem;
   text-align: center;
 }
-
 .menu-parent {
   color: var(--text-muted);
   background: transparent;
@@ -314,69 +280,56 @@ const toggleSidebar = () => {
   font-size: 0.7rem;
   font-weight: bold;
 }
-
 .menu-chevron {
   margin-left: auto;
   font-size: 0.75rem !important;
   transition: transform 0.25s var(--ease);
 }
-
 .submenu-expanded > .menu-parent .menu-chevron {
   transform: rotate(180deg);
 }
-
 .submenu {
   display: none;
   padding: 0;
   list-style: none;
 }
-
 .submenu-expanded > .submenu {
   display: block;
 }
-
 .submenu .nav-link {
   padding-left: 1.5rem;
 }
-
 .logout-item {
   margin-top: 1rem;
 }
-
-.user-sidebar .nav-link.text-danger {
+.doctor-sidebar .nav-link.text-danger {
   color: var(--secondary-dark) !important;
 }
-
-.user-sidebar.sidebar-collapsed .dashboard-item .menu-label,
-.user-sidebar.sidebar-collapsed .menu-group-label,
-.user-sidebar.sidebar-collapsed .logout-item .menu-label,
-.user-sidebar.sidebar-collapsed .menu-chevron {
+.doctor-sidebar.sidebar-collapsed .dashboard-item .menu-label,
+.doctor-sidebar.sidebar-collapsed .menu-group-label,
+.doctor-sidebar.sidebar-collapsed .logout-item .menu-label,
+.doctor-sidebar.sidebar-collapsed .menu-chevron {
   display: none;
 }
-
-.user-sidebar.sidebar-collapsed .dashboard-item .nav-link,
-.user-sidebar.sidebar-collapsed .menu-parent,
-.user-sidebar.sidebar-collapsed .logout-item .nav-link {
+.doctor-sidebar.sidebar-collapsed .dashboard-item .nav-link,
+.doctor-sidebar.sidebar-collapsed .menu-parent,
+.doctor-sidebar.sidebar-collapsed .logout-item .nav-link {
   justify-content: center;
   padding: 0.72rem 0;
 }
-
-.user-sidebar.sidebar-collapsed .menu-parent {
+.doctor-sidebar.sidebar-collapsed .menu-parent {
   pointer-events: none;
   cursor: default;
 }
-
-.user-sidebar.sidebar-collapsed .menu-parent > i:first-child,
-.user-sidebar.sidebar-collapsed .nav-link i {
+.doctor-sidebar.sidebar-collapsed .menu-parent > i:first-child,
+.doctor-sidebar.sidebar-collapsed .nav-link i {
   flex: 0 0 auto;
   width: auto;
 }
-
-.user-sidebar.sidebar-collapsed .menu-group {
+.doctor-sidebar.sidebar-collapsed .menu-group {
   position: relative;
 }
-
-.user-sidebar.sidebar-collapsed .menu-group > .submenu {
+.doctor-sidebar.sidebar-collapsed .menu-group > .submenu {
   position: absolute;
   top: 0;
   left: 100%;
@@ -388,27 +341,22 @@ const toggleSidebar = () => {
   border-radius: var(--radius-sm);
   box-shadow: var(--shadow-md);
 }
-
-.user-sidebar.sidebar-collapsed .menu-group:hover > .submenu,
-.user-sidebar.sidebar-collapsed .menu-group:focus-within > .submenu {
+.doctor-sidebar.sidebar-collapsed .menu-group:hover > .submenu,
+.doctor-sidebar.sidebar-collapsed .menu-group:focus-within > .submenu {
   display: block;
 }
-
 @media (max-width: 768px) {
-  .user-sidebar {
+  .doctor-sidebar {
     min-height: auto;
     padding: 0.75rem;
   }
-
   .sidebar-menu {
     max-height: calc(100vh - 150px);
   }
-
-  .user-sidebar .nav-link {
+  .doctor-sidebar .nav-link {
     white-space: normal;
   }
-
-  .user-sidebar.sidebar-collapsed {
+  .doctor-sidebar.sidebar-collapsed {
     width: 72px;
   }
 }

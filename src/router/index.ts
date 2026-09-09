@@ -114,6 +114,49 @@ const routes: RouteRecordRaw[] = [
     ],
   },
 
+  // ===== DOCTOR ROUTES =====
+  {
+    path: '/doctor',
+    component: () => import('@/layouts/DoctorLayout.vue'),
+    meta: { requiresAuth: true, role: 'Doctor' },
+    children: [
+      {
+        path: '',
+        redirect: '/doctor/dashboard',
+      },
+      {
+        path: 'dashboard',
+        name: 'DoctorDashboard',
+        component: () => import('@/views/doctor/DoctorDashboard.vue'),
+      },
+      {
+        path: 'appointments',
+        name: 'DoctorAppointments',
+        component: () => import('@/views/doctor/DoctorFeaturePage.vue'),
+      },
+      {
+        path: 'medical-records',
+        name: 'DoctorMedicalRecords',
+        component: () => import('@/views/doctor/DoctorFeaturePage.vue'),
+      },
+      {
+        path: 'schedule',
+        name: 'DoctorSchedule',
+        component: () => import('@/views/doctor/DoctorFeaturePage.vue'),
+      },
+      {
+        path: 'profile',
+        name: 'DoctorProfile',
+        component: () => import('@/views/doctor/DoctorFeaturePage.vue'),
+      },
+      {
+        path: 'change-password',
+        name: 'DoctorChangePassword',
+        component: () => import('@/views/doctor/DoctorFeaturePage.vue'),
+      },
+    ],
+  },
+
   // ===== ADMIN ROUTES =====
   {
     path: '/admin',
@@ -322,6 +365,8 @@ router.beforeEach((to, from, next) => {
         // Redirect to appropriate dashboard
         if (userRole === 'Admin') {
           next('/admin/dashboard')
+        } else if (userRole === 'Doctor') {
+          next('/doctor/dashboard')
         } else if (userRole === 'User') {
           next('/user/dashboard')
         } else {
@@ -338,8 +383,10 @@ router.beforeEach((to, from, next) => {
   // Check if route is for guests only (login/register)
   if (to.meta.guestOnly && token) {
     // Redirect authenticated users away from login/register
-    if (userRole === '1') {
+    if (userRole === 'Admin') {
       next('/admin/dashboard')
+    } else if (userRole === 'Doctor') {
+      next('/doctor/dashboard')
     } else {
       next('/user/dashboard')
     }
