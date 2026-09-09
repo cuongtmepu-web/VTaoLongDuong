@@ -638,6 +638,33 @@ onBeforeUnmount(destroyCharts)
   border-bottom: none !important;
 }
 
+@media (max-width: 1024px) {
+  .dashboard-heading {
+    margin-bottom: 1.5rem;
+  }
+
+  .dashboard-panel {
+    padding: 1.1rem;
+  }
+
+  .panel-heading h3 {
+    font-size: 1.25rem;
+  }
+
+  .chart-panel,
+  .insight-panel {
+    min-height: 315px;
+  }
+
+  .chart-canvas-wrap {
+    height: 235px;
+  }
+
+  .compact-chart {
+    height: 225px;
+  }
+}
+
 @media (max-width: 768px) {
   .dashboard-heading {
     align-items: flex-start;
@@ -650,6 +677,123 @@ onBeforeUnmount(destroyCharts)
 
   .insight-item {
     min-height: auto;
+  }
+
+  .dashboard-heading {
+    margin-bottom: 1.25rem;
+  }
+
+  .dashboard-heading h2 {
+    font-size: 2.15rem;
+  }
+
+  .dashboard-panel {
+    padding: 1rem;
+  }
+
+  .panel-heading h3 {
+    font-size: 1.2rem;
+  }
+
+  .chart-panel,
+  .insight-panel {
+    min-height: 0;
+  }
+
+  .chart-canvas-wrap,
+  .chart-placeholder {
+    height: 220px;
+  }
+
+  .compact-chart {
+    height: 215px;
+  }
+
+  .order-item,
+  .appointment-item {
+    align-items: flex-start !important;
+    gap: 0.75rem;
+  }
+
+  .order-item > div:last-child,
+  .appointment-item > div:last-child {
+    flex-shrink: 0;
+  }
+}
+
+@media (max-width: 576px) {
+  .dashboard-heading {
+    gap: 0.4rem;
+    margin-bottom: 1.1rem;
+  }
+
+  .dashboard-heading h2 {
+    font-size: 2rem;
+  }
+
+  .dashboard-heading .text-muted {
+    max-width: 28rem;
+    font-size: 0.88rem;
+    line-height: 1.45;
+  }
+
+  .update-time {
+    font-size: 0.75rem;
+  }
+
+  .stat-card {
+    min-height: 108px;
+    padding: 0.85rem;
+    gap: 0.65rem;
+    border-radius: var(--radius-md);
+  }
+
+  .stat-icon {
+    flex: 0 0 auto;
+    font-size: 1.9rem;
+  }
+
+  .stat-info h3 {
+    font-size: 1.35rem;
+  }
+
+  .stat-info p {
+    font-size: 0.8rem;
+    line-height: 1.25;
+  }
+
+  .panel-heading {
+    gap: 0.5rem;
+  }
+
+  .panel-heading h3 {
+    font-size: 1.15rem;
+    line-height: 1.25;
+  }
+
+  .dashboard-panel {
+    border-radius: var(--radius-md);
+  }
+
+  .list-panel .panel-heading .btn {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.78rem;
+  }
+
+  .order-item,
+  .appointment-item {
+    flex-direction: column;
+  }
+
+  .order-item > div:last-child,
+  .appointment-item > div:last-child {
+    width: 100%;
+    text-align: left !important;
+  }
+
+  .order-item .badge,
+  .appointment-item .badge {
+    margin-left: 0.35rem !important;
   }
 }
 </style>

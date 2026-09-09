@@ -565,6 +565,60 @@ textarea.form-control {
   }
 }
 
+@media (max-width: 1199px) {
+  .admin-layout .g-3 {
+    gap: 1rem;
+  }
+
+  .admin-layout .col-sm-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+
+  .admin-layout .col-lg-4 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  .admin-layout .col-lg-6 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  .admin-layout .col-lg-8 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .admin-layout .col-xl-3 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  .admin-layout .col-xl-4 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  .admin-layout .col-xl-8 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+  .admin-layout .col-lg-4 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .admin-layout .col-lg-6 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .admin-layout .col-lg-8 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
 .admin-layout .container-fluid {
   width: 100%;
 }
