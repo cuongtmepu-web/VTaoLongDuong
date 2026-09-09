@@ -305,13 +305,158 @@ onMounted(() => {
   border-bottom: none !important;
 }
 
+.user-dashboard .row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.user-dashboard .row.g-3 {
+  margin-right: -0.75rem;
+  margin-left: -0.75rem;
+}
+
+.user-dashboard .row.g-4 {
+  margin-right: -1.5rem;
+  margin-left: -1.5rem;
+}
+
+.user-dashboard .row > * {
+  padding-right: 0.75rem;
+  padding-left: 0.75rem;
+  min-width: 0;
+}
+
+@media (min-width: 992px) {
+  .user-dashboard .col-lg-8 {
+    flex: 0 0 66.667%;
+    max-width: 66.667%;
+  }
+
+  .user-dashboard .col-lg-4 {
+    flex: 0 0 33.333%;
+    max-width: 33.333%;
+  }
+}
+
+@media (min-width: 1025px) {
+  .user-dashboard .col-xl-3 {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .user-dashboard .col-lg-8,
+  .user-dashboard .col-lg-4 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .user-dashboard .col-sm-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+}
+
 @media (max-width: 768px) {
   .dashboard-heading {
     align-items: flex-start;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-bottom: 1.25rem;
   }
 
   .heading-icon {
     font-size: 2.25rem;
+  }
+
+  .dashboard-panel {
+    padding: 1rem;
+  }
+
+  .user-dashboard .row.g-3 {
+    margin-right: -0.5rem;
+    margin-left: -0.5rem;
+  }
+
+  .user-dashboard .row.g-4 {
+    margin-right: -0.75rem;
+    margin-left: -0.75rem;
+  }
+
+  .user-dashboard .row > * {
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+  }
+
+  .panel-heading h2 {
+    font-size: 1.2rem;
+  }
+
+  .dashboard-lower {
+    margin-top: 1rem;
+  }
+
+  .appointment-item {
+    align-items: flex-start !important;
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .dashboard-heading h1 {
+    font-size: 2rem;
+  }
+
+  .dashboard-heading .text-muted {
+    font-size: 0.88rem;
+    line-height: 1.45;
+  }
+
+  .stat-card {
+    min-height: 108px;
+    padding: 0.85rem;
+    gap: 0.65rem;
+  }
+
+  .stat-card > i {
+    flex: 0 0 auto;
+    font-size: 1.9rem;
+  }
+
+  .stat-info strong {
+    font-size: 1.35rem;
+  }
+
+  .stat-info span {
+    font-size: 0.78rem;
+    line-height: 1.25;
+  }
+
+  .panel-heading {
+    gap: 0.5rem;
+  }
+
+  .panel-heading h2 {
+    font-size: 1.15rem;
+    line-height: 1.25;
+  }
+
+  .dashboard-panel .panel-heading .btn {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.78rem;
+  }
+
+  .appointment-item {
+    flex-direction: column;
+  }
+
+  .appointment-item > .badge {
+    align-self: flex-start;
+  }
+
+  .quick-actions .btn {
+    min-height: 46px;
   }
 }
 </style>

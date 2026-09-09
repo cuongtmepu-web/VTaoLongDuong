@@ -24,12 +24,11 @@
             style="width: 150px"
             @update:model-value="onSearch"
           />
-          <input
-            type="date"
-            class="form-control"
+          <DatePicker
             v-model="dateFilter"
+            label="Lọc theo ngày"
             style="width: 150px"
-            @change="onSearch"
+            @update:model-value="onSearch"
           />
           <button class="btn btn-primary" @click="fetchAppointments">
             <i class="bi bi-search"></i> Tìm
@@ -152,6 +151,7 @@
 import { ref, computed, onMounted } from 'vue'
 import AdminLayout from '@/layouts/AdminLayout.vue'
 import BaseSelect from '@/components/common/BaseSelect.vue'
+import DatePicker from '@/components/common/DatePicker.vue'
 import { adminAppointmentApi } from '@/api/admin/adminAppointment'
 import type { Appointment, AppointmentStatus } from '@/api/types/appointment'
 import { useToast } from '@erag/vue-toastification'

@@ -25,7 +25,12 @@
     <div class="sidebar-menu">
       <ul class="nav flex-column">
         <li v-show="matchesMenu('Dashboard')" class="nav-item dashboard-item">
-          <router-link to="/doctor-dashboard" class="nav-link" active-class="active">
+          <router-link
+            to="/doctor-dashboard"
+            class="nav-link"
+            active-class="active"
+            @click="handleNavigation"
+          >
             <i class="bi bi-grid-1x2-fill"></i>
             <span class="menu-label">Dashboard</span>
           </router-link>
@@ -52,7 +57,12 @@
 
           <ul class="submenu">
             <li v-for="item in group.items" :key="item.path" class="nav-item">
-              <router-link :to="item.path" class="nav-link" active-class="active">
+              <router-link
+                :to="item.path"
+                class="nav-link"
+                active-class="active"
+                @click="handleNavigation"
+              >
                 <i :class="item.icon"></i>
                 <span class="menu-label">{{ item.label }}</span>
               </router-link>
@@ -61,7 +71,7 @@
         </li>
 
         <li v-show="matchesMenu('Đăng xuất')" class="nav-item logout-item">
-          <a href="#" class="nav-link text-danger" @click.prevent="authStore.logout">
+          <a href="#" class="nav-link text-danger" @click.prevent="handleLogout">
             <i class="bi bi-box-arrow-right"></i>
             <span class="menu-label">Đăng xuất</span>
           </a>
@@ -78,7 +88,10 @@ import { useAuthStore } from '@/api/stores/auth'
 type MenuItem = { label: string; path: string; icon: string }
 type MenuGroup = { id: string; label: string; icon: string; items: MenuItem[] }
 
-const emit = defineEmits<{ 'update:collapsed': [value: boolean] }>()
+const emit = defineEmits<{
+  'update:collapsed': [value: boolean]
+  navigate: []
+}>()
 const authStore = useAuthStore()
 const searchQuery = ref('')
 const sidebarCollapsed = ref(false)
@@ -146,6 +159,13 @@ const toggleSidebar = () => {
     openGroups.value = {}
   }
   emit('update:collapsed', sidebarCollapsed.value)
+}
+
+const handleNavigation = () => emit('navigate')
+
+const handleLogout = () => {
+  authStore.logout()
+  handleNavigation()
 }
 </script>
 
@@ -352,9 +372,13 @@ const toggleSidebar = () => {
 }
 @media (max-width: 768px) {
   .doctor-sidebar {
-    height: auto;
-    min-height: auto;
+    height: 100%;
+    min-height: 100%;
     padding: 0.75rem;
+  }
+
+  .sidebar-toggle {
+    display: none;
   }
   .sidebar-menu {
     max-height: calc(100vh - 150px);
@@ -363,7 +387,51 @@ const toggleSidebar = () => {
     white-space: normal;
   }
   .doctor-sidebar.sidebar-collapsed {
-    width: 72px;
+    width: 100%;
+    padding: 0.75rem;
+  }
+
+  .doctor-sidebar.sidebar-collapsed .sidebar-search,
+  .doctor-sidebar.sidebar-collapsed .menu-label,
+  .doctor-sidebar.sidebar-collapsed .menu-group-label,
+  .doctor-sidebar.sidebar-collapsed .menu-chevron {
+    display: inline-flex;
+  }
+
+  .doctor-sidebar.sidebar-collapsed .sidebar-toolbar,
+  .doctor-sidebar.sidebar-collapsed .dashboard-item .nav-link,
+  .doctor-sidebar.sidebar-collapsed .menu-parent,
+  .doctor-sidebar.sidebar-collapsed .logout-item .nav-link {
+    justify-content: initial;
+    padding: 0.72rem 1rem;
+  }
+
+  .doctor-sidebar.sidebar-collapsed .menu-parent {
+    pointer-events: auto;
+    cursor: pointer;
+  }
+
+  .doctor-sidebar.sidebar-collapsed .menu-group {
+    position: static;
+  }
+
+  .doctor-sidebar.sidebar-collapsed .menu-group > .submenu {
+    position: static;
+    width: auto;
+    padding: 0;
+    border: 0;
+    box-shadow: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .doctor-sidebar {
+    padding: 0.65rem;
+  }
+
+  .doctor-sidebar .nav-link,
+  .menu-parent {
+    padding: 0.65rem 0.8rem;
   }
 }
 </style>

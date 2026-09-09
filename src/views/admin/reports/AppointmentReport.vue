@@ -4,8 +4,8 @@
       <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="mb-0">Báo cáo lịch hẹn</h2>
         <div class="d-flex gap-2">
-          <input type="date" class="form-control" v-model="startDate" style="width: 150px" />
-          <input type="date" class="form-control" v-model="endDate" style="width: 150px" />
+          <DatePicker v-model="startDate" label="Từ ngày" style="width: 150px" />
+          <DatePicker v-model="endDate" label="Đến ngày" style="width: 150px" />
           <button class="btn btn-primary" @click="fetchReport">
             <i class="bi bi-search"></i> Xem
           </button>
@@ -144,6 +144,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import AdminLayout from '@/layouts/AdminLayout.vue'
+import DatePicker from '@/components/common/DatePicker.vue'
 import AppointmentChart from '@/components/charts/AppointmentChart.vue'
 import { adminAppointmentApi } from '@/api/admin/adminAppointment'
 import { useToast } from '@erag/vue-toastification'

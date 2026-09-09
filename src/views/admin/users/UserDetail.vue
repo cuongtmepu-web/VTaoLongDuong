@@ -68,7 +68,7 @@
                 <div class="row">
                   <div class="col-md-6 mb-3">
                     <label class="form-label">Ngày sinh</label>
-                    <input type="date" class="form-control" v-model="editForm.dateOfBirth" />
+                    <DatePicker v-model="editForm.dateOfBirth" label="Ngày sinh" />
                   </div>
                   <div class="col-md-6 mb-3">
                     <label class="form-label">Giới tính</label>
@@ -205,6 +205,7 @@ import { ref, reactive, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import AdminLayout from '@/layouts/AdminLayout.vue'
 import BaseSelect from '@/components/common/BaseSelect.vue'
+import DatePicker from '@/components/common/DatePicker.vue'
 import { adminUserApi } from '@/api/admin/adminUser'
 import type { User } from '@/api/types/auth'
 import { useToast } from '@erag/vue-toastification'
@@ -233,6 +234,8 @@ const formatDate = (date: string) => {
   if (!date) return ''
   return dayjs(date).format('DD/MM/YYYY')
 }
+
+const formatDateInput = (date?: string) => (date ? dayjs(date).format('YYYY-MM-DD') : '')
 
 const formatDateTime = (date: string) => {
   if (!date) return ''
@@ -293,7 +296,7 @@ const fetchUser = async () => {
       Object.assign(editForm, {
         fullName: user.value.fullName,
         phone: user.value.phone || '',
-        dateOfBirth: user.value.dateOfBirth || '',
+        dateOfBirth: formatDateInput(user.value.dateOfBirth),
         gender: user.value.gender?.toString() || '',
         address: user.value.address || '',
         role: user.value.role,
@@ -319,7 +322,7 @@ const cancelEdit = () => {
     Object.assign(editForm, {
       fullName: user.value.fullName,
       phone: user.value.phone || '',
-      dateOfBirth: user.value.dateOfBirth || '',
+      dateOfBirth: formatDateInput(user.value.dateOfBirth),
       gender: user.value.gender?.toString() || '',
       address: user.value.address || '',
       role: user.value.role,

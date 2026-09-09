@@ -56,7 +56,7 @@
               </div>
               <div class="col-md-6 mb-3">
                 <label class="form-label">Ngày tái khám</label>
-                <input type="date" class="form-control" v-model="form.followUpDate" />
+                <DatePicker v-model="form.followUpDate" label="Ngày tái khám" />
               </div>
             </div>
 
@@ -119,6 +119,7 @@ import { ref, reactive, computed, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import AdminLayout from '@/layouts/AdminLayout.vue'
 import BaseSelect from '@/components/common/BaseSelect.vue'
+import DatePicker from '@/components/common/DatePicker.vue'
 import { adminMedicalRecordApi } from '@/api/admin/adminMedicalRecord'
 import { adminUserApi } from '@/api/admin/adminUser'
 import { adminDoctorApi } from '@/api/admin/adminDoctor'

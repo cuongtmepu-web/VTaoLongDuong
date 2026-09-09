@@ -138,9 +138,12 @@ onBeforeUnmount(destroyCharts)
   grid-template-columns: minmax(260px, 0.85fr) minmax(320px, 1.15fr);
   gap: 1rem;
   margin-top: 1.5rem;
+  width: 100%;
+  min-width: 0;
 }
 
 .analytics-panel {
+  min-width: 0;
   min-height: 330px;
   padding: 1.25rem;
   background: rgba(255, 253, 248, 0.9);
@@ -180,15 +183,65 @@ onBeforeUnmount(destroyCharts)
 .chart-wrap {
   position: relative;
   height: 235px;
+  width: 100%;
+  min-width: 0;
+}
+
+.chart-wrap canvas {
+  display: block;
+  width: 100% !important;
+  max-width: 100%;
+  height: 100% !important;
 }
 
 .chart-wrap-doughnut {
   height: 240px;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 768px) {
   .analytics-grid {
     grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .analytics-panel {
+    min-height: 0;
+    padding: 1rem;
+  }
+
+  .panel-heading h3 {
+    font-size: 1.2rem;
+  }
+
+  .chart-wrap,
+  .chart-wrap-doughnut {
+    height: 220px;
+  }
+}
+
+@media (max-width: 576px) {
+  .analytics-grid {
+    margin-top: 1rem;
+    gap: 0.85rem;
+  }
+
+  .analytics-panel {
+    padding: 0.9rem;
+  }
+
+  .panel-heading {
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .panel-heading h3 {
+    font-size: 1.1rem;
+    line-height: 1.25;
+  }
+
+  .chart-wrap,
+  .chart-wrap-doughnut {
+    height: 205px;
   }
 }
 </style>

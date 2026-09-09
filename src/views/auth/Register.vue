@@ -112,7 +112,7 @@
                 <div class="row">
                   <div class="col-md-6 mb-3">
                     <label class="form-label">Ngày sinh</label>
-                    <input type="date" class="form-control" v-model="form.dateOfBirth" />
+                    <DatePicker v-model="form.dateOfBirth" label="Ngày sinh" />
                   </div>
 
                   <div class="col-md-6 mb-3">
@@ -163,6 +163,7 @@ import { ref, reactive } from 'vue'
 import { useAuthStore } from '@/api/stores/auth'
 import { useToast } from '@erag/vue-toastification'
 import BaseSelect from '@/components/common/BaseSelect.vue'
+import DatePicker from '@/components/common/DatePicker.vue'
 
 const authStore = useAuthStore()
 const toast = useToast()

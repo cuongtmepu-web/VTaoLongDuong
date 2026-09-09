@@ -66,12 +66,11 @@
                   <div class="row">
                     <div class="col-md-6 mb-3">
                       <label class="form-label">Ngày hẹn</label>
-                      <input
-                        type="date"
-                        class="form-control"
+                      <DatePicker
                         v-model="appointment.date"
+                        label="Ngày hẹn"
                         :min="minDate"
-                        @change="fetchAvailableSlots"
+                        @update:model-value="fetchAvailableSlots"
                       />
                     </div>
 
@@ -208,6 +207,7 @@ import { ref, computed, onMounted, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import UserLayout from '@/layouts/UserLayout.vue'
 import BaseSelect from '@/components/common/BaseSelect.vue'
+import DatePicker from '@/components/common/DatePicker.vue'
 import { useAppointmentStore } from '@/api/stores/appointment'
 import { doctorApi } from '@/api/doctor'
 import type { Doctor } from '@/api/types/doctor'

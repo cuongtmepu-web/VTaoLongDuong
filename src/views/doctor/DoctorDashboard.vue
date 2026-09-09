@@ -160,7 +160,7 @@ onMounted(async () => {
 
 <style scoped>
 .doctor-dashboard {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
 }
 .page-heading {
@@ -315,13 +315,145 @@ h1 {
   margin-left: auto;
 }
 
+.doctor-dashboard .row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.doctor-dashboard .row.g-3 {
+  margin-right: -0.75rem;
+  margin-left: -0.75rem;
+}
+
+.doctor-dashboard .row.g-4 {
+  margin-right: -1.5rem;
+  margin-left: -1.5rem;
+}
+
+.doctor-dashboard .row > * {
+  padding-right: 0.75rem;
+  padding-left: 0.75rem;
+  min-width: 0;
+}
+
+@media (min-width: 992px) {
+  .doctor-dashboard .col-lg-8 {
+    flex: 0 0 66.667%;
+    max-width: 66.667%;
+  }
+
+  .doctor-dashboard .col-lg-4 {
+    flex: 0 0 33.333%;
+    max-width: 33.333%;
+  }
+}
+
+@media (min-width: 1025px) {
+  .doctor-dashboard .col-xl-3 {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .doctor-dashboard .col-lg-8,
+  .doctor-dashboard .col-lg-4 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .doctor-dashboard .col-sm-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+}
+
 @media (max-width: 576px) {
   .page-heading {
     align-items: flex-start;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-bottom: 1.25rem;
   }
 
   .page-icon {
     font-size: 2.25rem;
+  }
+
+  .page-heading h1 {
+    font-size: 2rem;
+  }
+
+  .page-heading .text-muted {
+    font-size: 0.88rem;
+    line-height: 1.45;
+  }
+
+  .stat-card {
+    min-height: 108px;
+    padding: 0.85rem;
+    gap: 0.65rem;
+  }
+
+  .stat-card > i {
+    flex: 0 0 auto;
+    font-size: 1.9rem;
+  }
+
+  .stat-card strong {
+    font-size: 1.3rem;
+  }
+
+  .stat-card span {
+    font-size: 0.78rem;
+    line-height: 1.25;
+  }
+
+  .dashboard-panel {
+    padding: 1rem;
+  }
+
+  .doctor-dashboard .row.g-3 {
+    margin-right: -0.5rem;
+    margin-left: -0.5rem;
+  }
+
+  .doctor-dashboard .row.g-4 {
+    margin-right: -0.75rem;
+    margin-left: -0.75rem;
+  }
+
+  .doctor-dashboard .row > * {
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+  }
+
+  .panel-heading {
+    gap: 0.5rem;
+  }
+
+  .panel-heading h2 {
+    font-size: 1.15rem;
+    line-height: 1.25;
+  }
+
+  .dashboard-panel .panel-heading .btn {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.78rem;
+  }
+
+  .appointment-row {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .appointment-row .badge {
+    align-self: flex-start;
+  }
+
+  .action-link {
+    padding: 0.85rem;
   }
 }
 </style>

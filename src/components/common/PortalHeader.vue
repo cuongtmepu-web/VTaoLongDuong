@@ -2,6 +2,17 @@
   <header class="portal-header">
     <nav class="portal-navbar">
       <div class="container-fluid">
+        <button
+          class="mobile-menu-button"
+          :class="{ 'is-open': mobileSidebarOpen }"
+          type="button"
+          :aria-expanded="mobileSidebarOpen"
+          :aria-label="mobileSidebarOpen ? 'Đóng menu' : 'Mở menu'"
+          title="Mở menu"
+          @click="$emit('toggle-sidebar')"
+        >
+          <i class="bi bi-list" aria-hidden="true"></i>
+        </button>
         <router-link :to="dashboardPath" class="navbar-brand">
           <i class="bi bi-flower1"></i>
           <span
@@ -27,6 +38,14 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useAuthStore } from '@/api/stores/auth'
+
+defineProps<{
+  mobileSidebarOpen: boolean
+}>()
+
+defineEmits<{
+  'toggle-sidebar': []
+}>()
 
 const authStore = useAuthStore()
 
@@ -69,6 +88,21 @@ const roleLabel = computed(() => (isDoctor.value ? 'Khu vực bác sĩ' : 'Khu v
   max-width: 1600px;
   min-height: 76px;
   margin: 0 auto;
+}
+
+.mobile-menu-button {
+  display: none;
+  color: var(--surface);
+  font-size: 1.5rem;
+}
+
+.mobile-menu-button i {
+  display: block;
+  transition: transform 0.3s var(--ease);
+}
+
+.mobile-menu-button.is-open i {
+  transform: rotate(90deg);
 }
 
 .navbar-brand {
@@ -138,12 +172,29 @@ const roleLabel = computed(() => (isDoctor.value ? 'Khu vực bác sĩ' : 'Khu v
   outline: none;
 }
 
-@media (max-width: 576px) {
+@media (max-width: 768px) {
   .portal-navbar {
-    padding: 0 1rem;
+    min-height: 68px;
+    padding: 0 0.75rem;
+  }
+
+  .container-fluid {
+    min-height: 68px;
+    gap: 0.6rem;
+  }
+
+  .mobile-menu-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 2.25rem;
+    width: 2.25rem;
+    height: 2.25rem;
   }
 
   .navbar-brand {
+    flex: 1;
+    min-width: 0;
     font-size: 1.2rem;
   }
 

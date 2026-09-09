@@ -7,7 +7,7 @@
       <p class="text-muted">
         Chức năng này đang được chuẩn bị để kết nối với dữ liệu nghiệp vụ của bác sĩ.
       </p>
-      <router-link to="/doctor/dashboard" class="btn btn-primary">
+      <router-link to="/doctor-dashboard" class="btn btn-primary">
         <i class="bi bi-arrow-left"></i> Về Dashboard
       </router-link>
     </section>
