@@ -25,7 +25,7 @@
     <div class="sidebar-menu">
       <ul class="nav flex-column">
         <li v-show="matchesMenu('Dashboard')" class="nav-item dashboard-item">
-          <router-link to="/user/dashboard" class="nav-link" active-class="active">
+          <router-link to="/user-dashboard" class="nav-link" active-class="active">
             <i class="bi bi-grid-1x2-fill"></i>
             <span class="menu-label">Dashboard</span>
           </router-link>
@@ -103,8 +103,8 @@ const groups: MenuGroup[] = [
     label: 'Lịch hẹn',
     icon: 'bi bi-calendar-check-fill',
     items: [
-      { label: 'Lịch hẹn', path: '/user/appointments', icon: 'bi bi-calendar-check-fill' },
-      { label: 'Đặt lịch mới', path: '/user/appointments/book', icon: 'bi bi-calendar-plus-fill' },
+      { label: 'Lịch hẹn', path: '/user-appointments', icon: 'bi bi-calendar-check-fill' },
+      { label: 'Đặt lịch mới', path: '/user-appointments/book', icon: 'bi bi-calendar-plus-fill' },
     ],
   },
   {
@@ -112,22 +112,22 @@ const groups: MenuGroup[] = [
     label: 'Hồ sơ bệnh án',
     icon: 'bi bi-file-medical-fill',
     items: [
-      { label: 'Hồ sơ bệnh án', path: '/user/medical-records', icon: 'bi bi-file-medical-fill' },
+      { label: 'Hồ sơ bệnh án', path: '/user-medical-records', icon: 'bi bi-file-medical-fill' },
     ],
   },
   {
     id: 'orders',
     label: 'Thanh toán',
     icon: 'bi bi-receipt-fill',
-    items: [{ label: 'Lịch sử thanh toán', path: '/user/orders', icon: 'bi bi-receipt-fill' }],
+    items: [{ label: 'Lịch sử thanh toán', path: '/user-orders', icon: 'bi bi-receipt-fill' }],
   },
   {
     id: 'profile',
     label: 'Tài khoản',
     icon: 'bi bi-person-fill',
     items: [
-      { label: 'Thông tin cá nhân', path: '/user/profile', icon: 'bi bi-person-fill' },
-      { label: 'Đổi mật khẩu', path: '/user/change-password', icon: 'bi bi-key-fill' },
+      { label: 'Thông tin cá nhân', path: '/user-profile', icon: 'bi bi-person-fill' },
+      { label: 'Đổi mật khẩu', path: '/user-change-password', icon: 'bi bi-key-fill' },
     ],
   },
 ]

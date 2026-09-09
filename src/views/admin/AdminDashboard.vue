@@ -101,6 +101,7 @@
 </template>
 
 <script setup lang="ts">
+debugger
 import { ref, computed, onMounted } from 'vue'
 import AdminLayout from '@/layouts/AdminLayout.vue'
 import { adminDashboardApi } from '@/api/admin/adminDashboard'
@@ -206,6 +207,7 @@ const getPaymentStatusText = (status: string) => {
 const fetchDashboardData = async () => {
   loading.value = true
   try {
+    debugger
     const response = await adminDashboardApi.getStats()
     if (response.data.success) {
       const data = response.data.data

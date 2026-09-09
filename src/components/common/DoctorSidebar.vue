@@ -25,7 +25,7 @@
     <div class="sidebar-menu">
       <ul class="nav flex-column">
         <li v-show="matchesMenu('Dashboard')" class="nav-item dashboard-item">
-          <router-link to="/doctor/dashboard" class="nav-link" active-class="active">
+          <router-link to="/doctor-dashboard" class="nav-link" active-class="active">
             <i class="bi bi-grid-1x2-fill"></i>
             <span class="menu-label">Dashboard</span>
           </router-link>
@@ -92,7 +92,7 @@ const groups: MenuGroup[] = [
     items: [
       {
         label: 'Danh sách lịch hẹn',
-        path: '/doctor/appointments',
+        path: '/doctor-appointments',
         icon: 'bi bi-calendar-check-fill',
       },
     ],
@@ -102,22 +102,22 @@ const groups: MenuGroup[] = [
     label: 'Bệnh án',
     icon: 'bi bi-file-medical-fill',
     items: [
-      { label: 'Hồ sơ bệnh án', path: '/doctor/medical-records', icon: 'bi bi-file-medical-fill' },
+      { label: 'Hồ sơ bệnh án', path: '/doctor-medical-records', icon: 'bi bi-file-medical-fill' },
     ],
   },
   {
     id: 'schedule',
     label: 'Lịch làm việc',
     icon: 'bi bi-calendar-week-fill',
-    items: [{ label: 'Quản lý lịch làm việc', path: '/doctor/schedule', icon: 'bi bi-clock-fill' }],
+    items: [{ label: 'Quản lý lịch làm việc', path: '/doctor-schedule', icon: 'bi bi-clock-fill' }],
   },
   {
     id: 'profile',
     label: 'Tài khoản',
     icon: 'bi bi-person-fill',
     items: [
-      { label: 'Thông tin cá nhân', path: '/doctor/profile', icon: 'bi bi-person-fill' },
-      { label: 'Đổi mật khẩu', path: '/doctor/change-password', icon: 'bi bi-key-fill' },
+      { label: 'Thông tin cá nhân', path: '/doctor-profile', icon: 'bi bi-person-fill' },
+      { label: 'Đổi mật khẩu', path: '/doctor-change-password', icon: 'bi bi-key-fill' },
     ],
   },
 ]

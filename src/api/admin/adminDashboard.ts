@@ -23,8 +23,8 @@ export interface RevenueReport {
 }
 
 export const adminDashboardApi = {
-  getStats: () => api.get<ApiResponse<DashboardStats>>('/admin/dashboard/stats'),
+  getStats: () => api.get<ApiResponse<DashboardStats>>('/admin/AdminDashboard/stats'),
 
   getRevenueReport: (params?: { year?: number; month?: number }) =>
-    api.get<ApiResponse<RevenueReport>>('/admin/dashboard/revenue', { params }),
+    api.get<ApiResponse<RevenueReport>>('/admin/AdminDashboard/revenue', { params }),
 }

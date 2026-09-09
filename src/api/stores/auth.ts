@@ -64,11 +64,11 @@ export const useAuthStore = defineStore('auth', {
           toast.success('Đăng nhập thành công!')
 
           if (user.role === 'Admin') {
-            router.push('/admin/dashboard')
+            router.push('/admin-dashboard')
           } else if (user.role === 'Doctor') {
-            router.push('/doctor/dashboard')
+            router.push('/doctor-dashboard')
           } else {
-            router.push('/user/dashboard')
+            router.push('/user-dashboard')
           }
 
           return true

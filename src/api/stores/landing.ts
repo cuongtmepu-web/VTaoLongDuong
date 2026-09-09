@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { landingApi } from '@/api/Landing'
+import { landingApi } from '@/api/landing'
 import { useToast } from '@erag/vue-toastification'
 import { type LandingSectionContent } from '@/api/types/landing'
 

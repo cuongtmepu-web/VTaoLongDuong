@@ -25,7 +25,7 @@
     <div class="sidebar-menu">
       <ul class="nav flex-column">
         <li v-show="matchesMenu('Dashboard')" class="nav-item dashboard-item">
-          <router-link to="/admin/dashboard" class="nav-link" active-class="active">
+          <router-link to="/admin-dashboard" class="nav-link" active-class="active">
             <i class="bi bi-grid-1x2-fill"></i>
             <span class="menu-label">Dashboard</span>
           </router-link>
@@ -103,11 +103,11 @@ const groups: MenuGroup[] = [
     label: 'Quản lý',
     icon: 'bi bi-briefcase-fill',
     items: [
-      { label: 'Người dùng', path: '/admin/users', icon: 'bi bi-people-fill' },
-      { label: 'Bác sĩ', path: '/admin/doctors', icon: 'bi bi-person-heart' },
-      { label: 'Lịch hẹn', path: '/admin/appointments', icon: 'bi bi-calendar-check-fill' },
-      { label: 'Hồ sơ bệnh án', path: '/admin/medical-records', icon: 'bi bi-file-medical-fill' },
-      { label: 'Đơn hàng', path: '/admin/orders', icon: 'bi bi-receipt-fill' },
+      { label: 'Người dùng', path: '/admin-users', icon: 'bi bi-people-fill' },
+      { label: 'Bác sĩ', path: '/admin-doctors', icon: 'bi bi-person-heart' },
+      { label: 'Lịch hẹn', path: '/admin-appointments', icon: 'bi bi-calendar-check-fill' },
+      { label: 'Hồ sơ bệnh án', path: '/admin-medical-records', icon: 'bi bi-file-medical-fill' },
+      { label: 'Đơn hàng', path: '/admin-orders', icon: 'bi bi-receipt-fill' },
     ],
   },
   {
@@ -115,23 +115,23 @@ const groups: MenuGroup[] = [
     label: 'Nội dung',
     icon: 'bi bi-files',
     items: [
-      { label: 'Blog', path: '/admin/blog/posts', icon: 'bi bi-newspaper' },
-      { label: 'Trang chủ', path: '/admin/landing', icon: 'bi bi-layout-text-window' },
+      { label: 'Blog', path: '/admin-blog/posts', icon: 'bi bi-newspaper' },
+      { label: 'Trang chủ', path: '/admin-landing', icon: 'bi bi-layout-text-window' },
     ],
   },
   {
     id: 'reports',
     label: 'Báo cáo',
     icon: 'bi bi-bar-chart-fill',
-    items: [{ label: 'Doanh thu', path: '/admin/reports/revenue', icon: 'bi bi-graph-up-arrow' }],
+    items: [{ label: 'Doanh thu', path: '/admin-reports/revenue', icon: 'bi bi-graph-up-arrow' }],
   },
   {
     id: 'settings',
     label: 'Cài đặt',
     icon: 'bi bi-gear-fill',
     items: [
-      { label: 'Cài đặt chung', path: '/admin/settings/general', icon: 'bi bi-sliders' },
-      { label: 'Cổng thanh toán', path: '/admin/settings/payment', icon: 'bi bi-credit-card-fill' },
+      { label: 'Cài đặt chung', path: '/admin-settings/general', icon: 'bi bi-sliders' },
+      { label: 'Cổng thanh toán', path: '/admin-settings/payment', icon: 'bi bi-credit-card-fill' },
     ],
   },
 ]
