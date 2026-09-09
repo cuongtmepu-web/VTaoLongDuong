@@ -74,16 +74,18 @@
                   <form @submit.prevent="handleSubmit">
                     <div class="row">
                       <div class="col-md-6 mb-3">
-                        <label class="form-label">Họ và tên *</label>
+                        <label class="form-label"
+                          >Họ và tên <span style="color: red">*</span></label
+                        >
                         <input type="text" class="form-control" v-model="form.fullName" required />
                       </div>
                       <div class="col-md-6 mb-3">
-                        <label class="form-label">Email *</label>
+                        <label class="form-label">Email <span style="color: red">*</span></label>
                         <input type="email" class="form-control" v-model="form.email" required />
                       </div>
                     </div>
                     <div class="mb-3">
-                      <label class="form-label">Số điện thoại</label>
+                      <label class="form-label">Số điện thoại </label>
                       <input type="tel" class="form-control" v-model="form.phone" />
                     </div>
                     <div class="mb-3">
@@ -100,7 +102,7 @@
                       />
                     </div>
                     <div class="mb-3">
-                      <label class="form-label">Nội dung *</label>
+                      <label class="form-label">Nội dung <span style="color: red">*</span></label>
                       <textarea
                         class="form-control"
                         v-model="form.message"
@@ -173,7 +175,6 @@ const handleSubmit = async () => {
   padding: 7rem 0 0 0;
   background: linear-gradient(180deg, var(--soft-green) 0%, var(--bg) 100%);
   min-height: 100vh;
-  overflow: hidden;
 }
 
 .page-header {
@@ -291,6 +292,7 @@ const handleSubmit = async () => {
   border: 1px solid var(--surface-border) !important;
   box-shadow: 0 18px 40px rgba(28, 38, 32, 0.06) !important;
   background: var(--surface);
+  overflow: visible;
 }
 .contact-page .card-body h4 {
   font-family: var(--font-heading);

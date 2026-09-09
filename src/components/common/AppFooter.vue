@@ -16,7 +16,7 @@
         </div>
         <div>
           <h5>Tảo Long Đường</h5>
-          <p>Phòng khám Đông y gia truyền với hơn 10 năm kinh nghiệm</p>
+          <p>Phòng khám Đông y gia truyền với nhiều năm kinh nghiệm thực tế</p>
         </div>
       </div>
 
