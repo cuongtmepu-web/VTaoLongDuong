@@ -152,6 +152,10 @@ const handleLogin = async () => {
   margin: 0 auto;
 }
 
+.login-page form .mb-3 {
+  text-align: left;
+}
+
 .login-page h3 {
   font-size: 40px;
 }
@@ -183,10 +187,12 @@ const handleLogin = async () => {
   color: var(--text-muted);
   font-size: 0.92rem;
   font-style: italic;
+  margin-bottom: 1.8rem;
 }
 .login-page .btn-primary {
   border-radius: 999px;
   padding: 0.8rem 1.5rem;
+  margin: 1rem 0;
 }
 
 /* Password wrapper styles - đưa icon vào bên trong input */

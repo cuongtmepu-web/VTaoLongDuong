@@ -250,6 +250,10 @@ const handleRegister = async () => {
   text-align: center;
   margin: 0 auto;
 }
+
+.register-page form .mb-3 {
+  text-align: left;
+}
 .register-page h3 {
   font-size: 40px;
 }
@@ -261,6 +265,9 @@ const handleRegister = async () => {
   border: 1px solid var(--gold-light) !important;
   box-shadow: 0 30px 70px rgba(0, 0, 0, 0.35) !important;
   background: var(--surface);
+}
+.register-page form .btn {
+  margin: 1rem 0;
 }
 .auth-brand {
   display: flex;
