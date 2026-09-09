@@ -21,16 +21,7 @@ const sidebarCollapsed = ref(false)
 </script>
 
 <style scoped>
-.sidebar {
-  background: #f8f9fa;
-  min-height: calc(100vh - 76px);
-  min-width: 248px;
-  border-right: 1px solid #dee2e6;
-  overflow: visible;
-  transition: min-width 0.6s var(--ease);
-}
-
-.user-shell {
+.user-layout {
   min-height: 100vh;
   background: var(--bg);
   overflow-x: clip;
@@ -53,13 +44,21 @@ const sidebarCollapsed = ref(false)
   align-self: start;
   height: calc(100vh - 76px);
   min-width: 248px;
-  display: grid;
-  transition: grid-template-columns 0.6s var(--ease);
+  overflow: visible;
+  background: var(--surface);
+  transition: min-width 0.6s var(--ease);
 }
 
-.user-shell.sidebar-collapsed {
+.sidebar-collapsed .sidebar {
+  min-width: 72px;
+}
+
+.main-content {
   min-width: 0;
+  min-height: calc(100vh - 76px);
+  padding: 2.25rem clamp(1rem, 3vw, 3rem);
   overflow-x: hidden;
+  background: linear-gradient(135deg, rgba(255, 253, 248, 0.62), transparent 46%), var(--bg);
 }
 
 @media (max-width: 768px) {
@@ -76,6 +75,10 @@ const sidebarCollapsed = ref(false)
 
   .sidebar-collapsed .sidebar {
     min-width: 72px;
+  }
+
+  .main-content {
+    padding: 1.25rem 1rem 2rem;
   }
 }
 </style>

@@ -24,8 +24,8 @@
 
       <AppointmentAnalytics :appointments="appointmentStore.appointments" />
 
-      <div class="row g-4 mt-1">
-        <div class="col-lg-8">
+      <div class="row g-4">
+        <div class="col-lg-8 dashboard-lower">
           <section class="dashboard-panel">
             <div class="panel-heading">
               <h2>Lịch hẹn gần đây</h2>
@@ -65,7 +65,7 @@
           </section>
         </div>
 
-        <div class="col-lg-4">
+        <div class="col-lg-4 dashboard-lower">
           <section class="dashboard-panel quick-panel">
             <div class="panel-heading"><h2>Thao tác nhanh</h2></div>
             <div class="quick-actions">
@@ -76,7 +76,7 @@
                 <router-link to="/user-appointments" class="btn btn-outline-primary">
                   <i class="bi bi-calendar-check"></i> Xem lịch hẹn
                 </router-link>
-                <router-link to="/user-medical-records" class="btn btn-outline-success">
+                <router-link to="/user-medical-records" class="btn btn-outline-primary">
                   <i class="bi bi-file-medical"></i> Hồ sơ bệnh án
                 </router-link>
                 <router-link to="/user-profile" class="btn btn-outline-secondary">
@@ -272,6 +272,10 @@ onMounted(() => {
   border: 1px solid var(--surface-border);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-sm);
+}
+
+.dashboard-lower {
+  margin-top: 1.5rem;
 }
 
 .panel-heading {

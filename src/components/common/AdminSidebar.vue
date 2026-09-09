@@ -107,7 +107,7 @@ const groups: MenuGroup[] = [
       { label: 'Bác sĩ', path: '/admin-doctors', icon: 'bi bi-person-heart' },
       { label: 'Lịch hẹn', path: '/admin-appointments', icon: 'bi bi-calendar-check-fill' },
       { label: 'Hồ sơ bệnh án', path: '/admin-medical-records', icon: 'bi bi-file-medical-fill' },
-      { label: 'Đơn hàng', path: '/admin-orders', icon: 'bi bi-receipt-fill' },
+      { label: 'Đơn hàng', path: '/admin-orders', icon: 'bi bi-box-seam' },
     ],
   },
   {

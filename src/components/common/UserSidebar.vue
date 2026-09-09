@@ -118,8 +118,8 @@ const groups: MenuGroup[] = [
   {
     id: 'orders',
     label: 'Thanh toán',
-    icon: 'bi bi-receipt-fill',
-    items: [{ label: 'Lịch sử thanh toán', path: '/user-orders', icon: 'bi bi-receipt-fill' }],
+    icon: 'bi bi-wallet2',
+    items: [{ label: 'Lịch sử thanh toán', path: '/user-orders', icon: 'bi bi-clock-history' }],
   },
   {
     id: 'profile',

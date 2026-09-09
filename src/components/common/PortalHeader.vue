@@ -31,7 +31,7 @@ import { useAuthStore } from '@/api/stores/auth'
 const authStore = useAuthStore()
 
 const isDoctor = computed(() => authStore.user?.role === 'Doctor')
-const dashboardPath = computed(() => (isDoctor.value ? '/doctor-dashboard' : '/user-dashboard'))
+const dashboardPath = computed(() => '/')
 const roleLabel = computed(() => (isDoctor.value ? 'Khu vực bác sĩ' : 'Khu vực người dùng'))
 </script>
 

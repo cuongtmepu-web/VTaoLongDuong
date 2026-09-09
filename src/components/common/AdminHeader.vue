@@ -2,7 +2,7 @@
   <header class="admin-header">
     <nav class="admin-navbar">
       <div class="container-fluid">
-        <a class="navbar-brand" href="/admin-dashboard">
+        <a class="navbar-brand" href="/">
           <i class="bi bi-flower1"></i>
           <span>Tảo Long Đường <small>Quản trị hệ thống</small></span>
         </a>

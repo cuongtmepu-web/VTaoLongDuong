@@ -26,7 +26,13 @@
       <div class="nav-actions">
         <template v-if="authStore.isAuthenticated">
           <router-link
-            :to="authStore.isAdmin ? '/admin/dashboard' : '/user/dashboard'"
+            :to="
+              authStore.isAdmin
+                ? '/admin-dashboard'
+                : authStore.isDoctor
+                  ? '/doctor-dashboard'
+                  : '/user-dashboard'
+            "
             class="nav-user"
           >
             <i class="bi bi-person-circle"></i>

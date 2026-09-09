@@ -288,6 +288,7 @@ const handleRegister = async () => {
   color: var(--text-muted);
   font-size: 0.92rem;
   font-style: italic;
+  margin-bottom: 1.8rem;
 }
 
 /* Password wrapper styles - đưa icon vào bên trong input */
