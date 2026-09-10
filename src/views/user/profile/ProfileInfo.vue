@@ -29,13 +29,7 @@
                 <div class="row">
                   <div class="col-md-6 mb-3">
                     <label class="form-label">Ngày sinh</label>
-                    <div
-                      ref="datePickerRoot"
-                      class="date-input-wrap"
-                      :class="{ 'is-open': isDatePickerOpen }"
-                    >
-                      <DatePicker v-model="form.dateOfBirth" label="Ngày sinh" />
-                    </div>
+                    <DatePicker v-model="form.dateOfBirth" label="Ngày sinh" />
                   </div>
 
                   <div class="col-md-6 mb-3">
