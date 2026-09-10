@@ -16,8 +16,11 @@ export default defineConfig({
     port: 3000,
     proxy: {
       '/api': {
-        target: 'https://localhost:44303',
+        target: 'https://host.docker.internal:44303',
         changeOrigin: true,
+        headers: {
+          Host: 'localhost:44303',
+        },
         secure: false,
       },
     },

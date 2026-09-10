@@ -326,8 +326,8 @@ h1 {
 }
 
 .doctor-dashboard .row.g-4 {
-  margin-right: -1.5rem;
-  margin-left: -1.5rem;
+  margin-right: -0.6rem;
+  margin-left: -0.6rem;
 }
 
 .doctor-dashboard .row > * {
@@ -419,8 +419,8 @@ h1 {
   }
 
   .doctor-dashboard .row.g-4 {
-    margin-right: -0.75rem;
-    margin-left: -0.75rem;
+    margin-right: -0.6rem;
+    margin-left: -0.6rem;
   }
 
   .doctor-dashboard .row > * {

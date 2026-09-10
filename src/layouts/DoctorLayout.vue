@@ -123,7 +123,7 @@ const handleSidebarCollapsed = (collapsed: boolean) => {
   }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 768px) {
   .sidebar {
     top: 68px;
     height: calc(100vh - 68px);
