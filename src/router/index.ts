@@ -1,15 +1,10 @@
-import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHashHistory, type RouteRecordRaw } from 'vue-router'
 import { useAuthStore } from '@/api/stores/auth'
 
 // ===== PUBLIC ROUTES =====
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    name: 'Home',
-    component: () => import('@/views/landing/LandingPage.vue'),
-  },
-  {
-    path: '/VTaoLongDuong',
     name: 'Home',
     component: () => import('@/views/landing/LandingPage.vue'),
   },
@@ -314,7 +309,7 @@ const routes: RouteRecordRaw[] = [
 
 // ===== CREATE ROUTER =====
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHashHistory(import.meta.env.BASE_URL),
   routes,
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
