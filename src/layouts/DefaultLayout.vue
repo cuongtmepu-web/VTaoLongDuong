@@ -16,6 +16,5 @@ import AppFooter from '@/components/common/AppFooter.vue'
 <style scoped>
 .main-content {
   min-height: calc(100vh - 200px);
-  padding: 20px 0;
 }
 </style>
