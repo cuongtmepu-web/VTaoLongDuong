@@ -5,9 +5,9 @@ import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
 
 // https://vite.dev/config/
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   plugins: [vue(), vueDevTools()],
-  // base: '/VTaoLongDuong/',
+  base: mode === 'production' ? '/VTaoLongDuong/' : '/',
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
@@ -26,4 +26,4 @@ export default defineConfig({
       },
     },
   },
-})
+}))
