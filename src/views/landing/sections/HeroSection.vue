@@ -28,7 +28,7 @@
         <p class="hero-description">
           {{
             sectionData.subtitle ||
-            'Hơn 10 năm gìn giữ bài thuốc gia truyền, kết hợp tinh hoa Đông y cổ truyền với phương pháp thăm khám hiện đại — khoa học, an toàn và tận tâm.'
+            'Hơn 200 năm gìn giữ bài thuốc gia truyền, kết hợp tinh hoa Đông y cổ truyền với phương pháp thăm khám hiện đại — khoa học, an toàn và tận tâm.'
           }}
         </p>
 

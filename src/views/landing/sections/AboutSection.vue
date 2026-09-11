@@ -87,7 +87,7 @@ const landingStore = useLandingStore()
 const sectionData = computed(() => landingStore.getSection('about'))
 
 const defaultContent = `
-  <p class="lead">Tảo Long Đường là phòng khám Đông y gia truyền với hơn 10 năm kinh nghiệm trong việc chăm sóc sức khỏe cộng đồng.</p>
+  <p class="lead">Tảo Long Đường là phòng khám Đông y gia truyền với nhiều năm kinh nghiệm trong việc chăm sóc sức khỏe cộng đồng.</p>
   <p class="description">Chúng tôi tự hào là nơi kết nối giữa y học cổ truyền và hiện đại, mang đến cho bệnh nhân những phương pháp điều trị hiệu quả và an toàn nhất.</p>
   <ul class="feature-list">
     <li>Đội ngũ bác sĩ giàu kinh nghiệm</li>
