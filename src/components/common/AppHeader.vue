@@ -67,7 +67,6 @@ const authStore = useAuthStore()
   padding: 0.8rem 0;
   background: rgba(250, 246, 236, 0.78);
   backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--gold-light);
   transition: all 0.3s var(--ease);
 }
