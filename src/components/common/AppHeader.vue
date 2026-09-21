@@ -38,7 +38,7 @@
             <i class="bi bi-person-circle"></i>
             <span>{{ authStore.user?.fullName }}</span>
           </router-link>
-          <a href="#" class="nav-logout" @click.prevent="authStore.logout">
+          <a href="/" class="nav-logout" @click.prevent="authStore.logout">
             <i class="bi bi-box-arrow-right"></i>
           </a>
         </template>

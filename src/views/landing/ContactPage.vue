@@ -59,10 +59,10 @@
                 </div>
 
                 <div class="social-links mt-4">
-                  <a href="#" class="social-link"><i class="bi bi-facebook"></i></a>
-                  <a href="#" class="social-link"><i class="bi bi-youtube"></i></a>
-                  <a href="#" class="social-link"><i class="bi bi-instagram"></i></a>
-                  <a href="#" class="social-link"><i class="bi bi-tiktok"></i></a>
+                  <a href="/" class="social-link"><i class="bi bi-facebook"></i></a>
+                  <a href="/" class="social-link"><i class="bi bi-youtube"></i></a>
+                  <a href="/" class="social-link"><i class="bi bi-instagram"></i></a>
+                  <a href="/" class="social-link"><i class="bi bi-tiktok"></i></a>
                 </div>
               </div>
             </div>

@@ -71,7 +71,7 @@
         </li>
 
         <li v-show="matchesMenu('Đăng xuất')" class="nav-item logout-item">
-          <a href="#" class="nav-link text-danger" @click.prevent="handleLogout">
+          <a href="/" class="nav-link text-danger" @click.prevent="handleLogout">
             <i class="bi bi-box-arrow-right"></i>
             <span class="menu-label">Đăng xuất</span>
           </a>

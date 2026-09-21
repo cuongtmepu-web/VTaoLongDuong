@@ -113,7 +113,7 @@
                   <li class="page-item" :class="{ disabled: pagination.currentPage === 1 }">
                     <a
                       class="page-link"
-                      href="#"
+                      href="/"
                       @click.prevent="changePage(pagination.currentPage - 1)"
                       >Trước</a
                     >
@@ -124,7 +124,7 @@
                     class="page-item"
                     :class="{ active: page === pagination.currentPage }"
                   >
-                    <a class="page-link" href="#" @click.prevent="changePage(page)">{{ page }}</a>
+                    <a class="page-link" href="/" @click.prevent="changePage(page)">{{ page }}</a>
                   </li>
                   <li
                     class="page-item"
@@ -132,7 +132,7 @@
                   >
                     <a
                       class="page-link"
-                      href="#"
+                      href="/"
                       @click.prevent="changePage(pagination.currentPage + 1)"
                       >Sau</a
                     >

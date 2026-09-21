@@ -15,7 +15,7 @@
             class="nav-link"
             :class="{ active: activeTab === 'all' }"
             @click="activeTab = 'all'"
-            href="#"
+            href="/"
           >
             Tất cả ({{ appointments.length }})
           </a>
@@ -25,7 +25,7 @@
             class="nav-link"
             :class="{ active: activeTab === 'pending' }"
             @click="activeTab = 'pending'"
-            href="#"
+            href="/"
           >
             Chờ xác nhận ({{ pendingCount }})
           </a>
@@ -35,7 +35,7 @@
             class="nav-link"
             :class="{ active: activeTab === 'confirmed' }"
             @click="activeTab = 'confirmed'"
-            href="#"
+            href="/"
           >
             Đã xác nhận ({{ confirmedCount }})
           </a>
@@ -45,7 +45,7 @@
             class="nav-link"
             :class="{ active: activeTab === 'completed' }"
             @click="activeTab = 'completed'"
-            href="#"
+            href="/"
           >
             Hoàn thành ({{ completedCount }})
           </a>
@@ -55,7 +55,7 @@
             class="nav-link"
             :class="{ active: activeTab === 'cancelled' }"
             @click="activeTab = 'cancelled'"
-            href="#"
+            href="/"
           >
             Đã hủy ({{ cancelledCount }})
           </a>
