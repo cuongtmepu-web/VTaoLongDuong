@@ -219,7 +219,7 @@ const fetchAppointments = async () => {
 
     const response = await adminAppointmentApi.getAll(params)
     if (response.data.success) {
-      appointments.value = response.data.data.items
+      appointments.value = response.data.data.data
       pagination.value.totalCount = response.data.data.pagination.totalCount
     }
   } catch (error) {
