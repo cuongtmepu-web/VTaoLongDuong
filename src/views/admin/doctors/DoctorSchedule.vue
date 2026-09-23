@@ -1,10 +1,10 @@
 <template>
   <AdminLayout>
     <div class="doctor-schedule">
-      <div class="d-flex justify-content-between align-items-center mb-4">
+      <div class="doctor-schedule-header d-flex justify-content-between align-items-center mb-4">
         <h2 class="mb-0">Quản lý lịch làm việc</h2>
-        <div>
-          <router-link to="/admin/doctors" class="btn btn-secondary me-2">
+        <div class="doctor-schedule-actions">
+          <router-link to="/admin-doctors" class="btn btn-secondary">
             <i class="bi bi-arrow-left"></i> Quay lại
           </router-link>
           <button class="btn btn-primary" @click="saveSchedule" :disabled="saving">
@@ -18,10 +18,13 @@
         <div class="spinner-border text-primary"></div>
       </div>
 
-      <div v-else class="card">
+      <div v-else class="card schedule-card">
         <div class="card-body">
-          <h5 class="mb-3">Lịch làm việc của {{ doctorName }}</h5>
-          <p class="text-muted small">Chọn các khung giờ bác sĩ làm việc trong tuần</p>
+          <div class="schedule-intro">
+            <span class="schedule-kicker">LỊCH LÀM VIỆC</span>
+            <h5 class="mb-1">{{ doctorName }}</h5>
+            <p>Chọn các khung giờ bác sĩ làm việc trong tuần.</p>
+          </div>
 
           <div class="schedule-grid">
             <div v-for="(day, index) in days" :key="index" class="schedule-row">
@@ -40,9 +43,9 @@
             </div>
           </div>
 
-          <div class="mt-4">
-            <h6 class="mb-2">Hướng dẫn</h6>
-            <ul class="text-muted small">
+          <div class="schedule-guide mt-4">
+            <h6 class="mb-2"><i class="bi bi-info-circle me-2"></i>Hướng dẫn</h6>
+            <ul class="text-muted small mb-0">
               <li>Click vào khung giờ để chọn/ bỏ chọn</li>
               <li>Khung giờ được chọn (màu xanh) sẽ hiển thị trên trang đặt lịch</li>
               <li>Khung giờ không được chọn sẽ không hiển thị</li>
@@ -122,7 +125,7 @@ const fetchSchedule = async () => {
     }
   } catch (error) {
     toast.error('Không thể tải lịch làm việc')
-    router.push('/admin/doctors')
+    router.push('/admin-doctors')
   } finally {
     loading.value = false
   }
@@ -154,26 +157,66 @@ onMounted(() => {
 
 <style scoped>
 .doctor-schedule {
-  padding: 20px;
+  max-width: 1120px;
+}
+
+.doctor-schedule h2 {
+  color: var(--text);
+  font-size: clamp(1.8rem, 3vw, 2.35rem);
+}
+
+.schedule-card {
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.schedule-card .card-body {
+  padding: clamp(1.25rem, 3vw, 2.25rem);
+}
+
+.schedule-intro {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--surface-border);
+}
+
+.schedule-kicker {
+  color: var(--secondary-dark);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.schedule-intro h5 {
+  margin-top: 0.35rem;
+  font-size: 1.35rem;
+}
+
+.schedule-intro p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
 }
 
 .schedule-grid {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 0.75rem;
 }
 
 .schedule-row {
   display: flex;
   align-items: center;
-  gap: 20px;
-  padding: 10px;
-  background: #f8f9fa;
-  border-radius: 8px;
+  gap: 1rem;
+  padding: 0.9rem;
+  background: var(--surface-alt);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-sm);
 }
 
 .day-label {
-  min-width: 100px;
+  min-width: 110px;
   font-weight: 600;
 }
 
@@ -184,13 +227,16 @@ onMounted(() => {
 }
 
 .time-slot {
-  padding: 6px 14px;
-  border: 2px solid #dee2e6;
-  border-radius: 20px;
+  min-width: 76px;
+  padding: 0.55rem 0.8rem;
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-sm);
   cursor: pointer;
   font-size: 0.85rem;
   transition: all 0.2s;
-  background: white;
+  background: var(--surface);
+  color: var(--text-soft);
+  text-align: center;
 }
 
 .time-slot:hover {
@@ -207,5 +253,81 @@ onMounted(() => {
 .time-slot.active:hover {
   background: #218838;
   border-color: #218838;
+}
+
+.schedule-guide {
+  padding: 1rem 1.1rem;
+  background: var(--soft-peach);
+  border: 1px solid var(--secondary-light);
+  border-radius: var(--radius-sm);
+}
+
+.schedule-guide h6 {
+  color: var(--secondary-dark);
+}
+
+@media (max-width: 768px) {
+  .doctor-schedule-header {
+    align-items: flex-start !important;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .doctor-schedule-header h2 {
+    margin-bottom: 0;
+  }
+
+  .doctor-schedule-actions {
+    display: flex;
+    width: 100%;
+    gap: 0.6rem;
+  }
+
+  .doctor-schedule-actions .btn {
+    flex: 1;
+  }
+
+  .schedule-row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .day-label {
+    min-width: 0;
+  }
+
+  .time-slots {
+    width: 100%;
+  }
+
+  .time-slot {
+    flex: 1 1 76px;
+  }
+}
+
+@media (max-width: 480px) {
+  .doctor-schedule h2 {
+    font-size: 1.7rem;
+  }
+
+  .doctor-schedule-actions {
+    flex-direction: column;
+  }
+
+  .doctor-schedule-actions .btn {
+    width: 100%;
+  }
+
+  .schedule-card .card-body {
+    padding: 1rem;
+  }
+
+  .schedule-row {
+    padding: 0.75rem;
+  }
+
+  .time-slot {
+    flex-basis: calc(50% - 0.4rem);
+  }
 }
 </style>

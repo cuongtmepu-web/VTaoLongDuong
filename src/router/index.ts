@@ -159,65 +159,70 @@ const routes: RouteRecordRaw[] = [
       },
       // User Management
       {
-        path: '/users',
+        path: '/admin-users',
         name: 'UserList',
         component: () => import('@/views/admin/users/UserList.vue'),
       },
       {
-        path: '/users/:id',
+        path: '/admin-users/create',
+        name: 'UserCreate',
+        component: () => import('@/views/admin/users/UserForm.vue'),
+      },
+      {
+        path: '/admin-users/:id',
         name: 'UserDetail',
         component: () => import('@/views/admin/users/UserDetail.vue'),
       },
       // Doctor Management
       {
-        path: '/doctors',
+        path: '/admin-doctors',
         name: 'DoctorList',
         component: () => import('@/views/admin/doctors/DoctorList.vue'),
       },
       {
-        path: '/doctors/create',
+        path: '/admin-doctors/create',
         name: 'DoctorCreate',
         component: () => import('@/views/admin/doctors/DoctorForm.vue'),
       },
       {
-        path: '/doctors/:id/edit',
+        path: '/admin-doctors/:id/edit',
         name: 'DoctorEdit',
         component: () => import('@/views/admin/doctors/DoctorForm.vue'),
       },
       {
-        path: '/doctors/:id/schedule',
+        path: '/admin-doctors/:id/schedule',
         name: 'DoctorSchedule',
         component: () => import('@/views/admin/doctors/DoctorSchedule.vue'),
       },
       // Appointment Management
       {
-        path: '/appointments',
+        path: '/admin-appointments',
         name: 'AdminAppointments',
         component: () => import('@/views/admin/appointments/AppointmentList.vue'),
       },
       {
-        path: '/appointments/:id',
+        path: '/admin-appointments/:id',
         name: 'AdminAppointmentDetail',
         component: () => import('@/views/admin/appointments/AppointmentDetail.vue'),
       },
       {
-        path: '/appointments/calendar',
+        path: '/admin-appointments/calendar',
         name: 'AppointmentCalendar',
         component: () => import('@/views/admin/appointments/CalendarView.vue'),
       },
       // Medical Records
       {
-        path: '/medical-records',
+        path: '/admin-medical-records',
         name: 'AdminMedicalRecords',
         component: () => import('@/views/admin/medical-records/RecordList.vue'),
       },
       {
-        path: '/medical-records/create',
+        path: '/admin-medical-records/create',
         name: 'CreateMedicalRecord',
         component: () => import('@/views/admin/medical-records/RecordForm.vue'),
       },
       {
-        path: '/medical-records/:id/edit',
+        path: '/admin-medical-records/:id/edit',
         name: 'EditMedicalRecord',
         component: () => import('@/views/admin/medical-records/RecordForm.vue'),
       },

@@ -83,6 +83,7 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
+import { useRoute } from 'vue-router'
 import { useAuthStore } from '@/api/stores/auth'
 
 type MenuItem = {
@@ -104,6 +105,7 @@ const emit = defineEmits<{
 }>()
 
 const authStore = useAuthStore()
+const route = useRoute()
 const searchQuery = ref('')
 const sidebarCollapsed = ref(false)
 const openGroups = ref<Record<string, boolean>>({})
@@ -165,8 +167,14 @@ const visibleGroups = computed(() =>
     .filter((group) => group.items.length > 0),
 )
 
-const isGroupOpen = (groupId: string) =>
-  Boolean(openGroups.value[groupId]) || Boolean(searchQuery.value)
+const isGroupOpen = (groupId: string) => {
+  const group = groups.find((item) => item.id === groupId)
+  const hasActiveItem = group?.items.some(
+    (item) => route.path === item.path || route.path.startsWith(`${item.path}/`),
+  )
+
+  return Boolean(openGroups.value[groupId]) || Boolean(searchQuery.value) || Boolean(hasActiveItem)
+}
 
 const toggleGroup = (groupId: string) => {
   openGroups.value[groupId] = !openGroups.value[groupId]

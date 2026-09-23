@@ -24,7 +24,12 @@
               </div>
               <div class="info-copy">
                 <span class="info-label">Địa chỉ</span>
-                <p>{{ sectionData.address || 'Số 123, Đường ABC, Quận XYZ, TP.HCM' }}</p>
+                <p>
+                  {{
+                    sectionData.address ||
+                    'Số 6, trại Hậu, TDP Đông Lương, Phường Việt Yên, Thành phố Bắc Ninh'
+                  }}
+                </p>
               </div>
             </div>
 
@@ -34,7 +39,7 @@
               </div>
               <div class="info-copy">
                 <span class="info-label">Điện thoại</span>
-                <p>{{ sectionData.phone || '0987 654 321' }}</p>
+                <p>{{ sectionData.phone || '0364 145 761' }}</p>
               </div>
             </div>
 
@@ -44,7 +49,7 @@
               </div>
               <div class="info-copy">
                 <span class="info-label">Email</span>
-                <p>{{ sectionData.email || 'contact@taolongduong.com' }}</p>
+                <p>{{ sectionData.email || 'cuongtm@taolongduong.com' }}</p>
               </div>
             </div>
 

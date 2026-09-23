@@ -1,9 +1,9 @@
 <template>
   <AdminLayout>
     <div class="doctor-form">
-      <div class="d-flex justify-content-between align-items-center mb-4">
+      <div class="doctor-form-header d-flex justify-content-between align-items-center mb-4">
         <h2 class="mb-0">{{ isEdit ? 'Chỉnh sửa bác sĩ' : 'Thêm bác sĩ mới' }}</h2>
-        <router-link to="/admin/doctors" class="btn btn-secondary">
+        <router-link to="/admin-doctors" class="btn btn-secondary">
           <i class="bi bi-arrow-left"></i> Quay lại
         </router-link>
       </div>
@@ -72,12 +72,12 @@
               </div>
             </div>
 
-            <div class="d-flex gap-2">
+            <div class="doctor-form-actions d-flex gap-2">
               <button type="submit" class="btn btn-primary" :disabled="submitting">
                 <span v-if="submitting" class="spinner-border spinner-border-sm me-2"></span>
                 {{ isEdit ? 'Cập nhật' : 'Thêm mới' }}
               </button>
-              <router-link to="/admin/doctors" class="btn btn-secondary">Hủy</router-link>
+              <router-link to="/admin-doctors" class="btn btn-secondary">Hủy</router-link>
             </div>
           </form>
         </div>
@@ -115,7 +115,7 @@ const form = reactive({
 
 const fetchUsers = async () => {
   try {
-    const response = await adminUserApi.getUsers({ role: 'User' })
+    const response = await adminUserApi.getUsers()
     if (response.data.success) {
       users.value = response.data.data.data
     }
@@ -143,7 +143,7 @@ const fetchDoctor = async () => {
     }
   } catch (error) {
     toast.error('Không thể tải thông tin bác sĩ')
-    router.push('/admin/doctors')
+    router.push('/admin-doctors')
   }
 }
 
@@ -173,7 +173,7 @@ const handleSubmit = async () => {
 
     if (response.data.success) {
       toast.success(isEdit.value ? 'Cập nhật bác sĩ thành công' : 'Thêm bác sĩ thành công')
-      router.push('/admin/doctors')
+      router.push('/admin-doctors')
     }
   } catch (error) {
     toast.error('Lưu thông tin thất bại')
@@ -192,6 +192,69 @@ onMounted(() => {
 
 <style scoped>
 .doctor-form {
-  padding: 20px;
+  padding: 0;
+  width: 100%;
+}
+
+.doctor-form h2 {
+  color: var(--text);
+  font-size: clamp(1.8rem, 3vw, 2.35rem);
+}
+
+.doctor-form > .card {
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.doctor-form .card-body {
+  padding: clamp(1.25rem, 3vw, 2.25rem);
+}
+
+.doctor-form .card-body::before {
+  content: 'HỒ SƠ CHUYÊN MÔN';
+  display: block;
+  margin-bottom: 1.6rem;
+  padding-bottom: 1rem;
+  color: var(--secondary-dark);
+  border-bottom: 1px solid var(--surface-border);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.doctor-form .form-label {
+  color: var(--text-soft);
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .doctor-form-header {
+    align-items: flex-start !important;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .doctor-form-header .btn {
+    width: 100%;
+  }
+
+  .doctor-form .card-body {
+    padding: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .doctor-form h2 {
+    font-size: 1.7rem;
+  }
+
+  .doctor-form-actions {
+    flex-direction: column;
+  }
+
+  .doctor-form-actions .btn {
+    width: 100%;
+  }
 }
 </style>

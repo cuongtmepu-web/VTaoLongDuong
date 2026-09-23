@@ -1,9 +1,9 @@
 <template>
   <AdminLayout>
     <div class="doctor-list">
-      <div class="d-flex justify-content-between align-items-center mb-4">
+      <div class="doctor-list-header d-flex justify-content-between align-items-center mb-4">
         <h2 class="mb-0">Quản lý bác sĩ</h2>
-        <router-link to="/admin/doctors/create" class="btn btn-primary">
+        <router-link to="/admin-doctors/create" class="btn btn-primary">
           <i class="bi bi-plus-circle"></i> Thêm bác sĩ
         </router-link>
       </div>
@@ -15,7 +15,7 @@
           </div>
           <div v-else>
             <div class="table-responsive">
-              <table class="table table-hover">
+              <table class="table table-hover doctors-table">
                 <thead>
                   <tr>
                     <th>ID</th>
@@ -47,7 +47,7 @@
                     <td>
                       <span
                         :class="doctor.isAvailable ? 'bg-success' : 'bg-secondary'"
-                        class="badge"
+                        class="badge status-badge"
                       >
                         {{ doctor.isAvailable ? 'Hoạt động' : 'Đang bận' }}
                       </span>
@@ -55,13 +55,13 @@
                     <td>
                       <div class="btn-group">
                         <router-link
-                          :to="`/admin/doctors/${doctor.doctorId}/edit`"
+                          :to="`/admin-doctors/${doctor.doctorId}/edit`"
                           class="btn btn-sm btn-outline-primary"
                         >
                           <i class="bi bi-pencil"></i>
                         </router-link>
                         <router-link
-                          :to="`/admin/doctors/${doctor.doctorId}/schedule`"
+                          :to="`/admin-doctors/${doctor.doctorId}/schedule`"
                           class="btn btn-sm btn-outline-info"
                         >
                           <i class="bi bi-calendar"></i>
@@ -155,6 +155,36 @@ onMounted(() => {
 
 <style scoped>
 .doctor-list {
-  padding: 20px;
+  width: 100%;
+}
+
+.status-badge {
+  color: #fff !important;
+}
+
+.doctors-table thead th,
+.doctors-table tbody td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.doctors-table thead th {
+  white-space: nowrap;
+}
+
+.doctors-table tbody td:nth-child(2) > div {
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .doctor-list-header {
+    align-items: flex-start !important;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .doctor-list-header .btn {
+    width: 100%;
+  }
 }
 </style>

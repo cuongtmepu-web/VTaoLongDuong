@@ -208,6 +208,7 @@ const getStatusText = (status: string) => {
 const fetchAppointments = async () => {
   loading.value = true
   try {
+    debugger
     const params: any = {
       page: pagination.value.currentPage,
       pageSize: pagination.value.pageSize,
@@ -218,7 +219,7 @@ const fetchAppointments = async () => {
 
     const response = await adminAppointmentApi.getAll(params)
     if (response.data.success) {
-      appointments.value = response.data.data.data
+      appointments.value = response.data.data.items
       pagination.value.totalCount = response.data.data.pagination.totalCount
     }
   } catch (error) {
